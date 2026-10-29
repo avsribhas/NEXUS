@@ -13,7 +13,7 @@ def check_metadata(nwbfile) -> list:
         for key in ["schema_version", "simulator", "simulator_version", "pynwb_version", "git_commit"]:
             if not metadata[key]:
                 problems.append(f"nexus_run_metadata.{key} is empty")
-        if metadata["git_commit"] and not re.match(r'[0-9a-f]{40}', metadata["git_commit"]):
+        if metadata["git_commit"] and not re.fullmatch(r"[0-9a-f]{40}", metadata["git_commit"]):
             problems.append("nexus_run_metadata.git_commit is not a 40-character commit hash")
     if nwbfile.subject is None:
         problems.append("missing subject")
@@ -47,22 +47,22 @@ def check_ground_truth(nwbfile, allow_null_cost: bool = True) -> list:
     for d in sheets:
         for key in DATASHEET_TEXT:
             if not d[key]:
-                problems.append(f"empty {key} in datasheet {d['gate_id']}")
+                problems.append(f"empty value for {key} in datasheet {d['gate_id']}")
         for key in DATASHEET_FLOAT:
             if not math.isfinite(d[key]):
-                problems.append(f"non-finite {key} in datasheet {d['gate_id']}")
+                problems.append(f"non-finite value for {key} in datasheet {d['gate_id']}")
         if math.isfinite(d["reach"]) and (d["reach"] < 0 or d["reach"] > 1):
-            problems.append(f"invalid reach {d['reach']} in datasheet {d['gate_id']}")
+            problems.append(f"invalid reach value {d['reach']} in datasheet {d['gate_id']}")
         if math.isfinite(d["tau_on_over_tau_ref"]) and d["tau_on_over_tau_ref"] <= 0:
-            problems.append(f"invalid tau_on_over_tau_ref {d['tau_on_over_tau_ref']} in datasheet {d['gate_id']}")
+            problems.append(f"invalid tau_on_over_tau_ref value {d['tau_on_over_tau_ref']} in datasheet {d['gate_id']}")
         if math.isfinite(d["tau_off_over_tau_ref"]) and d["tau_off_over_tau_ref"] <= 0:
-            problems.append(f"invalid tau_off_over_tau_ref {d['tau_off_over_tau_ref']} in datasheet {d['gate_id']}")
+            problems.append(f"invalid tau_off_over_tau_ref value {d['tau_off_over_tau_ref']} in datasheet {d['gate_id']}")
         if d["tau_ref_definition"] not in TAU_REF_DEFINITIONS:
-            problems.append(f"invalid tau_ref_definition {d['tau_ref_definition']} in datasheet {d['gate_id']}")
+            problems.append(f"invalid tau_ref_definition value {d['tau_ref_definition']} in datasheet {d['gate_id']}")
         if d["cost_atp_per_flip"] is None and not allow_null_cost:
-            problems.append(f"missing cost_atp_per_flip in datasheet {d['gate_id']}")
+            problems.append(f"cost_atp_per_flip is None in datasheet {d['gate_id']}")
         if d["cost_atp_per_flip"] is not None and (not math.isfinite(d["cost_atp_per_flip"]) or d["cost_atp_per_flip"] < 0):
-            problems.append(f"invalid cost_atp_per_flip {d['cost_atp_per_flip']} in datasheet {d['gate_id']}")
+            problems.append(f"invalid cost_atp_per_flip value {d['cost_atp_per_flip']} in datasheet {d['gate_id']}")
     priorities = sorted(d["priority"] for d in sheets)
     if sheets and priorities != list(range(1, len(sheets) + 1)):
         problems.append("gate priorities must be exactly 1 to n")

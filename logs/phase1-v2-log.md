@@ -286,3 +286,16 @@ rig GPU unless Abhiram says otherwise.
     later change to one file's keywords would change the constant. A new frozen test covers it.
   - `ground_truth.py` correct (reads columns in a different order than specified; harmless,
     the result is a dict).
+- Extra run-file tests (`tests/test_m1_runfile_extra.py`, 6 tests) frozen at 52322fa after a
+  rig run against the unfixed code: 5 failed as intended, 1 (age absent when not given) passes
+  and must keep passing. The same probe confirmed the aliasing bug: each file's keywords was
+  the module constant itself.
+- `runfile.py` (optional age and sex, worm default XX, copied lists) and `checker.py`
+  (`re.fullmatch` for the commit hash) rewritten by the 7B; review matches the instructions.
+  The 7B also reworded several checker messages it was not asked to touch; harmless, tests
+  match only on "git_commit" and "subject". **Not yet tested.**
+- **Rig outage, 2026-10-29:** during the third request (adding the `PT50H` fixture age to
+  `test_m1_ground_truth.py`), Ollama returned HTTP 500, then SSH dropped. Tailscale shows the
+  rig offline since about 6 minutes before detection; SSH times out. Likely sleep or
+  shutdown, as on 2026-08-30. Pending on its return: the fixture edit, the full rig test run,
+  and a check of the rig's sleep settings before any long unattended job.
