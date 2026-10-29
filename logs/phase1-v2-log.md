@@ -83,4 +83,26 @@ the override at the top.
 - Mac (CPU): `uv sync --frozen` installs the stack; all 10 frozen M0 tests pass.
 - 7B throughput: the first request ran 30% on CPU with a 16K context (6 GB GPU). Context
   lowered to 8K for later requests.
-- Open: how the rig runs GPU work (WSL2 with the same lock, or the Docker image). Asked Abhiram.
+
+### Rig GPU environment: WSL2 (Abhiram's choice)
+- Abhiram chose WSL2 with the same lock over the Docker image for the rig. Deviation from spec
+  0.1 item 2 (container when Docker with GPU is available): the OS layer on the rig is not
+  pinned (Ubuntu 24.04.3, Python 3.12.3 against 3.12.13 on the Mac); every Python package
+  matches through `uv.lock`. The Dockerfile stays for cloud runs and has not been built.
+- Repo reaches WSL2 as a git bundle, not a push: `avsribhas/NEXUS` is public, and pushing
+  `phase1-v2` would make the branch public. Waiting on Abhiram before any push.
+- uv 0.11.14 installed from the official release tarball, SHA-256 verified (no sudo, no pip
+  in WSL2). `uv sync --frozen --extra gpu` took 18.6 min (mostly CUDA wheel downloads).
+- GPU probe: JAX 0.12.0.1 sees `CudaDevice(id=0)` and runs a matmul on it. torch 2.15.0+cu132
+  (built for CUDA 13.2) runs on the 13.0 driver; `torch.cuda.is_available()` is True on the
+  RTX 4050 Laptop GPU.
+- All 10 frozen M0 tests pass in WSL2.
+- GPU memory contention: with the 7B loaded, Ollama holds about 4 GB of the 6 GB. JAX's default
+  75% preallocation failed and fell back to smaller blocks. For GPU jobs, set
+  `XLA_PYTHON_CLIENT_PREALLOCATE=false` and unload the 7B first (`keep_alive: 0`); the 7B and a
+  GPU job cannot share the card comfortably.
+
+### M0 status: complete
+Archive, Rev 3, archive README, plain-language report, root README and CLAUDE.md, new layout,
+pinned environment (pyproject, uv.lock, Dockerfile), frozen M0 tests passing on Mac CPU and rig
+GPU. Not pushed.
