@@ -253,3 +253,36 @@ rig GPU unless Abhiram says otherwise.
   - Accepted, not fixed: all-NaN `power_in_mW`, `wavelength_in_nm`, `period_in_ms`,
     `intertrain_interval_in_ms` (a simulated current injection has no light), and
     single-row tables (one site, one-poke probe).
+
+### M1 checker and ground-truth tests
+- `tests/test_m1_checker_metadata.py` (to be frozen: depends on no open decision) and
+  `tests/test_m1_ground_truth.py` (not frozen: depends on D3 and D4) written by the 7B; both
+  matched their instructions.
+- **Director design error, caught on the rig before any implementation:** the missing-subject
+  test set `f.subject = None`. pynwb silently ignores that assignment (the subject stays), so
+  the test could never pass and would have read as a checker bug. Revised to build a file
+  with no subject directly.
+- **Director coverage gaps, added before freezing:** five checker rules had no test: subject_id
+  must equal animal_id; a simulated file with no ground truth must fail; corruption `kind` must
+  be one of the four allowed values; gate priorities must be unique; priorities must be exactly
+  1 to n. The subject rule was one I had specified and then told the 7B not to test.
+- Verified on the rig: an empty `subject_id` is accepted by pynwb (so the checker must catch
+  it), and `nwbinspector` 0.7.2 exposes `inspect_nwbfile` and `Importance`.
+
+### Checker, ground truth and run-file builder (first pass, 7B)
+- Rig: 57 passed, 1 failed, 1 skipped (network). The failure is `test_full_file_all_extensions`:
+  nwbinspector reports two CRITICAL Subject issues, both director spec gaps: no age or
+  date_of_birth, and sex "U" where C. elegans requires "XX" (hermaphrodite) or "XO" (male).
+- **Decision (Abhiram, 2026-10-29):** a simulated animal records the life stage of the
+  connectome or model its circuit is built from; each generator supplies it. Worm files
+  default to sex "XX" (the worm connectome models are hermaphrodite). Fixture value for an
+  adult worm: `PT50H` (about 50 h post-hatch, the adult stage in Witvliet et al. 2021).
+  **Tracked requirement 11:** verify that value against the paper before any generator uses it.
+- Review findings:
+  - `checker.py` uses `re.match` for the commit hash, a prefix match, so a valid hash
+    followed by junk passes. The instruction said full match. Not caught by any test; a new
+    frozen test covers it.
+  - `runfile.py` passes the module-level `EXPERIMENTER` and `KEYWORDS` lists directly, so a
+    later change to one file's keywords would change the constant. A new frozen test covers it.
+  - `ground_truth.py` correct (reads columns in a different order than specified; harmless,
+    the result is a dict).
