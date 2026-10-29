@@ -1,0 +1,34 @@
+[project]
+name = "nexus"
+version = "0.2.0"
+description = "NEXUS Phase 1 v2: switch-finding test bench"
+requires-python = "==3.12.*"
+dependencies = [
+    "pynwb==3.1.3",
+    "hdmf==4.3.1",
+    "ndx-optogenetics==0.4.1",
+    "dandi==0.81.0",
+    "nwbinspector==0.7.2",
+    "numpy==2.5.4",
+    "jax==0.12.0.1",
+    "jaxlib==0.12.0.1",
+    "jaxley==0.14.0",
+    "tarjuman==0.5.1",
+    "brian2==2.10.1",
+    "pyNeuroML==1.3.22",
+    "sbi==0.27.0",
+    "torch==2.15.0",
+    "pytest==9.2.0",
+    "packaging==26.3"
+]
+
+[project.optional-dependencies]
+gpu = ["jax[cuda13]==0.12.0.1; sys_platform == 'linux'"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"
+
+[tool.uv]
+package = false
