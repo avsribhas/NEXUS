@@ -1,0 +1,74 @@
+# NEXUS Phase 1 v2: build log
+
+Director: Claude (Opus 5.5) on Abhiram's Mac. Executor: `qwen2.5-coder:7b` through Ollama on the
+Windows rig (RTX 4050, 6 GB). Spec: root `CLAUDE.md`.
+
+## 2026-10-28 Setup
+
+### Environment check (spec 0.1)
+- Mac: Darwin, clone at `NEXUS-0/NEXUS`, `main` pulled to b254549.
+- Tailscale: `abhiram-lenovo` at 100.66.69.108, online.
+- SSH: `windows-rig@abhiram-lenovo` fails (publickey). The `~/.ssh/config` alias `windows-rig`
+  (same IP, user `abhis`) works. Remote shell is PowerShell 5.1, so `&&` is not available.
+- `nvidia-smi`: RTX 4050 Laptop, 6141 MiB, driver 582.05, CUDA 13.0.
+- Rig tooling: Docker Desktop, WSL2 Ubuntu (stopped), Python 3.12.10, no conda. Ollama models
+  include `qwen2.5-coder:7b`.
+
+### M0 resolution checks
+`uv pip compile` (resolve only) for Python 3.11 and 3.12 on Linux x86_64, macOS arm64 and
+Windows x86_64, plus a real `pip install --dry-run` on the Mac (3.12).
+
+- The full set (pynwb, ndx-optogenetics 0.4.1, dandi, nwbinspector, jax, jaxley, brian2,
+  pyNeuroML, sbi, torch) resolves on every combination. Python 3.12 picks jax 0.12.0.1,
+  jaxley 0.14.0, brian2 2.10.1, sbi 0.27.0, torch 2.15.0, numpy 2.5.4, dandi 0.81.0,
+  nwbinspector 0.7.2, pyNeuroML 1.3.22.
+- Unpinned pynwb resolves to 4.2.0. D5 asks for 3.x; capping at `<4` resolves everywhere to
+  pynwb 3.1.3 with hdmf 4.3.1 and ndx-ophys-devices 0.3.1. Pinned at 3.1.3.
+- The spec says an unpinned `ndx-optogenetics` falls back to 0.2.0. Not reproduced: it resolved
+  to 0.4.1 on every combination. The fallback probably needs another package capping pynwb
+  below 3. The exact pin stays.
+- `ndx-multichannel-volume` and `ndx-optogenetics==0.4.1` cannot be installed together (pynwb
+  `<3` against `>=3.1`). Confirms D5.
+- `leifer_lab_to_nwb` is not on PyPI. If needed it is installed from source into a separate env.
+- `tarjuman` resolves alone and with the full set.
+- CUDA in one Linux image:
+  - Python 3.12, `jax[cuda13]` and torch 2.15: one CUDA 13 stack. Chosen.
+  - `jax[cuda12]` and torch 2.15: both CUDA 12 and CUDA 13 libraries installed side by side.
+  - Python 3.11, `jax[cuda13]`: torch drops to 2.10 (CUDA 12), again two stacks.
+  - The wheels ship CUDA 13.4 libraries; the rig driver reports CUDA 13.0. To be checked on the
+    rig.
+
+## 2026-10-29 Decisions
+
+Abhiram accepted the proposed defaults for D1 to D9, and Python 3.12, pynwb 3.1.3 and
+`jax[cuda13]` for the image. Still open:
+- Udeern: D3 (six fields), D4 (brain state and animal), D6 (Jaxley as primary). Tests that
+  depend on these are written but not frozen until Udeern confirms.
+- D7: no key holder named. Placeholder key only; no held-out data.
+- D9: source of 0.82 unknown. Target is the current paper version, named when read.
+- D2: Rev 3 read from Google Drive with permission and committed. `scripts/v2_realization.py`
+  and `scripts/confound_experiment.py` recorded as absent.
+
+### Deviation: the 7B writes the code
+The spec (section 2) says the director-executor workflow is retired and Claude writes the code.
+On 2026-10-29, during M0, Abhiram instructed the opposite: the on-device 7B writes all code and
+Claude takes notes. This log follows Abhiram's instruction. Claude still writes prose (this log,
+reports, READMEs, the prereg) and does file moves and git operations. Root `CLAUDE.md` carries
+the override at the top.
+
+## 2026-10-29 M0: repo restructure
+
+### Archive (done by Claude; no code involved)
+- Branch `phase1-v2` created from `main` (b254549).
+- 90 tracked files moved with `git mv` into `archive/phase1-betse/`: `nexus/`, `scripts/`,
+  `tests/`, `data/`, `outputs/`, `logs/`, `DEVIATIONS.md`, `nexus-phase1-prd.md`, `pytest.ini`.
+  Old `CLAUDE.md` became `CLAUDE.director-executor.md`, the addendum kept its name, and the old
+  README became `README.phase1-original.md`. No file named `CLAUDE.md` is under `archive/`.
+- `archive/phase1-betse/REV3.md`: Rev 3 converted from the Google Doc. Body text unchanged;
+  table header rows and paragraph breaks added for markdown.
+- `archive/phase1-betse/README.md`: written from Rev 3.
+- `archive/phase1-betse/logs/research-report.md`: replaced, at Abhiram's request, with a
+  plain-language report written from Rev 3. The old text is in git history at d82c41a.
+- Root `README.md` is now a short pointer. Root `CLAUDE.md` is the v2 prompt plus the status box.
+- New layout: `nexus/{format,circuits,perturb,models,baselines,degrade,energy,realdata,score}`
+  (empty `__init__.py` files), `prereg/`, `configs/`, `tests/`, `logs/`.
