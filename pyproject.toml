@@ -19,7 +19,9 @@ dependencies = [
     "sbi==0.27.0",
     "torch==2.15.0",
     "pytest==9.2.0",
-    "packaging==26.3"
+    "packaging==26.3",
+    "pyrage==1.4.0",
+    "opentimestamps-client==0.8.0"
 ]
 
 [project.optional-dependencies]

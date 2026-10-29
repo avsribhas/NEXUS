@@ -106,3 +106,150 @@ the override at the top.
 Archive, Rev 3, archive README, plain-language report, root README and CLAUDE.md, new layout,
 pinned environment (pyproject, uv.lock, Dockerfile), frozen M0 tests passing on Mac CPU and rig
 GPU. Not pushed.
+
+## 2026-10-29 M1: P0 data format and test locking
+
+`phase1-v2` pushed to GitHub at Abhiram's go-ahead (9890a7f). The remote still points at the
+old `avsribhas-svg/NEXUS` address, which GitHub redirects to `avsribhas/NEXUS`.
+
+### Design decisions (director)
+- **Pokes (D5).** Prototyped and confirmed against ndx-optogenetics 0.4.1: one
+  `ndx_ophys_devices.Effector` named `simulated_current_injection`, one `OptogeneticSitesTable`
+  row pointing at it, inside `OptogeneticExperimentMetadata` (lab metadata). Pokes go in an
+  `OptogeneticPulsesTable` named `optogenetic_pulses` with custom columns `target_neuron`,
+  `amplitude`, `amplitude_unit`, `modality`; power and wavelength are NaN for simulated
+  current. One `OptogeneticEpochsTable` row per poke epoch. Round trip verified.
+- **Extension catalog.** The NWB catalog (32 records) has nothing for planted ground truth;
+  `ndx-simulation-output` stores simulated traces, not answers. A custom extension `ndx-nexus`
+  is written, with two `LabMetaData` types:
+  - `NexusRunMetadata`: schema_version, simulated, simulator, simulator_version,
+    pynwb_version, seed, thread_count, git_commit (required); gpu_model, gpu_driver
+    (optional, absent on CPU runs).
+  - `NexusGroundTruth` (depends on D3 and D4, not frozen until Udeern confirms): switch_type,
+    is_decoy, twin_id, base_circuit_id, animal_id, a datasheet table (one row per gate, D3
+    fields, cost NaN until M6) and a wiring-corruption table.
+- **Locking deps.** `pyrage==1.4.0` (age encryption, D7) and `opentimestamps-client==0.8.0`
+  resolve with the stack on Linux and macOS.
+- **Freeze plan.** Frozen now: run metadata, pokes, round trip of pokes plus run metadata,
+  hashing, encryption with a placeholder key, access log, PyTorch reproducibility. Written
+  but not frozen: ground truth, checker rules that read ground truth, splits (D4), NeuroML2
+  translator and Jaxley versus Brian2 equivalence (D6).
+
+### Frozen M1 tests (commit 5eb0930)
+`tests/test_m1_format.py` (8), `tests/test_m1_inputs.py` (7), `tests/test_m1_repro.py` (4),
+`tests/test_m1_locking.py` (7). All written by the 7B. Review findings before freezing:
+- `test_stamp_file`: the 7B wrote the `skipif` as a statement inside the test body, where it
+  does nothing, so the network test would always run. Corrected to a decorator; the diff
+  showed only that line moved.
+- Design gap found by the director: run metadata recorded the commit but not whether the
+  working tree was dirty, so a result from uncommitted code would look reproducible. Added
+  `git_dirty` (test, extension schema and implementation spec) before freezing.
+
+### 7B throughput
+With `num_ctx` at 4096 the model still runs 18% on CPU: it needs 5.2 GB and Windows keeps part
+of the 6 GB card for the display. 2 to 9 minutes per file. Not fixable on this card.
+
+### Tracked requirements (must not be dropped)
+1. **M3, stored-input coverage.** The frozen inputs test proves the check catches a v2-style
+   bug, but nothing forces a generator to use it. M3 must add a frozen test that runs every
+   registered generator, reads the inputs back from its NWB file, and compares them with
+   `InputRecorder.received`.
+2. **GPU test coverage.** `test_gpu_bitwise_same_seed` skips on the Mac by design. On the rig
+   it must run, not skip: check `-rs` output, not only the pass count.
+3. **Cross-machine reproducibility.** Compare `train_tiny` parameters between Mac CPU, rig CPU
+   and rig GPU and record exact equality or the max difference. The spec says record, not
+   assume.
+4. **Jaxley rerun tolerance.** Belongs with the NeuroML2 circuits (D6); not yet written.
+5. **Checker split.** Metadata checks do not depend on D3; ground-truth checks do. Freeze the
+   metadata half separately from the ground-truth half.
+6. **nwbinspector.** Run it on the full round-trip file and record any CRITICAL or BEST
+   PRACTICE violations.
+7. **OpenTimestamps.** `test_stamp_file` needs the network; run once with
+   `NEXUS_NETWORK_TESTS=1` and record the result.
+8. **D7.** Placeholder key only. No held-out data until a key holder is named.
+9. **Udeern.** D3, D4 and Jaxley as primary (D6) still unconfirmed; their tests stay unfrozen.
+
+### M1 implementation, first pass (all nine files by the 7B)
+Review against each instruction:
+- `ndx-nexus.namespace.yaml`, `ndx_nexus.py`, `inputs.py`, `repro.py`, `locking.py`: match.
+  `ndx_nexus.py` omits `.resolve()` on its path; harmless in Python 3.12 (module `__file__` is
+  absolute).
+- `ndx-nexus.extensions.yaml`: fields match, but the file does not parse. **Director error:**
+  the `tau_ref_definition` doc in my instruction began with a quoted word followed by more
+  text, which is invalid YAML as written. Sent back with the parser error.
+- `pyproject.toml`: the 7B dropped a closing quote (`pythonpath = [".]`). **Director review
+  miss:** I filtered the diff to lines starting with `+ ` or `- `, which hid that line. From
+  here every review reads the full diff. Sent back with the `uv lock` error.
+- `metadata.py`: `REPO_ROOT` resolves to `nexus/`, one level short of the repo root. Works
+  (git searches upward) but is mislabelled. Text fields are not passed through `str()` on read.
+- `pokes.py`: adds the effectors container and sites table as separate lab metadata (not in
+  the instruction; they already belong to the experiment metadata); `stimulation_software`
+  is "nwbfile" instead of "nexus"; float and str casts omitted.
+  Corrections for these two go back with real test output once the tests can run.
+- Correction attempts, first round: the 7B returned both unparseable files unchanged when shown
+  the file plus the error (YAML attempt 1, pyproject attempt 1). The YAML was fixed on attempt
+  2 with a precise requirement (only line 76 changed). The pyproject was fixed by resending
+  the original full instruction (only the two new dependencies differ from the last commit).
+  **Method change:** corrections now resend the original specification plus the real test
+  output, without the broken code, because the 7B tends to copy back code it is shown.
+- First test run on the Mac after install: 30 passed, 4 failed, 2 skipped (network,
+  no CUDA). Failures: the three poke round-trip tests (extra `add_lab_meta_data` call,
+  as predicted in review) and the run metadata round trip (`NexusRunMetadata` built without
+  `name="nexus_run_metadata"`). **Second director review miss:** I passed metadata.py as
+  "logic correct" without checking every constructor argument against the instruction.
+
+### Where things run (Abhiram, 2026-10-29)
+Abhiram instructed that nothing runs on the Mac: all tests, installs, lock resolution and
+probes run in WSL2 on the rig. The Mac holds the git repo and receives the 7B's files; a
+helper syncs the working tree to `~/NEXUS` in WSL2 before every run. Deviation from spec 0.1
+item 2 ("CPU work runs on the Mac"). Earlier Mac runs (M0 tests, the first M1 run, API
+prototypes) are recorded above as they happened.
+
+Consequence for M1 reproducibility: "test across the two machines" becomes rig CPU against
+rig GPU unless Abhiram says otherwise.
+
+10. **Provenance on the rig (tracked requirement).** File sync does not move git history, so
+    the rig clone's HEAD lags the Mac. Files written there record a stale `git_commit` (with
+    `git_dirty` True). Before any data generation that results depend on: commit on the Mac,
+    push, check out that exact commit on the rig, and require `git_dirty` False.
+- Correction rounds on the rig (attempts counted per file, first write is attempt 1):
+  - `pokes.py`: attempts 2 (spec plus test output) still called `add_lab_meta_data` on the
+    effectors container. Attempt 3 added a short checklist naming the broken rule: correct,
+    all poke tests pass.
+  - `metadata.py`: attempts 2 and 3 fixed REPO_ROOT and the str() casts but still built
+    `NexusRunMetadata` without `name`. Attempt 4 puts that rule first in the prompt.
+  - Observation about the executor: a rule buried in a long specification is dropped
+    repeatedly; the same rule stated alone, as a named checklist item or at the top, is
+    followed. A missing keyword argument inside a dict literal was the hardest case.
+- Rig run after attempt 3: 34 passed, 1 failed (metadata round trip), 1 skipped (network).
+  `test_gpu_bitwise_same_seed` ran and passed on the RTX 4050 (tracked requirement 2 met).
+- Sync helper fix: it was sending 137 MB per run (ignored archive outputs); now sends only
+  git-tracked and unignored files (2.9 MB). One run failed because I edited the helper while
+  it was executing; rerun cleanly.
+- `metadata.py` attempt 4 passed all tests. Attempt 5 (the last allowed) fixed a latent bug
+  the tests do not cover: `_gpu_info` split the whole `nvidia-smi` output instead of its
+  first line, so on a multi-GPU machine the driver field would absorb the next GPU's line.
+  Diff showed only that change plus an equivalent REPO_ROOT spelling.
+
+### M1 checks on the rig (2026-10-29)
+- Frozen suite: 35 passed, 1 skipped (`test_stamp_file`, network). With
+  `NEXUS_NETWORK_TESTS=1` the stamp test passes (tracked requirement 7 met).
+- **CPU against GPU (tracked requirement 3):** `train_tiny(seed=0)` on rig CPU and rig GPU is
+  not bitwise equal: max absolute difference 5.96e-08 over 321 parameters (float32 rounding).
+  Each device repeats itself bitwise. Consequence: results are bitwise reproducible only on
+  the same device; any cross-device comparison needs a stated tolerance, and every reported
+  number must name its device. Goes into the M2 prereg. Mac CPU against rig not run (nothing
+  runs on the Mac).
+- GPU metadata on a real GPU run: `gpu_model` "NVIDIA GeForce RTX 4050 Laptop GPU",
+  `gpu_driver` "582.05".
+- **nwbinspector 0.7.2 (tracked requirement 6)** on a file with run metadata, pokes and
+  simulator inputs: 1 CRITICAL, 13 BEST_PRACTICE_SUGGESTION.
+  - CRITICAL `check_subject_exists`: no Subject. DANDI requires one. Under D4 the Subject is
+    the simulated animal (one wiring-corruption draw), so `subject_id` should equal
+    `animal_id`. **New requirement:** a run-file builder that always sets Subject,
+    experimenter, institution, experiment_description and keywords, and a checker rule that
+    rejects files without a Subject. Depends on D4, so written with the unfrozen
+    ground-truth work.
+  - Accepted, not fixed: all-NaN `power_in_mW`, `wavelength_in_nm`, `period_in_ms`,
+    `intertrain_interval_in_ms` (a simulated current injection has no light), and
+    single-row tables (one site, one-poke probe).

@@ -1,0 +1,142 @@
+groups:
+  - neurodata_type_def: NexusRunMetadata
+    neurodata_type_inc: LabMetaData
+    doc: Provenance of one run, simulated or real.
+    attributes:
+      - name: schema_version
+        dtype: text
+        doc: Version of the ndx-nexus schema used to write the file.
+      - name: simulated
+        dtype: bool
+        doc: True for simulated runs, False for recordings.
+      - name: simulator
+        dtype: text
+        doc: Simulator name, or "none" for recordings.
+      - name: simulator_version
+        dtype: text
+        doc: Simulator version string.
+      - name: pynwb_version
+        dtype: text
+        doc: pynwb version that wrote the file.
+      - name: seed
+        dtype: int64
+        doc: Random seed of the run.
+      - name: thread_count
+        dtype: int64
+        doc: Number of CPU threads used.
+      - name: git_commit
+        dtype: text
+        doc: Git commit of the code that wrote the file.
+      - name: git_dirty
+        dtype: bool
+        doc: True if the working tree had uncommitted changes when the file was written.
+      - name: gpu_model
+        dtype: text
+        required: false
+        doc: GPU model; absent for CPU runs.
+      - name: gpu_driver
+        dtype: text
+        required: false
+        doc: GPU driver version; absent for CPU runs.
+  - neurodata_type_def: NexusDatasheets
+    neurodata_type_inc: DynamicTable
+    doc: Planted datasheets, one row per gate.
+    datasets:
+      - name: gate_id
+        neurodata_type_inc: VectorData
+        dtype: text
+        doc: Identifier of the gate.
+      - name: trigger_channel
+        neurodata_type_inc: VectorData
+        dtype: text
+        doc: Identity of the input or state channel that triggers the gate.
+      - name: trigger_gain
+        neurodata_type_inc: VectorData
+        dtype: float64
+        doc: Trigger gain, dimensionless.
+      - name: threshold
+        neurodata_type_inc: VectorData
+        dtype: float64
+        doc: Threshold in units of the trigger signal.
+      - name: threshold_unit
+        neurodata_type_inc: VectorData
+        dtype: text
+        doc: Unit of the trigger signal.
+      - name: tau_on_over_tau_ref
+        neurodata_type_inc: VectorData
+        dtype: float64
+        doc: Switch-on time constant divided by tau_ref.
+      - name: tau_off_over_tau_ref
+        neurodata_type_inc: VectorData
+        dtype: float64
+        doc: Switch-off time constant divided by tau_ref.
+      - name: tau_ref_definition
+        neurodata_type_inc: VectorData
+        dtype: text
+        doc: trigger_time_constant for smooth triggers; median_membrane_time_constant (of the gated population) for step triggers and stochastic switches.
+      - name: reach
+        neurodata_type_inc: VectorData
+        dtype: float64
+        doc: Fraction of circuit neurons whose activity changes by more than reach_criterion when the gate flips, 0 to 1.
+      - name: reach_criterion
+        neurodata_type_inc: VectorData
+        dtype: text
+        doc: The stated activity change used to compute reach.
+      - name: priority
+        neurodata_type_inc: VectorData
+        dtype: int64
+        doc: Rank of the gate among gates in the circuit, 1 is highest.
+      - name: cost_atp_per_flip
+        neurodata_type_inc: VectorData
+        dtype: float64
+        doc: ATP per flip computed from ion flow; NaN until computed.
+  - neurodata_type_def: NexusWiringCorruption
+    neurodata_type_inc: DynamicTable
+    doc: Differences between the true wiring and the wiring given to models, one row per corrupted synapse.
+    datasets:
+      - name: pre_neuron
+        neurodata_type_inc: VectorData
+        dtype: text
+        doc: Presynaptic neuron.
+      - name: post_neuron
+        neurodata_type_inc: VectorData
+        dtype: text
+        doc: Postsynaptic neuron.
+      - name: kind
+        neurodata_type_inc: VectorData
+        dtype: text
+        doc: One of missing_edge, false_edge, sign_flip, weight_error.
+      - name: true_weight
+        neurodata_type_inc: VectorData
+        dtype: float64
+        doc: Signed weight in the true circuit; 0 for a false edge.
+      - name: stored_weight
+        neurodata_type_inc: VectorData
+        dtype: float64
+        doc: Signed weight given to models; 0 for a missing edge.
+  - neurodata_type_def: NexusGroundTruth
+    neurodata_type_inc: LabMetaData
+    doc: Planted ground truth for one simulated circuit.
+    attributes:
+      - name: switch_type
+        dtype: text
+        doc: One of release, gain, winner_take_all, global_shutoff, stochastic, none.
+      - name: is_decoy
+        dtype: bool
+        doc: True when the circuit mimics a switch without a gate.
+      - name: twin_id
+        dtype: text
+        doc: Identifier shared by degenerate twins; empty string if none.
+      - name: base_circuit_id
+        dtype: text
+        doc: Identifier of the base circuit.
+      - name: animal_id
+        dtype: text
+        doc: Identifier of the wiring-corruption draw (the simulated animal).
+    groups:
+      - name: datasheets
+        neurodata_type_inc: NexusDatasheets
+        doc: Planted datasheets.
+      - name: wiring_corruption
+        neurodata_type_inc: NexusWiringCorruption
+        doc: Wiring corruption record.

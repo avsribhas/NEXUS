@@ -1,0 +1,12 @@
+namespaces:
+  - name: ndx-nexus
+    version: 0.1.0
+    doc: NEXUS run metadata and planted ground truth for simulated circuits
+    author: [s9m Labs]
+    contact: [avsribhas@gmail.com]
+    schema:
+      - namespace: core
+        neurodata_types: [LabMetaData]
+      - namespace: hdmf-common
+        neurodata_types: [DynamicTable, VectorData]
+      - source: ndx-nexus.extensions.yaml
