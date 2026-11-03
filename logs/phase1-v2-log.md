@@ -1206,3 +1206,6 @@ the unfloored mean before flooring samples. The draft now says so.
 
 Next for Dusk, validation split only: calibrate the intervals (more data from the full
 library, then a held-aside calibration set or early stopping), and handle two-gate circuits.
+
+Abhiram gave the go-ahead on 2026-11-03 to make these validation results public; commit
+5d665f7 and the files in `logs/pilot/m4/` were pushed with this note.

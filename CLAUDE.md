@@ -45,7 +45,7 @@
 >   corruption rates. M4: scoring code locked and timestamped
 >   (`prereg/lock-scoring-0.1.json`); linear baselines, Dusk recovery v0, Dusk response v0,
 >   the identifiability step and prediction rows are built and were evaluated on the pilot's
->   validation split. Those results are committed locally only, not pushed, until Abhiram
+>   validation split (`logs/pilot/m4/`; public with Abhiram's go-ahead, 2026-11-03).
 >   says they can be public. Proposed pre-registration changes, including two scoring-code
 >   fixes, are in `prereg/revision-0.3-draft.md`, waiting on Abhiram and Udeern.
 > - **Writing.** Logs, READMEs and reports follow Abhiram's anti-slop rules: plain English,
