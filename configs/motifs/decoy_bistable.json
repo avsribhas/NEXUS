@@ -1,0 +1,63 @@
+{
+  "switch_type": "none",
+  "is_decoy": true,
+  "decoy_kind": "bistable",
+  "neurons": {
+    "in": {},
+    "trig": {},
+    "A": {},
+    "B": {},
+    "O": {}
+  },
+  "synapses": [
+    {
+      "pre": "in",
+      "post": "O",
+      "sign": "exc",
+      "w": [0.3, 0.6]
+    },
+    {
+      "pre": "trig",
+      "post": "A",
+      "sign": "exc",
+      "w": [1.0, 1.5]
+    },
+    {
+      "pre": "A",
+      "post": "B",
+      "sign": "exc",
+      "w": [1.2, 2.0],
+      "vth_mV": [-45.0, -40.0],
+      "delta_mV": [2.0, 3.0]
+    },
+    {
+      "pre": "B",
+      "post": "A",
+      "sign": "exc",
+      "w": [1.2, 2.0],
+      "vth_mV": [-45.0, -40.0],
+      "delta_mV": [2.0, 3.0]
+    },
+    {
+      "pre": "A",
+      "post": "O",
+      "sign": "exc",
+      "w": [0.1, 0.3]
+    }
+  ],
+  "state": {
+    "target": "A",
+    "sign": "exc",
+    "w": [0.02, 0.06]
+  },
+  "inputs": ["in", "trig"],
+  "outputs": ["O"],
+  "gates": [],
+  "candidates": [
+    {
+      "trigger": "trig",
+      "test_input": "in",
+      "output": "O"
+    }
+  ]
+}

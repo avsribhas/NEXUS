@@ -1048,3 +1048,31 @@ missing switch and decoy types, and D7. On noise seeds: about 54% of trials fall
 test side of at least one split, so 10 seeds for all of them would multiply simulation
 time by about 2.3; 10 seeds for held-out circuits only, by about 1.5. I recommend the
 second. The library size is left blank until the pilot finishes.
+
+### Test suite on CPU, and a batch rounding note
+Full suite on the rig, on CPU because the pilot holds the GPU: 254 passed, 2 skipped,
+2 expected failures, 1 failure. The failure is `test_m3_batch.py::test_trials_are_independent`:
+one trial run alone and the same trial run in a batch of 4 differ by 4e-4 mV after
+30,000 steps, against a 1e-4 tolerance. The same test passes on the GPU. CPU XLA rounds
+float32 differently depending on batch size. The library is simulated on the GPU, so
+nothing downstream is affected; the tolerance is left as it is and the note is here.
+
+### Bistable decoy
+`configs/motifs/decoy_bistable.json`, written by the 7B. Two neurons, A and B, excite
+each other through synapses with a high, sharp threshold (-45 to -40 mV, width 2 to 3 mV)
+and weights of 1.2 to 2 times the leak. At rest the synapses are off and the pair stays
+down; once pushed up, each holds the other near -30 mV. A brief pulse into the trigger
+latches the pair, and A excites the output. The input reaches the output on its own
+path, so its effect adds and nothing gates it. It looks like a switch with memory but
+has no gate, which is what a decoy must do.
+
+First version: one seed in three failed to latch, because the weakest trigger weight
+only pulled A to about -50 mV, below the pair's threshold. Trigger weight raised to 1 to
+1.5 times the leak. Now:
+- `tests/test_m3_bistable.py` (by the 7B): a 100 ms pulse leaves A more than 20 mV up two
+  seconds later, and without it A stays within 2 mV of rest. Passes for 3 seeds.
+- Acceptance survey: 8 of 8 accepted, input-to-output ratios 0.71 to 0.87 with the pair
+  latched (the output loses some driving force), all classified "no switch".
+
+The survey script now takes optional motif names, so one motif can be surveyed alone.
+The bistable decoy isn't in the running pilot, which loaded its motifs at the start.
