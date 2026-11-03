@@ -21,11 +21,11 @@
 >   `main`. `phase1-v2` stays the working branch, and `main` is fast-forwarded to it after each
 >   push. Making new *results* public still needs his go-ahead.
 > - **Where things run.** Everything runs in WSL2 on the rig (`~/NEXUS`), never on the Mac.
+>   Cisco Secure Client (the UT VPN) cuts WSL off from the internet; disconnect it while the
+>   rig needs the network.
 > - **Cost rule (overrides M1's "except Cost before M6").** Per the new P0 protocol, the checker
 >   rejects a missing energy value by default; a caller must pass `allow_null_cost=True`, and
 >   each use is logged.
->   (VPN note: Cisco Secure Client cuts WSL off from the internet; disconnect it while the rig
->   needs the network.)
 > - **Second simulator (overrides D6's Brian2 spot-check, Abhiram 2026-11-02).** NEURON 9.0.2
 >   through pyNeuroML. pyNeuroML's Brian2 export can't take networks at all.
 > - **Writing.** Logs, READMEs and reports follow Abhiram's anti-slop rules: plain English,
