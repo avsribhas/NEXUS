@@ -1,6 +1,6 @@
 # NEXUS Phase 1 (v2): build the switch-finding test bench
 
-> **Status and overrides (read first; updated 2026-11-02).** The prompt below is kept as
+> **Status and overrides (read first; updated 2026-11-03).** The prompt below is kept as
 > written. Where this box and the prompt disagree, this box wins.
 >
 > - **Who writes code (overrides section 2, last paragraph).** Abhiram reinstated the
@@ -37,6 +37,15 @@
 >   repo and locked files keep "NEXUS". The approved prereg is registered at osf.io/yrghs
 >   (project osf.io/h9fg5), private under embargo until 2030-11-01. Abhiram asked Claude to do
 >   this registration, overriding M2's "Abhiram does the OSF registration".
+> - **Where the build is (2026-11-03).** M3: graded motifs (release, gain, winner-take-all,
+>   global shutoff, plain, shunting and adaptation decoys), probe, trial protocol with paired
+>   pokes and steps, wiring corruption, NWB run files and library generator are built; a
+>   200-circuit pilot runs on the rig. Missing: stochastic switch, bistable decoy, the
+>   per-type NEURON check, real twins, sourced corruption rates. M4: scoring code locked and
+>   timestamped (`prereg/lock-scoring-0.1.json`); linear baselines, Dusk recovery v0, Dusk
+>   response v0, the identifiability step, prediction rows and a pilot evaluation script
+>   (validation only) are built. Proposed pre-registration changes, including two scoring-code
+>   fixes, are in `prereg/revision-0.3-draft.md`, waiting on Abhiram and Udeern.
 > - **Writing.** Logs, READMEs and reports follow Abhiram's anti-slop rules: plain English,
 >   short sentences, no filler or hype, no em dashes.
 > - **Environment:** Python 3.12, pynwb 3.1.3, `jax[cuda13]` with torch 2.15 in one CUDA 13 GPU

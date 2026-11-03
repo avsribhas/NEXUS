@@ -24,7 +24,9 @@ before it's trusted on real recordings. Phase 1 uses graded, non-spiking circuit
 | M0 | Archive the old study, pin the software, set up the repo | Done |
 | M1 | One file format for every run, a checker, a locked test set | Done, except decisions waiting on Udeern |
 | M2 | Pre-registration: fix the tests and pass marks before any held-out data exists | Approved and timestamped, version 0.2 ([`prereg/phase1-prereg.md`](prereg/phase1-prereg.md)); registered on OSF (osf.io/yrghs), private under embargo until 1 November 2030 |
-| M3 to M7 | Planted circuits, poke-and-predict, degraded data, energy, a real-data check | Not started |
+| M3 | Planted circuits: switch motifs, decoys, the poke protocol, wiring errors, run files | Mostly built; a 200-circuit pilot is running. Still missing: the stochastic switch, the bistable decoy, the per-type NEURON check, real twins |
+| M4 | Poke-and-predict: scoring, baselines, Dusk itself | Scoring locked before training; baselines and first versions of Dusk built and running on the pilot (validation data only) |
+| M5 to M7 | Degraded data, energy, a real-data check | Not started (M6, energy, is out of this version's scope) |
 
 Done so far in M1:
 - Every run is saved as an NWB file, with the planted answers, the run settings and the
@@ -48,6 +50,23 @@ Done so far in M1:
   random seed.
 - Training and simulation repeat exactly on the same device. Training on CPU and GPU differs
   by about 6e-08.
+
+Done so far in M3 and M4:
+- Seven kinds of graded circuit, built from small motif tables: four switch types (release,
+  gain, winner-take-all, global shutoff), plain circuits, and two decoys that look like a
+  switch but have no gate (shunting inhibition and adaptation). Each circuit's planted
+  answers are measured by probing it, and it's kept only if the measured switch behaves as
+  planted.
+- Every animal gets the same kinds of poke under 6 brain states with 3 noise seeds:
+  50 single pokes, plus paired pokes (one input held while another is poked) and paired
+  steps, so threshold and timing can be measured. 58 to 98 pokes, 1,044 to 1,764 trials.
+- The scoring code was written and locked before any model was trained.
+- Seven linear baselines that know the wiring, or not, and the first version of Dusk:
+  one network that reads the measured responses and writes the datasheets, and one that
+  predicts responses to new pokes from the wiring diagram.
+- Proposed changes to the pre-registration are in
+  [`prereg/revision-0.3-draft.md`](prereg/revision-0.3-draft.md). They need approval
+  before any held-out data is made.
 
 There are no results yet. Nothing here should be read as a finding.
 
@@ -82,9 +101,13 @@ timestamp test needs the internet and only runs with `NEXUS_NETWORK_TESTS=1`.
 | `CLAUDE.md` | The Phase 1 build spec and the current status box |
 | `logs/phase1-v2-log.md` | The build log: every step, decision, mistake and test run |
 | `nexus/format/` | File format, checker, train/test splits and locking (the M1 code) |
-| `nexus/circuits/` | Runs NeuroML circuits in Jaxley and in NEURON |
-| `configs/circuits/` | The two reference circuits |
-| `nexus/` (other folders) | Empty for now; filled in M3 to M7 |
+| `nexus/circuits/` | Runs circuits in Jaxley and NEURON; motif builder, probe, wiring errors, run files, library |
+| `nexus/perturb/` | The poke protocol |
+| `nexus/score/` | Scoring (locked) |
+| `nexus/baselines/` | Linear baselines |
+| `nexus/models/` | Dusk: data loading, summary features, recovery, response model, identifiability |
+| `configs/` | Reference circuits, motif tables, wiring error rates, scoring priors |
+| `scripts/` | Acceptance survey, pilot, cache, pilot evaluation, locking |
 | `tests/` | The test suite and the frozen-test hashes |
 | `prereg/` | The approved pre-registration, its pass marks as numbers, and the timestamped locks |
 | `pyproject.toml`, `uv.lock` | Exact software versions |
