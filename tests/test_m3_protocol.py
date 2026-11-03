@@ -4,11 +4,12 @@ import pytest
 from nexus.circuits.batch import BatchRunner
 from nexus.circuits.build import build_circuit, drive_to_current, load_motifs
 from nexus.circuits.graded import write_network
-from nexus.perturb.protocol import (DT, KEEP, N_KEEP, N_SEEDS, N_STEPS, NOISE_MV, POKE_START, POKE_TYPES, STATES_MV, T_TRIAL, TARGETS_PER_TYPE, make_pokes, run_trials, trial_currents, trial_table, PAIRED, PAIRS_PER_ANIMAL, PAIRED_STEP)
+from nexus.perturb.protocol import (DT, KEEP, N_KEEP, N_SEEDS, N_STEPS, NOISE_MV, POKE_START, POKE_TYPES, STATES_MV, T_TRIAL, TARGETS_PER_TYPE, make_pokes, run_trials, trial_currents, trial_table, PAIRED, PAIRED_STEP)
 
 COMMON, MOTIFS = load_motifs(Path(__file__).resolve().parents[1] / "configs" / "motifs")
 SPEC, ROLES = build_circuit("release", COMMON, MOTIFS, np.random.default_rng(0), "proto")
 IDS = [n["id"] for n in SPEC["neurons"]]
+N_POKES = 50 + 4 * len(ROLES["inputs"]) * (len(ROLES["inputs"]) - 1)
 
 def test_constants_agree():
     assert N_STEPS == int(round(T_TRIAL / DT)) + 1
@@ -19,22 +20,22 @@ def test_constants_agree():
 
 def test_make_pokes():
     pokes = make_pokes(SPEC, ROLES, np.random.default_rng(1))
-    assert len(pokes) == 50 + 2 * PAIRS_PER_ANIMAL
+    assert len(pokes) == N_POKES
     assert all(p["target"] != "S" for p in pokes)
     assert all(p["target"] in IDS for p in pokes)
-    assert len(set(p["poke_id"] for p in pokes)) == 50 + 2 * PAIRS_PER_ANIMAL
+    assert len(set(p["poke_id"] for p in pokes)) == N_POKES
     for t in POKE_TYPES:
         assert sum(1 for p in pokes if p["type"] == t) == TARGETS_PER_TYPE
         assert all(p["amplitude_mV"] == POKE_TYPES[t][0] for p in pokes if p["type"] == t)
         assert all(p["start_ms"] == POKE_START and p["stop_ms"] == POKE_START + POKE_TYPES[t][1] for p in pokes if p["type"] == t)
-    assert len(set(p["poke_id"] for p in pokes)) == 50 + 2 * PAIRS_PER_ANIMAL
+    assert len(set(p["poke_id"] for p in pokes)) == N_POKES
     pokes_again = make_pokes(SPEC, ROLES, np.random.default_rng(1))
     assert pokes == pokes_again
 
 def test_trial_table():
     pokes = make_pokes(SPEC, ROLES, np.random.default_rng(1))
     trials = trial_table(pokes)
-    assert len(trials) == (50 + 2 * PAIRS_PER_ANIMAL) * 6 * 3
+    assert len(trials) == N_POKES * 6 * 3
     assert len(set((t["poke_index"], t["state_index"], t["seed_index"]) for t in trials)) == len(trials)
     assert [t["trial_id"] for t in trials] == list(range(len(trials)))
 
@@ -86,7 +87,7 @@ def test_run_trials_shape_and_batching(tmp_path):
 def test_paired_pokes():
     pokes = make_pokes(SPEC, ROLES, np.random.default_rng(1))
     paired = [p for p in pokes if p["type"] == PAIRED["type"]]
-    assert len(paired) == PAIRS_PER_ANIMAL
+    assert len(paired) == 3 * len(ROLES["inputs"]) * (len(ROLES["inputs"]) - 1)
     for p in paired:
         assert p["hold"] in ROLES["inputs"]
         assert p["target"] in ROLES["inputs"]
@@ -111,10 +112,21 @@ def test_inputs_are_always_targets():
 def test_paired_steps():
     pokes = make_pokes(SPEC, ROLES, np.random.default_rng(1))
     steps = [p for p in pokes if p["type"] == PAIRED_STEP["type"]]
-    assert len(steps) == PAIRS_PER_ANIMAL
+    assert len(steps) == len(ROLES["inputs"]) * (len(ROLES["inputs"]) - 1)
     for p in steps:
         assert p["hold"] in ROLES["inputs"] and p["target"] in ROLES["inputs"] and p["hold"] != p["target"]
         assert p["hold_mV"] == PAIRED_STEP["hold_mV"] and p["amplitude_mV"] == PAIRED_STEP["amplitude_mV"]
         assert p["stop_ms"] - p["start_ms"] == PAIRED_STEP["duration_ms"]
     levels = set(p["hold_mV"] for p in pokes if p["type"] == PAIRED["type"])
     assert levels == set(PAIRED["hold_levels_mV"])
+
+def test_every_pair_and_level_is_covered():
+    spec, roles = build_circuit("winner_take_all", COMMON, MOTIFS, np.random.default_rng(0), "wta")
+    pokes = make_pokes(spec, roles, np.random.default_rng(1))
+    inputs = roles["inputs"]
+    for a in inputs:
+        for b in inputs:
+            if a != b:
+                for level in PAIRED["hold_levels_mV"]:
+                    assert any(p["type"] == PAIRED["type"] and p["hold"] == a and p["target"] == b and p["hold_mV"] == level for p in pokes)
+                assert any(p["type"] == PAIRED_STEP["type"] and p["hold"] == a and p["target"] == b for p in pokes)

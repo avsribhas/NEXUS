@@ -919,3 +919,13 @@ more than the original 900. Tests updated (not frozen ones); full suite on the r
 passed, 2 skipped, 2 expected failures. The off-time window is 200 ms (1800 to 2000 ms),
 which is short for the slowest cells (time constants up to 500 ms). Whether off-time is
 recoverable is for the identifiability step to say.
+Fourth change, again before any pilot data was kept: sampling 10 paired pokes would often
+miss the one input pair that matters in winner-take-all (4 inputs, 12 ordered pairs, 36
+pair-and-level combinations). Paired pokes now cover every ordered input pair at every
+hold level, and paired steps every ordered pair, with no sampling. A two-input circuit
+gets 6 paired pokes and 2 steps (58 pokes, 1,044 trials); winner-take-all gets 36 and 12
+(98 pokes, 1,764 trials). New test: every pair and level is covered for winner-take-all.
+The 7B twice dropped existing test lines when rewriting the whole test file; the third
+attempt had it write only the changed functions, which were then joined with the
+unchanged ones (the split CLAUDE.md suggests for long files). Full suite: 234 passed,
+2 skipped, 2 expected failures.

@@ -17,10 +17,9 @@ POKE_TYPES = {"dep_small": (5.0, 100.0), "dep_large": (15.0, 100.0), "hyp": (-15
 TARGETS_PER_TYPE = 10
 PAIRED = {"type": "paired", "amplitude_mV": 15.0, "duration_ms": 100.0, "hold_levels_mV": (10.0, 20.0, 30.0)}
 PAIRED_STEP = {"type": "paired_step", "amplitude_mV": 30.0, "duration_ms": 300.0, "hold_mV": 15.0}
-PAIRS_PER_ANIMAL = 10
 
 def make_pokes(spec, roles, rng):
-    """Fifty single pokes (five types on ten neurons that always include the inputs), ten paired pokes (one input held at 10, 20 or 30 mV while another is poked) and ten paired steps (one input held while another steps on and off)."""
+    """Fifty single pokes (five types on ten neurons that always include the inputs), a paired poke for every ordered pair of inputs at every hold level, and a paired step for every ordered pair."""
     eligible = [n["id"] for n in spec["neurons"] if n["id"] != roles["state"]]
     inputs_first = [str(x) for x in roles["inputs"] if x in eligible][:TARGETS_PER_TYPE]
     rest = [x for x in eligible if x not in inputs_first]
@@ -36,19 +35,10 @@ def make_pokes(spec, roles, rng):
             pokes.append({"poke_id": f"{t}_{j}", "type": t, "target": target, "amplitude_mV": float(POKE_TYPES[t][0]), "start_ms": float(POKE_START), "stop_ms": float(POKE_START + POKE_TYPES[t][1]), "hold": "", "hold_mV": 0.0})
     inputs = [str(x) for x in roles["inputs"]]
     pairs = [(a, b) for a in inputs for b in inputs if a != b]
-    if pairs:
-        combos = [(a, b, level) for a, b in pairs for level in PAIRED["hold_levels_mV"]]
-        if len(combos) >= PAIRS_PER_ANIMAL:
-            chosen = list(rng.choice(len(combos), size=PAIRS_PER_ANIMAL, replace=False))
-        else:
-            chosen = list(range(len(combos))) + list(rng.choice(len(combos), size=PAIRS_PER_ANIMAL - len(combos), replace=True))
-        for j, k in enumerate(chosen):
-            hold, target, level = combos[int(k)]
-            pokes.append({"poke_id": f"paired_{j}", "type": PAIRED["type"], "target": target, "amplitude_mV": float(PAIRED["amplitude_mV"]), "start_ms": float(POKE_START), "stop_ms": float(POKE_START + PAIRED["duration_ms"]), "hold": hold, "hold_mV": float(level)})
-        steps = rng.choice(len(pairs), size=PAIRS_PER_ANIMAL, replace=len(pairs) < PAIRS_PER_ANIMAL)
-        for j, k in enumerate(steps):
-            hold, target = pairs[int(k)]
-            pokes.append({"poke_id": f"paired_step_{j}", "type": PAIRED_STEP["type"], "target": target, "amplitude_mV": float(PAIRED_STEP["amplitude_mV"]), "start_ms": float(POKE_START), "stop_ms": float(POKE_START + PAIRED_STEP["duration_ms"]), "hold": hold, "hold_mV": float(PAIRED_STEP["hold_mV"])})
+    for j, (hold, target, level) in enumerate((a, b, level) for a, b in pairs for level in PAIRED["hold_levels_mV"]):
+        pokes.append({"poke_id": f"paired_{j}", "type": PAIRED["type"], "target": target, "amplitude_mV": float(PAIRED["amplitude_mV"]), "start_ms": float(POKE_START), "stop_ms": float(POKE_START + PAIRED["duration_ms"]), "hold": hold, "hold_mV": float(level)})
+    for j, (hold, target) in enumerate(pairs):
+        pokes.append({"poke_id": f"paired_step_{j}", "type": PAIRED_STEP["type"], "target": target, "amplitude_mV": float(PAIRED_STEP["amplitude_mV"]), "start_ms": float(POKE_START), "stop_ms": float(POKE_START + PAIRED_STEP["duration_ms"]), "hold": hold, "hold_mV": float(PAIRED_STEP["hold_mV"])})
     return pokes
 
 def trial_table(pokes):
