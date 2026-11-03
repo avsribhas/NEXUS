@@ -24,7 +24,7 @@ def check_metadata(nwbfile) -> list:
             problems.append("subject.species is empty")
     return problems
 
-def check_ground_truth(nwbfile, allow_null_cost: bool = True) -> list:
+def check_ground_truth(nwbfile, allow_null_cost: bool = False) -> list:
     problems = []
     if "nexus_run_metadata" not in nwbfile.lab_meta_data:
         return ["missing nexus_run_metadata"]
@@ -71,7 +71,7 @@ def check_ground_truth(nwbfile, allow_null_cost: bool = True) -> list:
             problems.append(f"invalid corruption kind: {r['kind']}")
     return problems
 
-def check_file(path, allow_null_cost: bool = True) -> list:
+def check_file(path, allow_null_cost: bool = False) -> list:
     with NWBHDF5IO(str(path), "r") as io:
         nwbfile = io.read()
         return check_metadata(nwbfile) + check_ground_truth(nwbfile, allow_null_cost)

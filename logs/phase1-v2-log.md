@@ -299,3 +299,49 @@ rig GPU unless Abhiram says otherwise.
   rig offline since about 6 minutes before detection; SSH times out. Likely sleep or
   shutdown, as on 2026-08-30. Pending on its return: the fixture edit, the full rig test run,
   and a check of the rig's sleep settings before any long unattended job.
+
+### Rig back; the fixes are tested (2026-11-02)
+- The rig came back after the outage. The 7B made the pending edit (worm age `PT50H` in the
+  ground-truth test helper).
+- Full suite on the rig: everything passes except the one test that needs the network (it
+  is skipped unless network tests are switched on). That covers the `runfile.py` and
+  `checker.py` fixes from 4f5557f, which were committed untested, and the full-file
+  nwbinspector check, which now finds no critical problems.
+- Still to do: check the rig's sleep settings before any long unattended run.
+
+### New protocol docs, and the energy field is now required (2026-11-02)
+Abhiram drafted three new documents: "Simulation Protocols (P0 to P6)", "Protocol Order and
+Cross-Validation Map" and "s9m Labs: How We Solve It" (the master spec, 29 October 2026). I
+read them against the repo. What they mean for this build:
+- **Nothing we've built is thrown out.** Their P0 (data format and locked exam) is our M1.
+  The master spec's first experiment, E1, starts with "finish M1".
+- **One rule changed right away.** P0 says the checker must reject a run that is missing its
+  energy value. Until now it allowed a blank cost by default. Abhiram chose to change the
+  rule first.
+- **Bigger scope is waiting on decisions.** E1 adds learning, decision, need, flight and sleep
+  circuits to the planted-switch bench. It also adds four comparison models that every
+  later experiment runs against. These go beyond the v2 spec in CLAUDE.md, and Udeern owns
+  the planted circuits, so none of it starts until it's agreed.
+- **Simulator naming.** The protocols doc says NEURON and Brian2. The master spec and this
+  build use Jaxley and Brian2. We're staying with Jaxley unless told otherwise.
+
+How the cost rule was changed (all code by the 7B, one file per request):
+1. Test first. The 7B updated `tests/test_m1_ground_truth.py`. The sample gate now has a
+   cost (250000 ATP per flip). A second sample with no cost was added. The cost test now
+   expects a blank cost to be rejected by default and accepted only when the caller asks
+   for it. A new test checks the same thing for a whole file on disk. Its diff contained
+   exactly the requested changes. On the old checker, those two tests failed and
+   everything else passed, as expected.
+2. Then the code. The 7B changed one word in two places in `nexus/format/checker.py`: the
+   default for allowing a blank cost went from True to False. The diff is those two lines.
+3. Rig: all tests pass (one network test skipped).
+
+What this means in practice: once generators exist, the checker will reject any switch
+circuit file that has no energy number, until the P6 energy module is built. A generator
+can only get past that by passing the "allow blank cost" flag explicitly, and that should
+be logged each time it happens.
+
+**Tracked requirement 12.** P0 asks for an energy-per-event value for every run. Our energy
+field belongs to each switch, so a circuit with no switch (a decoy or a no-switch control)
+has no energy value at all. Decide before M3 whether runs also need an energy value per
+poke. That would be a format change, so it needs Udeern's sign-off along with D3 and D4.
