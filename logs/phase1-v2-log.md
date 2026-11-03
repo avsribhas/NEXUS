@@ -1167,3 +1167,42 @@ are in item 3 of `prereg/revision-0.3-draft.md`; raw files in `logs/pilot/m3/`.
 One operational lesson: a job started with `nohup` in a WSL shell dies when the SSH session
 that started it closes, because WSL shuts down once nothing is attached. The cache step was
 lost this way at 26 of 200 and rerun attached. Long jobs must keep their SSH session open.
+
+### M4 pilot evaluation on the validation split (2026-11-03)
+
+Split by circuit (seed 0): 120 training, 40 validation, 40 test (not opened). Dusk recovery
+v0 (400 epochs) and Dusk response v0 (100 epochs), one training seed each. 11 minutes on the
+rig's CPU. Files: `logs/pilot/m4/`. These are development numbers on 40 circuits, 4 to 8 per
+switch type, so per-type rates move by 12 to 25 points per circuit.
+
+**What it shows.** Dusk rarely invents switches and usually notices real ones, and its
+response model beats every baseline on the state-dependent part of the response. It does not
+yet recover the datasheet values: its intervals are too narrow.
+
+- **No false switches:** 16 of 17 no-switch circuits got "no switch" (94%, pass mark 90%).
+  Plain 100%, shunting decoys 100%, adaptation decoys 5 of 6.
+- **Switch detection:** called a switch in 7/7 release, 7/8 global shutoff, 3/4 gain and 3/4
+  winner-take-all circuits. Trigger identity was right in 7/7 release, 6/8 global shutoff,
+  2/4 gain, and 0/4 winner-take-all. Winner-take-all has two gated inputs, and Dusk v0 does
+  not get both.
+- **Recovery:** fails for every type (gain 2/4, others 0). The 90% intervals cover the
+  planted value in only 39 to 67% of cases by field, against 90% intended, so the quantile
+  heads are overconfident on 120 training circuits.
+- **Identifiability:** only winner-take-all had at least 20 planted triggers in training
+  (40); its identifiable fields are gain and both timing ratios. Release (11), gain (19) and
+  global shutoff (15) were undecided, so they were scored on all five fields. The full
+  library fixes this.
+- **Prediction (fraction of the noise ceiling, 36 circuits after excluding 4 below 0.1):**
+  Dusk 0.35, per-state baseline 1 0.14, baseline 4 0.14, one-step 0.13, wiring-blind,
+  fully connected and shuffled 0.11, pooled baseline 1 0. The locked scorer gave NaN
+  intervals because of flaw 6 in the revision draft (215 of 4,000 ceiling samples were 0).
+  With the proposed fix applied (`scripts/m4_floor_check.py`): Dusk minus per-state
+  baseline 1 is 0.21 of the ceiling, 95% CI 0.13 to 0.29; minus pooled, 0.35, CI 0.27 to
+  0.44. No tie with baseline 4. The pre-registration asks for 3 training seeds per model;
+  this used one.
+
+Found while writing the floor check: the fix in item 6 must exclude low-ceiling circuits on
+the unfloored mean before flooring samples. The draft now says so.
+
+Next for Dusk, validation split only: calibrate the intervals (more data from the full
+library, then a held-aside calibration set or early stopping), and handle two-gate circuits.
