@@ -24,6 +24,10 @@
 > - **Cost rule (overrides M1's "except Cost before M6").** Per the new P0 protocol, the checker
 >   rejects a missing energy value by default; a caller must pass `allow_null_cost=True`, and
 >   each use is logged.
+>   (VPN note: Cisco Secure Client cuts WSL off from the internet; disconnect it while the rig
+>   needs the network.)
+> - **Second simulator (overrides D6's Brian2 spot-check, Abhiram 2026-11-02).** NEURON 9.0.2
+>   through pyNeuroML. pyNeuroML's Brian2 export can't take networks at all.
 > - **Writing.** Logs, READMEs and reports follow Abhiram's anti-slop rules: plain English,
 >   short sentences, no filler or hype, no em dashes.
 > - **Environment:** Python 3.12, pynwb 3.1.3, `jax[cuda13]` with torch 2.15 in one CUDA 13 GPU

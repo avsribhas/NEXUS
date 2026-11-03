@@ -5,6 +5,12 @@ import numpy as np
 import tarjuman
 from neuroml.utils import validate_neuroml2
 from tarjuman.validate import reset_times
+import shutil
+import sys
+import tempfile
+import xml.etree.ElementTree as ET
+from pathlib import Path
+from pyneuroml.runners import run_lems_with_jneuroml_neuron
 
 def validate_circuit(nml_path) -> None:
     """
@@ -55,3 +61,22 @@ def analytic_iaf_isi(c_nf, g_ns, e_leak_mv, thresh_mv, reset_mv, i_na) -> float:
     if v_inf_mv <= thresh_mv:
         return math.inf
     return tau_ms * math.log((v_inf_mv - reset_mv) / (v_inf_mv - thresh_mv))
+
+def run_neuron(lems_path) -> tuple:
+    """
+    Runs a LEMS file in NEURON through pyNeuroML, in a temporary copy of its folder, and returns (time, traces) in ms and mV keyed by OutputColumn id.
+    """
+    lems_path = Path(lems_path).resolve()
+    bin_dir = Path(sys.executable).parent
+    os.environ.setdefault("NEURON_HOME", str(bin_dir.parent))
+    if str(bin_dir) not in os.environ["PATH"].split(os.pathsep):
+        os.environ["PATH"] = str(bin_dir) + os.pathsep + os.environ["PATH"]
+    columns = {elem.attrib["id"]: elem.attrib["quantity"] for elem in ET.parse(lems_path).getroot().iter("OutputColumn")}
+    with tempfile.TemporaryDirectory() as tmp:
+        shutil.copytree(lems_path.parent, tmp, dirs_exist_ok=True)
+        result = run_lems_with_jneuroml_neuron(lems_path.name, nogui=True, load_saved_data=True, compile_mods=True, exec_in_dir=tmp, exit_on_fail=False)
+    if result is False or result is None:
+        raise RuntimeError("The NEURON run failed.")
+    time = np.asarray(result["t"]) * 1000.0
+    traces = {id: np.asarray(result[quantity]) * 1000.0 for id, quantity in columns.items()}
+    return time, traces

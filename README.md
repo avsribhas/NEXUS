@@ -37,9 +37,9 @@ Done so far in M1:
 - A small reference circuit, written in NeuroML, runs in the Jaxley simulator and matches the
   exact textbook answer to within one time step. The same check found a problem: the
   translator we use (tarjuman 0.5.1) drops the circuit's synaptic input while reporting the
-  conversion as complete. The official NeuroML simulator (jNeuroML) runs the same circuit
-  with the synapse working, which confirms it. Which simulator to use as the second check is
-  still being decided: the planned one (Brian2, via pyNeuroML) can't take networks at all.
+  conversion as complete. NEURON and the official NeuroML simulator (jNeuroML) both run the
+  same circuit with the synapse working, which confirms it. NEURON is the second simulator
+  that every circuit type is checked against; its spike times match Jaxley's exactly.
 - The train/test split works on four kinds of unit: whole circuits, single neurons, kinds
   of poke, and brain states. Every trial of a unit lands on the same side, whatever its
   random seed.
@@ -67,7 +67,9 @@ uv sync --frozen --extra gpu
 .venv/bin/python -m pytest -q -rfs
 ```
 
-Drop `--extra gpu` on a machine without an NVIDIA GPU; the GPU test then skips. The
+Drop `--extra gpu` on a machine without an NVIDIA GPU; the GPU test then skips. The NEURON
+tests also need Java and a C compiler (on Ubuntu: `default-jre-headless` and
+`build-essential`). The
 timestamp test needs the internet and only runs with `NEXUS_NETWORK_TESTS=1`.
 
 ## What's where
@@ -77,7 +79,7 @@ timestamp test needs the internet and only runs with `NEXUS_NETWORK_TESTS=1`.
 | `CLAUDE.md` | The Phase 1 build spec and the current status box |
 | `logs/phase1-v2-log.md` | The build log: every step, decision, mistake and test run |
 | `nexus/format/` | File format, checker, train/test splits and locking (the M1 code) |
-| `nexus/circuits/` | Runs NeuroML circuits in Jaxley |
+| `nexus/circuits/` | Runs NeuroML circuits in Jaxley and in NEURON |
 | `configs/circuits/` | The reference circuit |
 | `nexus/` (other folders) | Empty for now; filled in M3 to M7 |
 | `tests/` | The test suite and the frozen-test hashes |

@@ -679,6 +679,15 @@ wheels = [
 ]
 
 [[package]]
+name = "find-libpython"
+version = "0.5.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/70/60/951b7ca316ab3ec928ed788de5fcb30b4a0292704e50b872c8edf24c11fe/find_libpython-0.5.1.tar.gz", hash = "sha256:12a0fb39ff8dcc64ad0fd554b1bd142ea4a8c4c18e5da6043a547ce7b25559fe", size = 9402, upload-time = "2026-02-11T03:18:04.844Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/34/1f/1d6079f4f0540aaa368aa20d89d98eda42f081c397a822c547340e32d1e3/find_libpython-0.5.1-py3-none-any.whl", hash = "sha256:723a8cfe6fed255a1f58b53c62ed556fb340ec0d456e9863ebc01a5cc047607d", size = 9201, upload-time = "2026-02-11T03:18:03.263Z" },
+]
+
+[[package]]
 name = "fonttools"
 version = "4.68.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1578,6 +1587,24 @@ wheels = [
 ]
 
 [[package]]
+name = "neuron"
+version = "9.0.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "find-libpython" },
+    { name = "numpy" },
+    { name = "packaging" },
+    { name = "setuptools" },
+    { name = "sympy" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3d/78/d2f5159ed14e85ec0765a71ad863eaf16a1c1fd6bf0ea17a49d2a85bfd93/neuron-9.0.2-cp312-cp312-macosx_10_15_x86_64.whl", hash = "sha256:c374ad71a03cfeddb9a8e049c70ff79d1021d83ad028a268ffce653e11b8275d", size = 21927594, upload-time = "2026-08-10T17:18:01.313Z" },
+    { url = "https://files.pythonhosted.org/packages/76/ae/71bdb6607da7f17ef4932349c6758c9c91faff87825227ebb94b5a84bc24/neuron-9.0.2-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:428e7787f1eebd594105337b4852688e0fba70c47832a3768c0c669134964c16", size = 21409125, upload-time = "2026-08-10T17:18:04.423Z" },
+    { url = "https://files.pythonhosted.org/packages/67/cd/f341059ca6097d17e1887bc70b8202419ee50da19456dff4597e6614b21a/neuron-9.0.2-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:c9132866e435f39177a8b02cecd479d54996f7ca0f68488b8a31ab0ef1bf5ad8", size = 17296379, upload-time = "2026-08-10T17:18:07.259Z" },
+    { url = "https://files.pythonhosted.org/packages/3a/62/af8bf44e050a471f7e23f4df6e8d7ce225c680bc31a1cd3740fb444b720c/neuron-9.0.2-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:e696cfcf4a807ba00602f5bca3873a2f09ea8adee148d54afe221ed5ad0163d8", size = 17991206, upload-time = "2026-08-10T17:18:10.16Z" },
+]
+
+[[package]]
 name = "nexus"
 version = "0.2.0"
 source = { virtual = "." }
@@ -1589,6 +1616,7 @@ dependencies = [
     { name = "jaxley" },
     { name = "jaxlib" },
     { name = "ndx-optogenetics" },
+    { name = "neuron" },
     { name = "numpy" },
     { name = "nwbinspector" },
     { name = "opentimestamps-client" },
@@ -1617,6 +1645,7 @@ requires-dist = [
     { name = "jaxley", specifier = "==0.14.0" },
     { name = "jaxlib", specifier = "==0.12.0.1" },
     { name = "ndx-optogenetics", specifier = "==0.4.1" },
+    { name = "neuron", specifier = "==9.0.2" },
     { name = "numpy", specifier = "==2.5.4" },
     { name = "nwbinspector", specifier = "==0.7.2" },
     { name = "opentimestamps-client", specifier = "==0.8.0" },

@@ -481,6 +481,8 @@ Open, blocking the rest of M1:
 4. D7: who holds the key for held-out data. No held-out data until named.
 5. Whether to report the tarjuman synapse problem to its maintainer (a public GitHub issue,
    so Abhiram decides).
+(2026-11-02, later: items 1 and 2 are resolved, see the NEURON entry below. The VPN is off
+for now; WSL loses internet again whenever it reconnects.)
 
 Next is M2, the pre-registration. Writing it doesn't need any of the above, but approving it
 does.
@@ -520,3 +522,44 @@ does.
      pinned.
   3. Our own Brian2 builder for a short list of cell and synapse types. Most work, and a
      second translator that would itself need checking.
+
+### NEURON is the second simulator (Abhiram, 2026-11-02)
+**Decision (overrides D6's "Brian2 is the spot-check").** Abhiram chose NEURON, run through
+pyNeuroML, as the simulator Jaxley is checked against. Brian2 stays pinned but unused for
+now. Udeern still needs to confirm D6 as a whole.
+
+What was set up:
+- `neuron==9.0.2` pinned (the latest stable release, August 2026; a 9.0.2a1 pre-release
+  exists and is skipped). The 7B's first two edits added a `# Added line` comment I didn't ask
+  for; the third, with the no-comment rule at the top, was clean. The lock file gained
+  NEURON and one helper (`find-libpython` 0.5.1) and nothing else changed.
+- System packages in WSL, installed as root: `default-jre-headless` (Java, for jNeuroML) and
+  `build-essential` (gcc 13.3, make 4.3, which NEURON uses to compile each model's
+  mechanism files). The Dockerfile doesn't include either. It's unused, but if it's ever
+  revived it needs both.
+- `nexus/circuits/run.py` gained `run_neuron`. It runs a LEMS file in NEURON inside a
+  temporary copy of its folder, so the generated files never land in `configs/`. It points
+  jNeuroML at the pip-installed NEURON by setting `NEURON_HOME` to the environment folder.
+  The 7B's first version imported a name that doesn't exist (`add`); one edit fixed it.
+- `tests/test_m1_neuron.py`, 7 tests. The first version unpacked NEURON's two return values
+  as three in two tests; one edit fixed it. Not frozen (D6).
+
+What the rig showed, on the reference circuit:
+- NEURON's spike times match Jaxley's exactly, for all nine spikes. The pre-registered
+  tolerance is one time step (0.01 ms).
+- Both fire every 21.98 ms against an exact answer of 21.972 ms, under one step off. (The
+  0.01 ms difference from jNeuroML, noted above, is jNeuroML's own update order, not an
+  error in either.)
+- NEURON's synapse works: cell 1 rises to -59.4 mV, the same as jNeuroML (-59.43). Jaxley's
+  cell 1 stays at -70 mV. **Two independent simulators now agree that the tarjuman
+  conversion drops this synapse.**
+- The cell with no input matches exactly in all three.
+- Suite: 100 passed, 2 expected failures (the same synapse problem, tested from the Jaxley
+  side and from the comparison side), with network tests on.
+
+What this leaves for M3:
+- The equivalence check works and is ready for each cell and synapse type the generators
+  will use. Every type gets a check like this before the library is built.
+- Spiking cells with event synapses can't be used through tarjuman 0.5.1 until the synapse
+  problem is fixed or worked around. Graded synapses and gap junctions (worm-style
+  circuits) are the next thing to check, because they avoid spike detection altogether.
