@@ -1142,3 +1142,9 @@ can't meet exactly), and what to do when no twin is found. Pairing only circuits
 found a twin would leave out winner-take-all entirely and favour circuits whose fields
 are insensitive to their parameters. Smaller perturbations for winner-take-all are one
 option.
+
+Result in float64 at 0.0025 ms: all 8 types pass (release, gain, winner-take-all, global
+shutoff, plain, and the shunting, adaptation and bistable decoys), every neuron within
+0.02 mV of NEURON for the full 600 ms. 8 minutes on the rig's CPU. Command:
+`JAX_ENABLE_X64=1 JAX_PLATFORMS=cpu .venv/bin/python -m pytest tests/test_m3_neuron_types.py`.
+In the normal suite (float32) this test skips and says why.

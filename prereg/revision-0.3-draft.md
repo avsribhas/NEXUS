@@ -85,16 +85,38 @@ changes a pass mark.
    published source or an explicit statement that they're assumptions, plus a check of
    how the results change at half and double the rates.
 
-10. **Degenerate twins (section 5.4).** The current twins are scaled copies of one
-    circuit, which match trivially, so the twins test would pass without testing
-    anything. Twins need different structure (for example, a different number of
-    interneurons or a gap junction in place of a synapse) with the same planted values.
-    Not built yet.
+10. **Degenerate twins (section 5.4).** The old twins were scaled copies with identical
+    voltages, so the twins test couldn't fail. The new twin search perturbs each
+    capacitance, leak and conductance separately (about 25%), re-measures, and keeps the
+    copy if every field lands within a tolerance of the original. "Same planted values"
+    can't be met exactly by measured values, so the tolerance needs to be written down.
+    At 0.1 of the prior range, with 10 tries, twins were found for 2 of 3 circuits of
+    release, gain and global shutoff, and 0 of 3 of winner-take-all. Decisions needed:
+    - the tolerance (proposed: 0.1 of the prior range per field);
+    - what happens when no twin is found. Pairing only the circuits that found one would
+      drop winner-take-all and favour circuits whose fields barely depend on their
+      parameters. Proposed: smaller perturbations for winner-take-all, and the report
+      gives the twin-finding rate per type next to the twins result.
 
-11. **Switch and decoy types still missing (section 3).** The two-state stochastic switch
-    and the bistable decoy aren't built yet, and the per-type check against NEURON hasn't
-    been run. Either they're built before generation or this version drops them and says
-    so.
+11. **The stochastic switch (section 3).** The bistable decoy is now built, and every
+    circuit type passes the NEURON check. The two-state stochastic switch is not built. It
+    flips at random, so the probe, which measures a fixed gate ratio, can't measure its
+    planted answers as it stands. Proposed: drop it from this version and say so, rather
+    than delay the library for a new probe.
 
-12. **D7, the held-out key holder.** Still open from version 0.2. Nothing held out can be
+12. **How the NEURON check is run (section 6).** At a 0.01 ms step NEURON diverges on the
+    stiff graded synapses of latched or strongly driven cells, and Jaxley in float32
+    drifts at finer steps. Run in float64 at 0.0025 ms, all 8 circuit types agree with
+    NEURON to within 0.02 mV (worst seen 0.007 mV). Proposed: write that method into
+    section 6.
+
+13. **The library's time step.** The library is simulated at 0.2 ms. There, voltages are
+    0.03 to 0.3 mV from the converged solution for most neurons and up to 0.87 mV in the
+    latched bistable pair. Planted answers are measured at the same step as the data, so
+    the bench is consistent with itself, but the circuits are the NeuroML model at 0.2 ms,
+    not the continuous one. Options: keep 0.2 ms and state it, or use 0.1 ms and double
+    simulation time. Recommendation: keep 0.2 ms and state it; errors under 1 mV are
+    small next to the 10 mV recording noise.
+
+14. **D7, the held-out key holder.** Still open from version 0.2. Nothing held out can be
     generated until it's settled.
