@@ -18,7 +18,9 @@ def from_scale(value, scale) -> float:
     return float(10.0 ** value) if scale == "log10" else float(value)
 
 def animal_rows(animal, config) -> tuple:
-    """Features, switch labels, field targets and target masks for every candidate trigger of one animal."""
+    """Features, switch labels, field targets and target masks for every candidate trigger of one animal; a cached animal carries them precomputed under "rows"."""
+    if "rows" in animal:
+        return animal["rows"]
     traces = mean_traces(animal)
     responses = poke_responses(animal)
     planted = {d["trigger_channel"]: d for d in animal["datasheets"]}

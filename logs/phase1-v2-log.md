@@ -953,3 +953,30 @@ the summary file check features on a release circuit and a decoy. All pass on th
 
 This is a first version to get the full pipeline running end to end on the pilot. It
 treats each candidate separately, so it can't use the wiring diagram yet.
+
+### Prediction rows, cache and pilot evaluation script
+All written by the 7B.
+
+- `nexus/models/rows.py` builds one scoring row per animal. It takes each model's
+  predicted responses, keeps only the part that changes with brain state, and correlates
+  it with the measured state-dependent part averaged over noise seeds. It also gives the
+  split-half noise ceiling from the seeds. The brain-state neuron itself is left out,
+  since its response is set by the state drive. A model whose prediction doesn't change
+  with state scores 0, as decided earlier. 6 tests.
+- `scripts/m4_cache.py` reduces each accepted animal to what training and scoring need:
+  the Dusk feature rows, the poke responses for every seed, the pokes, the corrupted
+  diagram and the planted answers. That is about 80 KB per animal against 25 to 50 MB
+  for the run file, so the full library fits in memory. Dusk and the rows builder use the
+  cached values when an animal carries them (a two-line change to each, by the 7B).
+- `scripts/m4_pilot_eval.py` splits the pilot by circuit (60% train, 20% validation,
+  20% test), fits the seven linear baselines and Dusk recovery on train, and scores on
+  validation only. The pilot's test part is never opened, so it stays available as a
+  second check. Every continuous field counts as identifiable for now, until the
+  identifiability step says which are.
+
+A smoke run on the first 14 animals worked end to end (3 validation animals, so the
+numbers mean nothing yet). The median noise ceiling was 0.92 with 3 seeds.
+
+Gap against the pre-registration: it asks for at least 10 noise seeds per circuit for the
+ceiling, and the protocol has 3. That's fine for development, but held-out circuits will
+need 10. To go in the pre-registration revision.
