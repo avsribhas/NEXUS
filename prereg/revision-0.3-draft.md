@@ -26,8 +26,21 @@ Each item says what changes, why, and whether it needs a decision.
    paired poke has an unpaired reference.
 
 3. **Library size (section 3).** Version 0.2 fixes the count after the 200-circuit pilot.
-   *To be filled in from the pilot:* acceptance per type, hours and disk space per
-   circuit, and the resulting count. The rig is free to run, so no cloud cost is expected.
+   The pilot ran on the rig (RTX 4050, 6 GB) on 3 November 2026, 28 or 29 circuits of each
+   of the 7 types built at the time (the bistable decoy came later). Files are in
+   `logs/pilot/m3/`.
+   - **Acceptance:** 200 of 200, a mean of 1.00 to 1.07 tries per circuit by type.
+   - **Time:** 3.06 hours in all, 55 seconds per circuit on average (43 s for shunting
+     decoys up to 80 s for winner-take-all). These times include Jaxley compilation; the
+     pilot did not time compilation on its own.
+   - **Disk:** 6.9 GB, 35 MB per circuit on average (26 to 60 MB by type).
+   - **GPU:** 33% mean use in 30-second samples, above 50% in a third of them, peak memory
+     5.2 GB. The run is held back by the CPU side (probe and file writing), not the GPU.
+
+   **Proposed count: 5,000 circuits, as planned.** At pilot rates that is about 77 hours
+   and 175 GB on the rig with 3 seeds; with option (b) of item 8, about 115 hours and
+   260 GB. The rig's drive has 363 GB free, so disk, not time, is the limit. No cloud
+   machine is needed, so the cost is the rig's electricity.
 
 4. **Scoring scales (section 5.1).** Gain and both timing ratios are scored on a log10
    scale, threshold and reach on a linear one, with the prior ranges in
@@ -54,7 +67,15 @@ changes a pass mark.
    divides each circuit's score by a sampled ceiling. A circuit whose mean ceiling is
    just above the 0.1 floor can still have split-half samples of exactly 0, which gives
    infinity. One shunting decoy had 28 of 100 samples at 0. **Proposed:** floor each sample
-   at 0.1, the floor that section 5.6 already applies to whole circuits.
+   at 0.1, the floor that section 5.6 already applies to whole circuits. The order matters:
+   circuits are excluded on their unfloored mean ceiling first, and only the kept circuits'
+   samples are floored. Flooring first lifts every mean to at least 0.1, and then nothing is
+   ever excluded.
+
+   The pilot evaluation hit this on 40 validation circuits: 215 of 4,000 ceiling samples
+   were 0, and both bootstrap intervals came out as NaN. Re-scored with the fix as stated
+   (`scripts/m4_floor_check.py`, `logs/pilot/m4/floor_check.json`), the intervals are
+   finite and the point estimates barely move.
 
 7. **Tied priorities get credit.** The priority check counts a predicted tie as agreement
    whenever the planted order happens to run the other way. A model that ranks every gate

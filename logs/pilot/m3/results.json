@@ -1,0 +1,6336 @@
+[
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10000",
+  "animal_id": "decoy_adaptation_10000_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9360215637039843
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10000,
+  "seconds": 40.22,
+  "bytes": 25835145
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10001",
+  "animal_id": "decoy_shunt_10001_a0",
+  "n_neurons": 19,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9337356609883242
+  },
+  "motif": "decoy_shunt",
+  "seed": 10001,
+  "seconds": 74.12,
+  "bytes": 37106879
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10002",
+  "animal_id": "gain_10002_a0",
+  "n_neurons": 11,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 18.112846861030377,
+    "threshold": 10.380144319318646,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 1.9164168572542564,
+    "tau_off_over_tau_ref": 2.710290185017514,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.25,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   18.112846861030377
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10002,
+  "seconds": 42.78,
+  "bytes": 22852397
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10003",
+  "animal_id": "global_shutoff_10003_a0",
+  "n_neurons": 15,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.07111109518652278,
+    "threshold": 6.264114174576376,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.6575287652485917,
+    "tau_off_over_tau_ref": 7.803076110946713,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.18181818181818182,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.07111109518652278
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10003,
+  "seconds": 95.06,
+  "bytes": 37525354
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10004",
+  "animal_id": "plain_10004_a0",
+  "n_neurons": 17,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.925600070558035
+  },
+  "motif": "plain",
+  "seed": 10004,
+  "seconds": 76.94,
+  "bytes": 33571731
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10005",
+  "animal_id": "release_10005_a0",
+  "n_neurons": 15,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 30.025609004911047,
+    "threshold": 6.312314321450132,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.808236937258251,
+    "tau_off_over_tau_ref": 11.164747885037643,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.6666666666666666,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   30.025609004911047
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10005,
+  "seconds": 59.89,
+  "bytes": 29969134
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10006",
+  "animal_id": "winner_take_all_10006_a0",
+  "n_neurons": 16,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.06593264600599537,
+    "threshold": 2.303840986268623,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 10.031053038228055,
+    "tau_off_over_tau_ref": 14.939738608796832,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5454545454545454,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.4722765190194058,
+    "threshold": 12.41988874245831,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 13.534725753465986,
+    "tau_off_over_tau_ref": 8.992454512963375,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5454545454545454,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.06593264600599537,
+   0.4722765190194058
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10006,
+  "seconds": 66.47,
+  "bytes": 53792261
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10007",
+  "animal_id": "decoy_adaptation_10007_a0",
+  "n_neurons": 7,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9052315652708842
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10007,
+  "seconds": 21.03,
+  "bytes": 14457300
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10008",
+  "animal_id": "decoy_shunt_10008_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.8680907156754664
+  },
+  "motif": "decoy_shunt",
+  "seed": 10008,
+  "seconds": 51.78,
+  "bytes": 35751211
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10009",
+  "animal_id": "gain_10009_a0",
+  "n_neurons": 15,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 2243.1305308340116,
+    "threshold": 13.078813530607789,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.118762671149774,
+    "tau_off_over_tau_ref": 3.7486458520609363,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.08333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   2243.1305308340116
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10009,
+  "seconds": 46.13,
+  "bytes": 30600519
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10010",
+  "animal_id": "global_shutoff_10010_a0",
+  "n_neurons": 13,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.1874047696432946,
+    "threshold": 5.077640732555805,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 9.326940290295138,
+    "tau_off_over_tau_ref": 22.78168454574169,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5555555555555556,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.1874047696432946
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10010,
+  "seconds": 92.01,
+  "bytes": 33434659
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10011",
+  "animal_id": "plain_10011_a0",
+  "n_neurons": 7,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8968460000531927
+  },
+  "motif": "plain",
+  "seed": 10011,
+  "seconds": 20.29,
+  "bytes": 14620044
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10012",
+  "animal_id": "release_10012_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 40.49635856402805,
+    "threshold": 6.483701304613917,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.6151783003110802,
+    "tau_off_over_tau_ref": 5.4105414318603655,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   40.49635856402805
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10012,
+  "seconds": 77.29,
+  "bytes": 36087509
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10013",
+  "animal_id": "winner_take_all_10013_a0",
+  "n_neurons": 17,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.10165217066108335,
+    "threshold": 5.288466272308235,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 8.016834317429504,
+    "tau_off_over_tau_ref": 7.370997932233843,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.25,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.01683309330387725,
+    "threshold": 4.412019189160786,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.451966121021601,
+    "tau_off_over_tau_ref": 6.447277988050077,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.10165217066108335,
+   0.01683309330387725
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10013,
+  "seconds": 90.42,
+  "bytes": 57157138
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10014",
+  "animal_id": "decoy_adaptation_10014_a0",
+  "n_neurons": 16,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.8877531115595205
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10014,
+  "seconds": 82.03,
+  "bytes": 31427759
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10015",
+  "animal_id": "decoy_shunt_10015_a0",
+  "n_neurons": 14,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.8784386651898924
+  },
+  "motif": "decoy_shunt",
+  "seed": 10015,
+  "seconds": 43.15,
+  "bytes": 27703834
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10016",
+  "animal_id": "gain_10016_a0",
+  "n_neurons": 19,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 52883.046864226526,
+    "threshold": 11.849551564398462,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.593809882269887,
+    "tau_off_over_tau_ref": 5.44813448331956,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.0,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   52883.046864226526
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10016,
+  "seconds": 58.95,
+  "bytes": 37862520
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10017",
+  "animal_id": "global_shutoff_10017_a0",
+  "n_neurons": 13,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.19654874000903744,
+    "threshold": 1.6036375929300963,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 2.806269392944918,
+    "tau_off_over_tau_ref": 10.391970586190473,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.19654874000903744
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10017,
+  "seconds": 91.48,
+  "bytes": 32832414
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10018",
+  "animal_id": "plain_10018_a0",
+  "n_neurons": 16,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8755014607009356
+  },
+  "motif": "plain",
+  "seed": 10018,
+  "seconds": 97.26,
+  "bytes": 32511087
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10019",
+  "animal_id": "release_10019_a0",
+  "n_neurons": 11,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 18.93420587752872,
+    "threshold": 6.591476812504456,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.292738178013551,
+    "tau_off_over_tau_ref": 7.674707439500111,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.25,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   18.93420587752872
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10019,
+  "seconds": 80.6,
+  "bytes": 22365296
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10020",
+  "animal_id": "winner_take_all_10020_a0",
+  "n_neurons": 11,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.22501464768804824,
+    "threshold": 10.699405027949618,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 8.987690865278662,
+    "tau_off_over_tau_ref": 4.963784556436771,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.8333333333333334,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.15667672595339477,
+    "threshold": 5.2370057810009865,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 27.584676420384294,
+    "tau_off_over_tau_ref": 8.1664096997478,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.6666666666666666,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.22501464768804824,
+   0.15667672595339477
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10020,
+  "seconds": 88.16,
+  "bytes": 37622215
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10021",
+  "animal_id": "decoy_adaptation_10021_a0",
+  "n_neurons": 17,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9816681446402028
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10021,
+  "seconds": 92.36,
+  "bytes": 34005131
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10022",
+  "animal_id": "decoy_shunt_10022_a0",
+  "n_neurons": 15,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9242030998946732
+  },
+  "motif": "decoy_shunt",
+  "seed": 10022,
+  "seconds": 50.24,
+  "bytes": 29617073
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10023",
+  "animal_id": "gain_10023_a0",
+  "n_neurons": 15,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 55.95438953245755,
+    "threshold": 8.520087813621966,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.1258993419600687,
+    "tau_off_over_tau_ref": 5.441610562592894,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   55.95438953245755
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10023,
+  "seconds": 56.37,
+  "bytes": 30327180
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10024",
+  "animal_id": "global_shutoff_10024_a0",
+  "n_neurons": 16,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.0393641059418549,
+    "threshold": 6.3581983995733715,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.062831592714762,
+    "tau_off_over_tau_ref": 7.466920299919922,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.0393641059418549
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10024,
+  "seconds": 117.76,
+  "bytes": 40324976
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10025",
+  "animal_id": "plain_10025_a0",
+  "n_neurons": 17,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8815068794547072
+  },
+  "motif": "plain",
+  "seed": 10025,
+  "seconds": 83.81,
+  "bytes": 33543088
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10026",
+  "animal_id": "release_10026_a0",
+  "n_neurons": 16,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 4.260409069384081,
+    "threshold": 9.446860228421187,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.8780142529849235,
+    "tau_off_over_tau_ref": 7.774289604928715,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.15384615384615385,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   4.260409069384081
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10026,
+  "seconds": 85.68,
+  "bytes": 32095988
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10027",
+  "animal_id": "winner_take_all_10027_a0",
+  "n_neurons": 18,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.3573966600145842,
+    "threshold": 8.085597764396095,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.65972169676515,
+    "tau_off_over_tau_ref": 6.348214891753995,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.07692307692307693,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.07532430759900732,
+    "threshold": 11.260833277658516,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 20.522839222118673,
+    "tau_off_over_tau_ref": 5.0986590506333584,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.46153846153846156,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.3573966600145842,
+   0.07532430759900732
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10027,
+  "seconds": 113.03,
+  "bytes": 60214829
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10028",
+  "animal_id": "decoy_adaptation_10028_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9455101736537652
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10028,
+  "seconds": 102.61,
+  "bytes": 35864511
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10029",
+  "animal_id": "decoy_shunt_10029_a0",
+  "n_neurons": 10,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9281374159408136
+  },
+  "motif": "decoy_shunt",
+  "seed": 10029,
+  "seconds": 40.67,
+  "bytes": 20593670
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10030",
+  "animal_id": "gain_10030_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 58.45855341010198,
+    "threshold": 12.286811223601863,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.9565090913543917,
+    "tau_off_over_tau_ref": 4.755167950326717,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   58.45855341010198
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10030,
+  "seconds": 48.86,
+  "bytes": 26154607
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10031",
+  "animal_id": "global_shutoff_10031_a0",
+  "n_neurons": 12,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.20546587752331327,
+    "threshold": 5.668949069988965,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 9.15880969554867,
+    "tau_off_over_tau_ref": 55.34627907723112,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.375,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.20546587752331327
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10031,
+  "seconds": 46.68,
+  "bytes": 30644822
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10032",
+  "animal_id": "plain_10032_a0",
+  "n_neurons": 7,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.9114853961879383
+  },
+  "motif": "plain",
+  "seed": 10032,
+  "seconds": 20.45,
+  "bytes": 14654603
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10033",
+  "animal_id": "release_10033_a0",
+  "n_neurons": 16,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 14.948974219369187,
+    "threshold": 5.139673665818046,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.3905091433170105,
+    "tau_off_over_tau_ref": 14.780373905158331,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.46153846153846156,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   14.948974219369187
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10033,
+  "seconds": 55.87,
+  "bytes": 32111996
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10034",
+  "animal_id": "winner_take_all_10034_a0",
+  "n_neurons": 17,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.1221141867566448,
+    "threshold": 7.632350237461363,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.631747654808194,
+    "tau_off_over_tau_ref": 7.8533555600539815,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.2912687612070362,
+    "threshold": 1.7582527247805366,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.262541676712725,
+    "tau_off_over_tau_ref": 11.500149360862613,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.4166666666666667,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.1221141867566448,
+   0.2912687612070362
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10034,
+  "seconds": 77.07,
+  "bytes": 57074873
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10035",
+  "animal_id": "decoy_adaptation_10035_a0",
+  "n_neurons": 14,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9320595593382034
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10035,
+  "seconds": 47.33,
+  "bytes": 28363999
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10036",
+  "animal_id": "decoy_shunt_10036_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9125421767673432
+  },
+  "motif": "decoy_shunt",
+  "seed": 10036,
+  "seconds": 42.44,
+  "bytes": 25808332
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10037",
+  "animal_id": "gain_10037_a0",
+  "n_neurons": 20,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 305.5919798215078,
+    "threshold": 20.332671314913952,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.159804992632132,
+    "tau_off_over_tau_ref": 3.5552485087270953,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.0,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   305.5919798215078
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10037,
+  "seconds": 70.67,
+  "bytes": 39450866
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10038",
+  "animal_id": "global_shutoff_10038_a0",
+  "n_neurons": 22,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.005049954812891696,
+    "threshold": 4.166817907287798,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.778717422755881,
+    "tau_off_over_tau_ref": 9.292531994567847,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3888888888888889,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.005049954812891696
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10038,
+  "seconds": 84.0,
+  "bytes": 54975818
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10039",
+  "animal_id": "plain_10039_a0",
+  "n_neurons": 8,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8695465083171545
+  },
+  "motif": "plain",
+  "seed": 10039,
+  "seconds": 28.54,
+  "bytes": 16826089
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10040",
+  "animal_id": "release_10040_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 23.031978529014108,
+    "threshold": 5.2805036617722925,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.4624462416089345,
+    "tau_off_over_tau_ref": 8.766975742431246,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.4,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   23.031978529014108
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10040,
+  "seconds": 44.07,
+  "bytes": 26320040
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10041",
+  "animal_id": "winner_take_all_10041_a0",
+  "n_neurons": 21,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.0656366203863814,
+    "threshold": 1.6544321965970847,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 13.685390481844816,
+    "tau_off_over_tau_ref": 52.04912842097006,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.0625,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.06571034899715915,
+    "threshold": 6.265522632529455,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 7.738349387129025,
+    "tau_off_over_tau_ref": 9.513177727287083,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.4375,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.0656366203863814,
+   0.06571034899715915
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10041,
+  "seconds": 107.26,
+  "bytes": 70136988
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10042",
+  "animal_id": "decoy_adaptation_10042_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9167737345508262
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10042,
+  "seconds": 43.73,
+  "bytes": 26339639
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10043",
+  "animal_id": "decoy_shunt_10043_a0",
+  "n_neurons": 6,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9160223334519135
+  },
+  "motif": "decoy_shunt",
+  "seed": 10043,
+  "seconds": 21.64,
+  "bytes": 12399385
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10044",
+  "animal_id": "gain_10044_a0",
+  "n_neurons": 17,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 15.86177361620497,
+    "threshold": 10.588339679255908,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.293467290624267,
+    "tau_off_over_tau_ref": 6.229578391610654,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.2857142857142857,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   15.86177361620497
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10044,
+  "seconds": 67.19,
+  "bytes": 34654404
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10045",
+  "animal_id": "global_shutoff_10045_a0",
+  "n_neurons": 16,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.06507645997848756,
+    "threshold": 9.811797767335523,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 11.392942533538928,
+    "tau_off_over_tau_ref": 27.77456463407986,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.25,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.06507645997848756
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10045,
+  "seconds": 78.6,
+  "bytes": 40011707
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10046",
+  "animal_id": "plain_10046_a0",
+  "n_neurons": 14,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.839379799465748
+  },
+  "motif": "plain",
+  "seed": 10046,
+  "seconds": 57.2,
+  "bytes": 28257103
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10047",
+  "animal_id": "release_10047_a0",
+  "n_neurons": 20,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 23.896686460397316,
+    "threshold": 7.411073966440799,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.768044650454268,
+    "tau_off_over_tau_ref": 10.593133602279208,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.23529411764705882,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   23.896686460397316
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10047,
+  "seconds": 76.51,
+  "bytes": 39573418
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10048",
+  "animal_id": "winner_take_all_10048_a0",
+  "n_neurons": 23,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.3125221935620278,
+    "threshold": 6.331829039851312,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.968927481006788,
+    "tau_off_over_tau_ref": 7.889939363763095,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.2777777777777778,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.04864663645860074,
+    "threshold": 6.661612732863182,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 12.07255140596907,
+    "tau_off_over_tau_ref": 8.503572664175621,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.3125221935620278,
+   0.04864663645860074
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10048,
+  "seconds": 133.15,
+  "bytes": 76910901
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10049",
+  "animal_id": "decoy_adaptation_10049_a0",
+  "n_neurons": 8,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9564169467143872
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10049,
+  "seconds": 28.12,
+  "bytes": 16362734
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10050",
+  "animal_id": "decoy_shunt_10050_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9519029861402084
+  },
+  "motif": "decoy_shunt",
+  "seed": 10050,
+  "seconds": 94.85,
+  "bytes": 35223211
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10051",
+  "animal_id": "gain_10051_a0",
+  "n_neurons": 10,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 52.751074976971914,
+    "threshold": 11.169311163037252,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.697781456236403,
+    "tau_off_over_tau_ref": 5.346004954570169,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.42857142857142855,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   52.751074976971914
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10051,
+  "seconds": 50.18,
+  "bytes": 20326686
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10052",
+  "animal_id": "global_shutoff_10052_a0",
+  "n_neurons": 19,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.02728869872120846,
+    "threshold": 3.562808734695465,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.495774924460297,
+    "tau_off_over_tau_ref": 19.42248979982312,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.13333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.02728869872120846
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10052,
+  "seconds": 117.35,
+  "bytes": 47831282
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10053",
+  "animal_id": "plain_10053_a0",
+  "n_neurons": 10,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.7981597810368082
+  },
+  "motif": "plain",
+  "seed": 10053,
+  "seconds": 47.89,
+  "bytes": 20521397
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10054",
+  "animal_id": "release_10054_a0",
+  "n_neurons": 8,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 8.211537745424469,
+    "threshold": 5.910445657661701,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 8.444991112272056,
+    "tau_off_over_tau_ref": 13.233388895445131,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.2,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   8.211537745424469
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10054,
+  "seconds": 37.87,
+  "bytes": 16494933
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10055",
+  "animal_id": "winner_take_all_10055_a0",
+  "n_neurons": 23,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.15860784517104895,
+    "threshold": 2.4597444312031853,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.073574243029035,
+    "tau_off_over_tau_ref": 10.65328474651456,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.16666666666666666,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.16288958598859257,
+    "threshold": 4.2808599505754055,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 7.802468011182327,
+    "tau_off_over_tau_ref": 11.874841996911789,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3888888888888889,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.15860784517104895,
+   0.16288958598859257
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10055,
+  "seconds": 120.54,
+  "bytes": 77088257
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10056",
+  "animal_id": "decoy_adaptation_10056_a0",
+  "n_neurons": 16,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9541356366662065
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10056,
+  "seconds": 78.28,
+  "bytes": 32403441
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10057",
+  "animal_id": "decoy_shunt_10057_a0",
+  "n_neurons": 10,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.8903962803949028
+  },
+  "motif": "decoy_shunt",
+  "seed": 10057,
+  "seconds": 37.89,
+  "bytes": 19918682
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10058",
+  "animal_id": "gain_10058_a0",
+  "n_neurons": 10,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 2256.1108842475046,
+    "threshold": 16.140565892675358,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.9615862082414566,
+    "tau_off_over_tau_ref": 4.697828880652381,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.14285714285714285,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   2256.1108842475046
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10058,
+  "seconds": 52.97,
+  "bytes": 20620902
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10059",
+  "animal_id": "global_shutoff_10059_a0",
+  "n_neurons": 21,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.08712876107661346,
+    "threshold": 8.15665288566486,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 8.717165593009916,
+    "tau_off_over_tau_ref": 21.36548095628981,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.47058823529411764,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.08712876107661346
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10059,
+  "seconds": 118.76,
+  "bytes": 52272047
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10060",
+  "animal_id": "plain_10060_a0",
+  "n_neurons": 17,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.9040313273621905
+  },
+  "motif": "plain",
+  "seed": 10060,
+  "seconds": 74.21,
+  "bytes": 33837647
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10061",
+  "animal_id": "release_10061_a0",
+  "n_neurons": 8,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 9.569963614530623,
+    "threshold": 6.2674084273328585,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 2.8296080481525756,
+    "tau_off_over_tau_ref": 5.083992222435613,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.6,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   9.569963614530623
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10061,
+  "seconds": 31.58,
+  "bytes": 16590538
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10062",
+  "animal_id": "winner_take_all_10062_a0",
+  "n_neurons": 17,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.0706801703984367,
+    "threshold": 3.913060881940746,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 32.967281201083765,
+    "tau_off_over_tau_ref": 8.416869659588706,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5833333333333334,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.04795273456238593,
+    "threshold": 5.889008629816374,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.1566130878992285,
+    "tau_off_over_tau_ref": 3.662439336951234,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.6666666666666666,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.0706801703984367,
+   0.04795273456238593
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10062,
+  "seconds": 90.34,
+  "bytes": 57066744
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10063",
+  "animal_id": "decoy_adaptation_10063_a0",
+  "n_neurons": 10,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9589128570556076
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10063,
+  "seconds": 39.32,
+  "bytes": 20289756
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10064",
+  "animal_id": "decoy_shunt_10064_a0",
+  "n_neurons": 10,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9242428384967902
+  },
+  "motif": "decoy_shunt",
+  "seed": 10064,
+  "seconds": 37.96,
+  "bytes": 20224196
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10065",
+  "animal_id": "gain_10065_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 510.728289981967,
+    "threshold": 8.372589046966214,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.5320884259993814,
+    "tau_off_over_tau_ref": 7.45333444930372,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   510.728289981967
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10065,
+  "seconds": 54.16,
+  "bytes": 26466869
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10066",
+  "animal_id": "global_shutoff_10066_a0",
+  "n_neurons": 13,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.21488847212793696,
+    "threshold": 2.160038050208609,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 9.61617831434175,
+    "tau_off_over_tau_ref": 80.50074824607776,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.21488847212793696
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10066,
+  "seconds": 67.01,
+  "bytes": 33310233
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10067",
+  "animal_id": "plain_10067_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8898815745156952
+  },
+  "motif": "plain",
+  "seed": 10067,
+  "seconds": 73.53,
+  "bytes": 36181992
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10068",
+  "animal_id": "release_10068_a0",
+  "n_neurons": 20,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 7.2611387465334785,
+    "threshold": 6.805376712933034,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.4473412720034995,
+    "tau_off_over_tau_ref": 10.0429283578334,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.35294117647058826,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   7.2611387465334785
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10068,
+  "seconds": 82.9,
+  "bytes": 39727766
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10069",
+  "animal_id": "winner_take_all_10069_a0",
+  "n_neurons": 23,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.039607556912393586,
+    "threshold": 3.2881855209537285,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.277835849157786,
+    "tau_off_over_tau_ref": 8.285720245304699,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3888888888888889,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.09218208168882851,
+    "threshold": 2.0062624123359987,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 11.860762778128613,
+    "tau_off_over_tau_ref": 9.804203699674693,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.039607556912393586,
+   0.09218208168882851
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10069,
+  "seconds": 112.78,
+  "bytes": 76375414
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10070",
+  "animal_id": "decoy_adaptation_10070_a0",
+  "n_neurons": 17,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9565228579750391
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10070,
+  "seconds": 58.04,
+  "bytes": 33589427
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10071",
+  "animal_id": "decoy_shunt_10071_a0",
+  "n_neurons": 16,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9546655642020435
+  },
+  "motif": "decoy_shunt",
+  "seed": 10071,
+  "seconds": 63.98,
+  "bytes": 31596265
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10072",
+  "animal_id": "gain_10072_a0",
+  "n_neurons": 8,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 82.8860486356234,
+    "threshold": 11.186214268822154,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 2.739155549708416,
+    "tau_off_over_tau_ref": 3.480412614346121,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.4,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   82.8860486356234
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10072,
+  "seconds": 38.41,
+  "bytes": 16632923
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10073",
+  "animal_id": "global_shutoff_10073_a0",
+  "n_neurons": 20,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.07424665150639777,
+    "threshold": 1.448067036739471,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 9.715866275926214,
+    "tau_off_over_tau_ref": 49.37823232065865,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.0625,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.07424665150639777
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10073,
+  "seconds": 66.69,
+  "bytes": 49706409
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10074",
+  "animal_id": "plain_10074_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8740964615008917
+  },
+  "motif": "plain",
+  "seed": 10074,
+  "seconds": 55.51,
+  "bytes": 35904147
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10075",
+  "animal_id": "release_10075_a0",
+  "n_neurons": 20,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 8.640090599912261,
+    "threshold": 6.014988974031575,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 2.2777267922452182,
+    "tau_off_over_tau_ref": 4.430668374956715,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5882352941176471,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   8.640090599912261
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10075,
+  "seconds": 56.99,
+  "bytes": 39301827
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10076",
+  "animal_id": "winner_take_all_10076_a0",
+  "n_neurons": 17,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.1751218908489812,
+    "threshold": 6.097227460267329,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 9.351301129040205,
+    "tau_off_over_tau_ref": 6.857223917366277,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5833333333333334,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.15778494418611752,
+    "threshold": 5.577151821151154,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.1517510876058825,
+    "tau_off_over_tau_ref": 11.969365153310322,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.1751218908489812,
+   0.15778494418611752
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10076,
+  "seconds": 63.73,
+  "bytes": 57981673
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10077",
+  "animal_id": "decoy_adaptation_10077_a0",
+  "n_neurons": 9,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9680957678696899
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10077,
+  "seconds": 27.84,
+  "bytes": 18092042
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10078",
+  "animal_id": "decoy_shunt_10078_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.8900567301368776
+  },
+  "motif": "decoy_shunt",
+  "seed": 10078,
+  "seconds": 36.82,
+  "bytes": 25864695
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10079",
+  "animal_id": "gain_10079_a0",
+  "n_neurons": 15,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 463.8733652935173,
+    "threshold": 16.00080755461715,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.9206786297466176,
+    "tau_off_over_tau_ref": 5.0629815300726895,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.08333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   463.8733652935173
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10079,
+  "seconds": 44.2,
+  "bytes": 30660755
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10080",
+  "animal_id": "global_shutoff_10080_a0",
+  "n_neurons": 23,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.0790644099793721,
+    "threshold": 5.1661800328936485,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.577867576286009,
+    "tau_off_over_tau_ref": 7.6819795258479155,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.10526315789473684,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.0790644099793721
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10080,
+  "seconds": 72.58,
+  "bytes": 57739153
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10081",
+  "animal_id": "plain_10081_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8110463757792905
+  },
+  "motif": "plain",
+  "seed": 10081,
+  "seconds": 50.05,
+  "bytes": 35454701
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10082",
+  "animal_id": "release_10082_a0",
+  "n_neurons": 17,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 36.545604841972235,
+    "threshold": 6.070755620141722,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.4011916996962235,
+    "tau_off_over_tau_ref": 11.219305214838652,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.7142857142857143,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   36.545604841972235
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10082,
+  "seconds": 51.49,
+  "bytes": 34011469
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10083",
+  "animal_id": "winner_take_all_10083_a0",
+  "n_neurons": 12,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.019868972200047744,
+    "threshold": 3.805539632401163,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.576939926835458,
+    "tau_off_over_tau_ref": 4.513102421046,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5714285714285714,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.006900243144471369,
+    "threshold": 6.210479274517718,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.401669919038914,
+    "tau_off_over_tau_ref": 4.797378958055718,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.7142857142857143,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.019868972200047744,
+   0.006900243144471369
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10083,
+  "seconds": 49.74,
+  "bytes": 40814616
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10084",
+  "animal_id": "decoy_adaptation_10084_a0",
+  "n_neurons": 17,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.8554827636032873
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10084,
+  "seconds": 47.65,
+  "bytes": 33386486
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10085",
+  "animal_id": "decoy_shunt_10085_a0",
+  "n_neurons": 19,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.8584497082982918
+  },
+  "motif": "decoy_shunt",
+  "seed": 10085,
+  "seconds": 51.64,
+  "bytes": 37626038
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10086",
+  "animal_id": "gain_10086_a0",
+  "n_neurons": 7,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 41.3341046384295,
+    "threshold": 11.980816590052173,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.810675099938131,
+    "tau_off_over_tau_ref": 4.345762808149109,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.25,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   41.3341046384295
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10086,
+  "seconds": 16.44,
+  "bytes": 14737226
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10087",
+  "animal_id": "global_shutoff_10087_a0",
+  "n_neurons": 13,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.20583849101775267,
+    "threshold": 7.150840240800039,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.489047179568406,
+    "tau_off_over_tau_ref": 15.392708547680002,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.20583849101775267
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10087,
+  "seconds": 41.99,
+  "bytes": 32973615
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10088",
+  "animal_id": "plain_10088_a0",
+  "n_neurons": 16,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8680529843150735
+  },
+  "motif": "plain",
+  "seed": 10088,
+  "seconds": 47.06,
+  "bytes": 32226805
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10089",
+  "animal_id": "release_10089_a0",
+  "n_neurons": 8,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 42.424757491933576,
+    "threshold": 7.502965264561951,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 7.905234930568931,
+    "tau_off_over_tau_ref": 11.894743649055297,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.6,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   42.424757491933576
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10089,
+  "seconds": 23.67,
+  "bytes": 16685506
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10090",
+  "animal_id": "winner_take_all_10090_a0",
+  "n_neurons": 19,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.009765118130338002,
+    "threshold": 4.29858786416662,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.4838861630775915,
+    "tau_off_over_tau_ref": 9.807694641755964,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.7142857142857143,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.34828200560490347,
+    "threshold": 2.1585214787358353,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.008108882786044,
+    "tau_off_over_tau_ref": 4.749186091070474,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5714285714285714,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.009765118130338002,
+   0.34828200560490347
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10090,
+  "seconds": 71.92,
+  "bytes": 64537513
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10091",
+  "animal_id": "decoy_adaptation_10091_a0",
+  "n_neurons": 17,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9267115387537483
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10091,
+  "seconds": 47.0,
+  "bytes": 33899922
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10092",
+  "animal_id": "decoy_shunt_10092_a0",
+  "n_neurons": 12,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9258249783096977
+  },
+  "motif": "decoy_shunt",
+  "seed": 10092,
+  "seconds": 35.81,
+  "bytes": 24218107
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10093",
+  "animal_id": "gain_10093_a0",
+  "n_neurons": 20,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 847.5733426707623,
+    "threshold": 13.617158764645675,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 2.633925185281512,
+    "tau_off_over_tau_ref": 3.0372958143823747,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.11764705882352941,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   847.5733426707623
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10093,
+  "seconds": 58.08,
+  "bytes": 40173664
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10094",
+  "animal_id": "global_shutoff_10094_a0",
+  "n_neurons": 19,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.10842876738635816,
+    "threshold": 6.7427509050032075,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 8.083385415403018,
+    "tau_off_over_tau_ref": 14.812191216275652,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.6,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.10842876738635816
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10094,
+  "seconds": 62.59,
+  "bytes": 48188553
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10095",
+  "animal_id": "plain_10095_a0",
+  "n_neurons": 19,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8255123835101523
+  },
+  "motif": "plain",
+  "seed": 10095,
+  "seconds": 54.03,
+  "bytes": 37499924
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10096",
+  "animal_id": "release_10096_a0",
+  "n_neurons": 19,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 9.7039219116063,
+    "threshold": 9.108213088667974,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.9741732472027578,
+    "tau_off_over_tau_ref": 6.770494514080718,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.625,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   9.7039219116063
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10096,
+  "seconds": 54.64,
+  "bytes": 37779244
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10097",
+  "animal_id": "winner_take_all_10097_a0",
+  "n_neurons": 23,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.11107423239080776,
+    "threshold": 9.658863883291737,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.386894001627291,
+    "tau_off_over_tau_ref": 5.219490712949931,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5555555555555556,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.008356139545421727,
+    "threshold": 8.185866833229198,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.352078269636696,
+    "tau_off_over_tau_ref": 6.941749693982197,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5555555555555556,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.11107423239080776,
+   0.008356139545421727
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10097,
+  "seconds": 84.55,
+  "bytes": 77118445
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10098",
+  "animal_id": "decoy_adaptation_10098_a0",
+  "n_neurons": 19,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9566374346624106
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10098,
+  "seconds": 55.74,
+  "bytes": 37728325
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10099",
+  "animal_id": "decoy_shunt_10099_a0",
+  "n_neurons": 14,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.940030515824294
+  },
+  "motif": "decoy_shunt",
+  "seed": 10099,
+  "seconds": 38.51,
+  "bytes": 27776769
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10100",
+  "animal_id": "gain_10100_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 43.40960653375458,
+    "threshold": 8.50604663210441,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 2.6605297633304166,
+    "tau_off_over_tau_ref": 5.672358213427502,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.13333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   43.40960653375458
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10100,
+  "seconds": 54.92,
+  "bytes": 36472046
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10101",
+  "animal_id": "global_shutoff_10101_a0",
+  "n_neurons": 21,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.10320856540363407,
+    "threshold": 7.9956260727264805,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 7.546021273900505,
+    "tau_off_over_tau_ref": 24.339566144387955,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.11764705882352941,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.10320856540363407
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10101,
+  "seconds": 63.5,
+  "bytes": 53183573
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10102",
+  "animal_id": "plain_10102_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.9352155304901836
+  },
+  "motif": "plain",
+  "seed": 10102,
+  "seconds": 55.19,
+  "bytes": 35510752
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10103",
+  "animal_id": "release_10103_a0",
+  "n_neurons": 9,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 4.135463692055491,
+    "threshold": 6.733551471364581,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.458506297318849,
+    "tau_off_over_tau_ref": 9.431917159636102,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.8333333333333334,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   4.135463692055491
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10103,
+  "seconds": 30.0,
+  "bytes": 18607334
+ },
+ {
+  "accepted": true,
+  "tries": 2,
+  "reasons": [
+   "gate not a clear switch: gB",
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10104",
+  "animal_id": "winner_take_all_10104_a0",
+  "n_neurons": 16,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.0475421762497576,
+    "threshold": 6.4109543020515165,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.456661031065172,
+    "tau_off_over_tau_ref": 7.215510260690783,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.8181818181818182,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.1740298795912404,
+    "threshold": 6.379036308117269,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 11.769749089926666,
+    "tau_off_over_tau_ref": 7.8526845018083025,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.18181818181818182,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.0475421762497576,
+   0.1740298795912404
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10104,
+  "seconds": 73.48,
+  "bytes": 54214547
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10105",
+  "animal_id": "decoy_adaptation_10105_a0",
+  "n_neurons": 10,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.7276019596976477
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10105,
+  "seconds": 26.54,
+  "bytes": 20203131
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10106",
+  "animal_id": "decoy_shunt_10106_a0",
+  "n_neurons": 7,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9460517744467387
+  },
+  "motif": "decoy_shunt",
+  "seed": 10106,
+  "seconds": 22.23,
+  "bytes": 14551236
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10107",
+  "animal_id": "gain_10107_a0",
+  "n_neurons": 17,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 63.44709374063435,
+    "threshold": 7.100200909944632,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 2.3291636668273474,
+    "tau_off_over_tau_ref": 4.469971224356286,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.14285714285714285,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   63.44709374063435
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10107,
+  "seconds": 65.23,
+  "bytes": 33761221
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10108",
+  "animal_id": "global_shutoff_10108_a0",
+  "n_neurons": 15,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.14869075495273643,
+    "threshold": 6.377887939618971,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.158696312565487,
+    "tau_off_over_tau_ref": 9.864861770422571,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.45454545454545453,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.14869075495273643
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10108,
+  "seconds": 48.59,
+  "bytes": 38116787
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10109",
+  "animal_id": "plain_10109_a0",
+  "n_neurons": 10,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.825218373765563
+  },
+  "motif": "plain",
+  "seed": 10109,
+  "seconds": 32.93,
+  "bytes": 20240616
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10110",
+  "animal_id": "release_10110_a0",
+  "n_neurons": 9,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 18.1759996005498,
+    "threshold": 8.47595643592459,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.375624020567342,
+    "tau_off_over_tau_ref": 6.143955237286073,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.6666666666666666,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   18.1759996005498
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10110,
+  "seconds": 27.04,
+  "bytes": 18445984
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10111",
+  "animal_id": "winner_take_all_10111_a0",
+  "n_neurons": 22,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.028153360623451286,
+    "threshold": 3.6926493408029915,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 8.990210078188692,
+    "tau_off_over_tau_ref": 22.223552093218093,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.4117647058823529,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.16857406746608353,
+    "threshold": 8.379322244491235,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.557781068516086,
+    "tau_off_over_tau_ref": 3.421010301177959,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.47058823529411764,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.028153360623451286,
+   0.16857406746608353
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10111,
+  "seconds": 82.04,
+  "bytes": 73571987
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10112",
+  "animal_id": "decoy_adaptation_10112_a0",
+  "n_neurons": 17,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9593816446616382
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10112,
+  "seconds": 50.54,
+  "bytes": 33741728
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10113",
+  "animal_id": "decoy_shunt_10113_a0",
+  "n_neurons": 19,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9193596730321458
+  },
+  "motif": "decoy_shunt",
+  "seed": 10113,
+  "seconds": 56.63,
+  "bytes": 37077288
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10114",
+  "animal_id": "gain_10114_a0",
+  "n_neurons": 11,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 212.76231689430674,
+    "threshold": 14.455931654866525,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.054317217483962,
+    "tau_off_over_tau_ref": 5.576680329271598,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.25,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   212.76231689430674
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10114,
+  "seconds": 34.94,
+  "bytes": 22743611
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10115",
+  "animal_id": "global_shutoff_10115_a0",
+  "n_neurons": 14,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.09250186170752413,
+    "threshold": 3.760574217770266,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.3893330242714605,
+    "tau_off_over_tau_ref": 9.65872759243369,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.09250186170752413
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10115,
+  "seconds": 47.17,
+  "bytes": 35560281
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10116",
+  "animal_id": "plain_10116_a0",
+  "n_neurons": 20,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8840767801224075
+  },
+  "motif": "plain",
+  "seed": 10116,
+  "seconds": 55.7,
+  "bytes": 39224455
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10117",
+  "animal_id": "release_10117_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 7.011311860334366,
+    "threshold": 4.6186388844459545,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 2.916329559554445,
+    "tau_off_over_tau_ref": 11.075867077371912,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   7.011311860334366
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10117,
+  "seconds": 56.71,
+  "bytes": 35655500
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10118",
+  "animal_id": "winner_take_all_10118_a0",
+  "n_neurons": 12,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.03641999359804078,
+    "threshold": 3.497900465419753,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 7.594541250510687,
+    "tau_off_over_tau_ref": 7.988830051766848,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.7142857142857143,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.02321054527712274,
+    "threshold": 5.144566523957167,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 7.672650554936666,
+    "tau_off_over_tau_ref": 6.913452891155455,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.7142857142857143,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.03641999359804078,
+   0.02321054527712274
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10118,
+  "seconds": 52.28,
+  "bytes": 40765245
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10119",
+  "animal_id": "decoy_adaptation_10119_a0",
+  "n_neurons": 14,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.8937462926942565
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10119,
+  "seconds": 40.73,
+  "bytes": 28272405
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10120",
+  "animal_id": "decoy_shunt_10120_a0",
+  "n_neurons": 6,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.911011399473424
+  },
+  "motif": "decoy_shunt",
+  "seed": 10120,
+  "seconds": 16.41,
+  "bytes": 12559365
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10121",
+  "animal_id": "gain_10121_a0",
+  "n_neurons": 12,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 91.80114050849296,
+    "threshold": 13.256928031657292,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.7053822603485354,
+    "tau_off_over_tau_ref": 5.593299463869297,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.2222222222222222,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   91.80114050849296
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10121,
+  "seconds": 37.59,
+  "bytes": 24622766
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10122",
+  "animal_id": "global_shutoff_10122_a0",
+  "n_neurons": 20,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.009265803115253053,
+    "threshold": 3.6315869780040657,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.950348224442289,
+    "tau_off_over_tau_ref": 14.093845117024108,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.125,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.009265803115253053
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10122,
+  "seconds": 63.09,
+  "bytes": 50130214
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10123",
+  "animal_id": "plain_10123_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8806353111371029
+  },
+  "motif": "plain",
+  "seed": 10123,
+  "seconds": 54.39,
+  "bytes": 35803732
+ },
+ {
+  "accepted": true,
+  "tries": 2,
+  "reasons": [
+   "gate not a clear switch: g0",
+   "ok"
+  ],
+  "circuit_id": "release_10124",
+  "animal_id": "release_10124_a0",
+  "n_neurons": 19,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 29.78788631086442,
+    "threshold": 7.830466781537458,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.7819084482287906,
+    "tau_off_over_tau_ref": 10.064966837780075,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.4375,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   29.78788631086442
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10124,
+  "seconds": 61.57,
+  "bytes": 37824130
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10125",
+  "animal_id": "winner_take_all_10125_a0",
+  "n_neurons": 22,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.006873696880246443,
+    "threshold": 2.2797855737928767,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.931287080463899,
+    "tau_off_over_tau_ref": 9.484821936682271,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.47058823529411764,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.005341608223333812,
+    "threshold": 11.083767892240807,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.98649962111154,
+    "tau_off_over_tau_ref": 3.125377379976747,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.17647058823529413,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.006873696880246443,
+   0.005341608223333812
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10125,
+  "seconds": 87.07,
+  "bytes": 73365055
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10126",
+  "animal_id": "decoy_adaptation_10126_a0",
+  "n_neurons": 9,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9454827539903529
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10126,
+  "seconds": 27.99,
+  "bytes": 18548100
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10127",
+  "animal_id": "decoy_shunt_10127_a0",
+  "n_neurons": 11,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9371114802269103
+  },
+  "motif": "decoy_shunt",
+  "seed": 10127,
+  "seconds": 35.48,
+  "bytes": 22049873
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10128",
+  "animal_id": "gain_10128_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 216.9288910436422,
+    "threshold": 12.561249667263878,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.486910977958637,
+    "tau_off_over_tau_ref": 4.023496358570678,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.06666666666666667,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   216.9288910436422
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10128,
+  "seconds": 59.28,
+  "bytes": 36111631
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10129",
+  "animal_id": "global_shutoff_10129_a0",
+  "n_neurons": 20,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.05146483927897634,
+    "threshold": 3.4266774341355406,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.491617611125811,
+    "tau_off_over_tau_ref": 15.720554294101067,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.0625,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.05146483927897634
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10129,
+  "seconds": 65.39,
+  "bytes": 50694885
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10130",
+  "animal_id": "plain_10130_a0",
+  "n_neurons": 11,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8795865387732446
+  },
+  "motif": "plain",
+  "seed": 10130,
+  "seconds": 34.21,
+  "bytes": 22352310
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10131",
+  "animal_id": "release_10131_a0",
+  "n_neurons": 14,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 6.444520167116073,
+    "threshold": 6.195659382921458,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.277071705452315,
+    "tau_off_over_tau_ref": 10.787067106365948,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.36363636363636365,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   6.444520167116073
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10131,
+  "seconds": 40.15,
+  "bytes": 27899783
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10132",
+  "animal_id": "winner_take_all_10132_a0",
+  "n_neurons": 21,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.4039644387433486,
+    "threshold": 3.5248455225939628,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.371679281098615,
+    "tau_off_over_tau_ref": 6.285991744020417,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3125,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.11005580270095036,
+    "threshold": 11.04179113476718,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 13.639143810584052,
+    "tau_off_over_tau_ref": 9.479172916890708,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.375,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.4039644387433486,
+   0.11005580270095036
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10132,
+  "seconds": 76.91,
+  "bytes": 70432094
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10133",
+  "animal_id": "decoy_adaptation_10133_a0",
+  "n_neurons": 20,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9209777733598311
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10133,
+  "seconds": 56.68,
+  "bytes": 38941249
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10134",
+  "animal_id": "decoy_shunt_10134_a0",
+  "n_neurons": 10,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.858920339232989
+  },
+  "motif": "decoy_shunt",
+  "seed": 10134,
+  "seconds": 29.44,
+  "bytes": 20438558
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10135",
+  "animal_id": "gain_10135_a0",
+  "n_neurons": 8,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 1251.0366012311385,
+    "threshold": 14.428787632897308,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 10.454500445691252,
+    "tau_off_over_tau_ref": 10.539182027384296,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.2,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   1251.0366012311385
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10135,
+  "seconds": 24.43,
+  "bytes": 16586220
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10136",
+  "animal_id": "global_shutoff_10136_a0",
+  "n_neurons": 12,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.013552705997905671,
+    "threshold": 6.14067764730342,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.851856596209414,
+    "tau_off_over_tau_ref": 18.638715644487192,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.375,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.013552705997905671
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10136,
+  "seconds": 40.25,
+  "bytes": 30588103
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10137",
+  "animal_id": "plain_10137_a0",
+  "n_neurons": 12,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.9085822170172353
+  },
+  "motif": "plain",
+  "seed": 10137,
+  "seconds": 34.95,
+  "bytes": 24396669
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10138",
+  "animal_id": "release_10138_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 5.251551117160872,
+    "threshold": 2.8637761936656565,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.783711806254705,
+    "tau_off_over_tau_ref": 9.370725828143895,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.4,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   5.251551117160872
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10138,
+  "seconds": 35.76,
+  "bytes": 26692514
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10139",
+  "animal_id": "winner_take_all_10139_a0",
+  "n_neurons": 22,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.20992907959621032,
+    "threshold": 3.702083794654305,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.194508019333828,
+    "tau_off_over_tau_ref": 5.899195931243315,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.35294117647058826,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.002634246884357129,
+    "threshold": 7.170978306124158,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.168747105689351,
+    "tau_off_over_tau_ref": 8.412494400632893,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.4117647058823529,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.20992907959621032,
+   0.002634246884357129
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10139,
+  "seconds": 81.41,
+  "bytes": 73529864
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10140",
+  "animal_id": "decoy_adaptation_10140_a0",
+  "n_neurons": 11,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9780127716227394
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10140,
+  "seconds": 34.21,
+  "bytes": 22494977
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10141",
+  "animal_id": "decoy_shunt_10141_a0",
+  "n_neurons": 19,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9223626384338877
+  },
+  "motif": "decoy_shunt",
+  "seed": 10141,
+  "seconds": 54.25,
+  "bytes": 37154353
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10142",
+  "animal_id": "gain_10142_a0",
+  "n_neurons": 15,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 21.79521217187577,
+    "threshold": 8.192092447047756,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 8.36768751254804,
+    "tau_off_over_tau_ref": 14.382853375235074,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.0,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   21.79521217187577
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10142,
+  "seconds": 38.86,
+  "bytes": 30430185
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10143",
+  "animal_id": "global_shutoff_10143_a0",
+  "n_neurons": 21,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.04584210549410375,
+    "threshold": 4.395262625400103,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 2.6046633462596764,
+    "tau_off_over_tau_ref": 8.504605152232765,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.11764705882352941,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.04584210549410375
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10143,
+  "seconds": 74.41,
+  "bytes": 52457858
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10144",
+  "animal_id": "plain_10144_a0",
+  "n_neurons": 10,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8091715067123223
+  },
+  "motif": "plain",
+  "seed": 10144,
+  "seconds": 33.96,
+  "bytes": 20669876
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10145",
+  "animal_id": "release_10145_a0",
+  "n_neurons": 12,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 5.2613940530082415,
+    "threshold": 5.926214593755342,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.016241884896836,
+    "tau_off_over_tau_ref": 4.508738787621154,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.1111111111111111,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   5.2613940530082415
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10145,
+  "seconds": 37.49,
+  "bytes": 23984563
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10146",
+  "animal_id": "winner_take_all_10146_a0",
+  "n_neurons": 12,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.002408736133897927,
+    "threshold": 3.380823560963371,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 7.128181058934581,
+    "tau_off_over_tau_ref": 4.372220527228192,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.7142857142857143,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.052363243089506746,
+    "threshold": 4.401170518091033,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 8.085655594886545,
+    "tau_off_over_tau_ref": 10.108764054902165,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.42857142857142855,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.002408736133897927,
+   0.052363243089506746
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10146,
+  "seconds": 50.06,
+  "bytes": 41000877
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10147",
+  "animal_id": "decoy_adaptation_10147_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9657474315009915
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10147,
+  "seconds": 38.62,
+  "bytes": 26583590
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10148",
+  "animal_id": "decoy_shunt_10148_a0",
+  "n_neurons": 10,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.95047058956857
+  },
+  "motif": "decoy_shunt",
+  "seed": 10148,
+  "seconds": 32.2,
+  "bytes": 20165537
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10149",
+  "animal_id": "gain_10149_a0",
+  "n_neurons": 15,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 33.90478123051843,
+    "threshold": 13.400805054168092,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.1962201712466864,
+    "tau_off_over_tau_ref": 5.494499184989519,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.0,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   33.90478123051843
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10149,
+  "seconds": 42.98,
+  "bytes": 30461041
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10150",
+  "animal_id": "global_shutoff_10150_a0",
+  "n_neurons": 12,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.06845916028695927,
+    "threshold": 5.598263296084458,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 7.7678716578456894,
+    "tau_off_over_tau_ref": 24.35403989611859,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.06845916028695927
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10150,
+  "seconds": 39.4,
+  "bytes": 30711204
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10151",
+  "animal_id": "plain_10151_a0",
+  "n_neurons": 9,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.9220412257136421
+  },
+  "motif": "plain",
+  "seed": 10151,
+  "seconds": 28.41,
+  "bytes": 18087682
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10152",
+  "animal_id": "release_10152_a0",
+  "n_neurons": 14,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 4.359714900071111,
+    "threshold": 6.753724560385619,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.804670014723964,
+    "tau_off_over_tau_ref": 10.693324187882743,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.7272727272727273,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   4.359714900071111
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10152,
+  "seconds": 39.62,
+  "bytes": 28476367
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10153",
+  "animal_id": "winner_take_all_10153_a0",
+  "n_neurons": 22,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.016560330388197837,
+    "threshold": 4.6302426091568485,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.195124329876854,
+    "tau_off_over_tau_ref": 8.527730537005837,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.11764705882352941,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.1454786336688987,
+    "threshold": 5.716281811746933,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.535520935716411,
+    "tau_off_over_tau_ref": 3.162859861390737,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.7058823529411765,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.016560330388197837,
+   0.1454786336688987
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10153,
+  "seconds": 84.46,
+  "bytes": 73619897
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10154",
+  "animal_id": "decoy_adaptation_10154_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9225072392295234
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10154,
+  "seconds": 54.28,
+  "bytes": 35470587
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10155",
+  "animal_id": "decoy_shunt_10155_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9392293082595597
+  },
+  "motif": "decoy_shunt",
+  "seed": 10155,
+  "seconds": 39.14,
+  "bytes": 26187421
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10156",
+  "animal_id": "gain_10156_a0",
+  "n_neurons": 17,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 72.86061532641764,
+    "threshold": 12.771949669817609,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 7.134051479825064,
+    "tau_off_over_tau_ref": 6.582464027777291,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.2857142857142857,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   72.86061532641764
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10156,
+  "seconds": 50.31,
+  "bytes": 34268865
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10157",
+  "animal_id": "global_shutoff_10157_a0",
+  "n_neurons": 17,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.015773196584363797,
+    "threshold": 1.9401650251957197,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 8.446853249012403,
+    "tau_off_over_tau_ref": 32.279405910991606,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.15384615384615385,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.015773196584363797
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10157,
+  "seconds": 59.42,
+  "bytes": 42757392
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10158",
+  "animal_id": "plain_10158_a0",
+  "n_neurons": 11,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8416977970229113
+  },
+  "motif": "plain",
+  "seed": 10158,
+  "seconds": 30.92,
+  "bytes": 22260025
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10159",
+  "animal_id": "release_10159_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 8.92667324286257,
+    "threshold": 7.70416122351887,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.162234750443275,
+    "tau_off_over_tau_ref": 10.418879303079628,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.4,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   8.92667324286257
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10159,
+  "seconds": 38.65,
+  "bytes": 26316009
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10160",
+  "animal_id": "winner_take_all_10160_a0",
+  "n_neurons": 21,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.12272521849552377,
+    "threshold": 4.412987033062679,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 13.478411917589133,
+    "tau_off_over_tau_ref": 21.995541900325666,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.125,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.00489182379368992,
+    "threshold": 10.935421630317883,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.260662705009994,
+    "tau_off_over_tau_ref": 5.666343523660718,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.6875,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.12272521849552377,
+   0.00489182379368992
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10160,
+  "seconds": 74.53,
+  "bytes": 70476501
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10161",
+  "animal_id": "decoy_adaptation_10161_a0",
+  "n_neurons": 11,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.8953072190900083
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10161,
+  "seconds": 33.94,
+  "bytes": 21865299
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10162",
+  "animal_id": "decoy_shunt_10162_a0",
+  "n_neurons": 8,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9190907176718136
+  },
+  "motif": "decoy_shunt",
+  "seed": 10162,
+  "seconds": 23.75,
+  "bytes": 16462823
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10163",
+  "animal_id": "gain_10163_a0",
+  "n_neurons": 12,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 182.02538753221802,
+    "threshold": 16.2176987321088,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.9004443032756484,
+    "tau_off_over_tau_ref": 5.115002875659499,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.6666666666666666,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   182.02538753221802
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10163,
+  "seconds": 37.95,
+  "bytes": 24756308
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10164",
+  "animal_id": "global_shutoff_10164_a0",
+  "n_neurons": 19,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.07205770182908594,
+    "threshold": 1.8043061350798755,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.815635220029163,
+    "tau_off_over_tau_ref": 19.35986620403583,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.2,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.07205770182908594
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10164,
+  "seconds": 70.61,
+  "bytes": 47365164
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10165",
+  "animal_id": "plain_10165_a0",
+  "n_neurons": 11,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8643597459963323
+  },
+  "motif": "plain",
+  "seed": 10165,
+  "seconds": 32.16,
+  "bytes": 22603344
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10166",
+  "animal_id": "release_10166_a0",
+  "n_neurons": 11,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 9.313762000641573,
+    "threshold": 7.40185011316828,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 10.099970461634182,
+    "tau_off_over_tau_ref": 16.633612909556927,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.375,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   9.313762000641573
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10166,
+  "seconds": 34.84,
+  "bytes": 22318882
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10167",
+  "animal_id": "winner_take_all_10167_a0",
+  "n_neurons": 22,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.1053350966939821,
+    "threshold": 3.685954313838378,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.264517157005572,
+    "tau_off_over_tau_ref": 10.01720752222631,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.4117647058823529,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.42076001791278334,
+    "threshold": 7.580531304626769,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 12.320548753210279,
+    "tau_off_over_tau_ref": 9.088043119535108,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.8235294117647058,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.1053350966939821,
+   0.42076001791278334
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10167,
+  "seconds": 84.3,
+  "bytes": 73926878
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10168",
+  "animal_id": "decoy_adaptation_10168_a0",
+  "n_neurons": 15,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9515556928633752
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10168,
+  "seconds": 43.21,
+  "bytes": 29823988
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10169",
+  "animal_id": "decoy_shunt_10169_a0",
+  "n_neurons": 11,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9167966040369002
+  },
+  "motif": "decoy_shunt",
+  "seed": 10169,
+  "seconds": 32.34,
+  "bytes": 22219529
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10170",
+  "animal_id": "gain_10170_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 326.2591652242687,
+    "threshold": 20.100080513616717,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.9500555291932065,
+    "tau_off_over_tau_ref": 5.292189567191412,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.13333333333333333,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   326.2591652242687
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10170,
+  "seconds": 53.84,
+  "bytes": 36222004
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10171",
+  "animal_id": "global_shutoff_10171_a0",
+  "n_neurons": 23,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.21196409046433223,
+    "threshold": 4.520812927493251,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.493588998621564,
+    "tau_off_over_tau_ref": 15.355232155791672,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3684210526315789,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.21196409046433223
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10171,
+  "seconds": 76.92,
+  "bytes": 57353666
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10172",
+  "animal_id": "plain_10172_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8656306667848559
+  },
+  "motif": "plain",
+  "seed": 10172,
+  "seconds": 36.06,
+  "bytes": 25819292
+ },
+ {
+  "accepted": true,
+  "tries": 2,
+  "reasons": [
+   "gate not a clear switch: g0",
+   "ok"
+  ],
+  "circuit_id": "release_10173",
+  "animal_id": "release_10173_a0",
+  "n_neurons": 14,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 5.8758279449259225,
+    "threshold": 4.0296624080275745,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.336592349374246,
+    "tau_off_over_tau_ref": 10.70696769761465,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.18181818181818182,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   5.8758279449259225
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10173,
+  "seconds": 48.87,
+  "bytes": 27902320
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10174",
+  "animal_id": "winner_take_all_10174_a0",
+  "n_neurons": 12,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.003112341119038001,
+    "threshold": 9.60062629476582,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.473320685260602,
+    "tau_off_over_tau_ref": 3.481509221748533,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5714285714285714,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.08290964752360315,
+    "threshold": 1.8476782386038362,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 7.4566988169399275,
+    "tau_off_over_tau_ref": 16.05560641444636,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.42857142857142855,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.003112341119038001,
+   0.08290964752360315
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10174,
+  "seconds": 52.88,
+  "bytes": 40802134
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10175",
+  "animal_id": "decoy_adaptation_10175_a0",
+  "n_neurons": 18,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.8543301167204731
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10175,
+  "seconds": 53.34,
+  "bytes": 35762712
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10176",
+  "animal_id": "decoy_shunt_10176_a0",
+  "n_neurons": 12,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9453551076567215
+  },
+  "motif": "decoy_shunt",
+  "seed": 10176,
+  "seconds": 35.73,
+  "bytes": 23887468
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10177",
+  "animal_id": "gain_10177_a0",
+  "n_neurons": 7,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 185.80749922976673,
+    "threshold": 11.339238861844944,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.1300484967893882,
+    "tau_off_over_tau_ref": 4.733286062119839,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   185.80749922976673
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10177,
+  "seconds": 20.1,
+  "bytes": 14775636
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10178",
+  "animal_id": "global_shutoff_10178_a0",
+  "n_neurons": 17,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.15647349663936158,
+    "threshold": 7.191614946583709,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.611141153521936,
+    "tau_off_over_tau_ref": 13.841898280750204,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.38461538461538464,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.15647349663936158
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10178,
+  "seconds": 58.5,
+  "bytes": 42771239
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10179",
+  "animal_id": "plain_10179_a0",
+  "n_neurons": 7,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8442556628685038
+  },
+  "motif": "plain",
+  "seed": 10179,
+  "seconds": 19.53,
+  "bytes": 14616975
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10180",
+  "animal_id": "release_10180_a0",
+  "n_neurons": 14,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 10.14600287011325,
+    "threshold": 6.376195702954967,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.959627791375006,
+    "tau_off_over_tau_ref": 10.72264052291066,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5454545454545454,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   10.14600287011325
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10180,
+  "seconds": 39.78,
+  "bytes": 28279531
+ },
+ {
+  "accepted": true,
+  "tries": 2,
+  "reasons": [
+   "gate not a clear switch: gA",
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10181",
+  "animal_id": "winner_take_all_10181_a0",
+  "n_neurons": 16,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.4719243892113046,
+    "threshold": 1.5641280229440613,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 2.947809222123651,
+    "tau_off_over_tau_ref": 8.262962689226965,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.0,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.14723899218299907,
+    "threshold": 16.531258130399042,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.087932302279601,
+    "tau_off_over_tau_ref": 3.8139924864153976,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.36363636363636365,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.4719243892113046,
+   0.14723899218299907
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10181,
+  "seconds": 70.31,
+  "bytes": 53699037
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10182",
+  "animal_id": "decoy_adaptation_10182_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9411023856183598
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10182,
+  "seconds": 38.03,
+  "bytes": 25903068
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10183",
+  "animal_id": "decoy_shunt_10183_a0",
+  "n_neurons": 19,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.933968502140579
+  },
+  "motif": "decoy_shunt",
+  "seed": 10183,
+  "seconds": 59.82,
+  "bytes": 37883312
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10184",
+  "animal_id": "gain_10184_a0",
+  "n_neurons": 17,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 62.33564284388465,
+    "threshold": 10.491566901315174,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.341278699261403,
+    "tau_off_over_tau_ref": 7.331501273250811,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.14285714285714285,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   62.33564284388465
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10184,
+  "seconds": 69.22,
+  "bytes": 34412517
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10185",
+  "animal_id": "global_shutoff_10185_a0",
+  "n_neurons": 17,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.07527496555754615,
+    "threshold": 2.105453226792392,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.9675943059337095,
+    "tau_off_over_tau_ref": 24.44118166325661,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5384615384615384,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.07527496555754615
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10185,
+  "seconds": 60.96,
+  "bytes": 42895479
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10186",
+  "animal_id": "plain_10186_a0",
+  "n_neurons": 9,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.816124026622105
+  },
+  "motif": "plain",
+  "seed": 10186,
+  "seconds": 27.49,
+  "bytes": 18698722
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10187",
+  "animal_id": "release_10187_a0",
+  "n_neurons": 11,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 5.714592144688777,
+    "threshold": 4.467724988420676,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 2.8228118757069347,
+    "tau_off_over_tau_ref": 7.355674964289425,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.75,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   5.714592144688777
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10187,
+  "seconds": 33.8,
+  "bytes": 22373467
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10188",
+  "animal_id": "winner_take_all_10188_a0",
+  "n_neurons": 14,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.086908460244638,
+    "threshold": 10.506134985814503,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.601710714606128,
+    "tau_off_over_tau_ref": 12.857454090798742,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.0,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.08649358997528422,
+    "threshold": 7.469362068417505,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.2615618863558336,
+    "tau_off_over_tau_ref": 3.649166612133273,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.5555555555555556,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.086908460244638,
+   0.08649358997528422
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10188,
+  "seconds": 53.05,
+  "bytes": 47164706
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10189",
+  "animal_id": "decoy_adaptation_10189_a0",
+  "n_neurons": 19,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9165590214543775
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10189,
+  "seconds": 53.85,
+  "bytes": 37239058
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10190",
+  "animal_id": "decoy_shunt_10190_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.9129903952464041
+  },
+  "motif": "decoy_shunt",
+  "seed": 10190,
+  "seconds": 39.93,
+  "bytes": 26206082
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10191",
+  "animal_id": "gain_10191_a0",
+  "n_neurons": 16,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 231.13031987306186,
+    "threshold": 15.886119431430794,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 3.5722458972030333,
+    "tau_off_over_tau_ref": 3.283328377072524,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.07692307692307693,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   231.13031987306186
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10191,
+  "seconds": 49.23,
+  "bytes": 32347420
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10192",
+  "animal_id": "global_shutoff_10192_a0",
+  "n_neurons": 17,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.13963568595418321,
+    "threshold": 5.536351040571274,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.2730256767051715,
+    "tau_off_over_tau_ref": 18.64938760365204,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.15384615384615385,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.13963568595418321
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10192,
+  "seconds": 59.73,
+  "bytes": 42702465
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "plain_10193",
+  "animal_id": "plain_10193_a0",
+  "n_neurons": 12,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "in2>in1>O": 0.8502266271210558
+  },
+  "motif": "plain",
+  "seed": 10193,
+  "seconds": 35.62,
+  "bytes": 24236420
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "release_10194",
+  "animal_id": "release_10194_a0",
+  "n_neurons": 21,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 11.170404799863592,
+    "threshold": 12.582888754877189,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 4.499064060542877,
+    "tau_off_over_tau_ref": 6.116936858013684,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.0,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   11.170404799863592
+  ],
+  "cross_ratios": {},
+  "motif": "release",
+  "seed": 10194,
+  "seconds": 63.19,
+  "bytes": 42334307
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "winner_take_all_10195",
+  "animal_id": "winner_take_all_10195_a0",
+  "n_neurons": 12,
+  "n_trials": 1764,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "gA",
+    "trigger_channel": "trigA",
+    "trigger_gain": 0.40582799019823623,
+    "threshold": 1.9465160181479548,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 11.977475754239848,
+    "tau_off_over_tau_ref": 19.017213160825087,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.14285714285714285,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 2,
+    "cost_atp_per_flip": null
+   },
+   {
+    "gate_id": "gB",
+    "trigger_channel": "trigB",
+    "trigger_gain": 0.45534643255255314,
+    "threshold": 9.127903235962485,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 8.70210073548332,
+    "tau_off_over_tau_ref": 6.110226950673506,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.42857142857142855,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.40582799019823623,
+   0.45534643255255314
+  ],
+  "cross_ratios": {},
+  "motif": "winner_take_all",
+  "seed": 10195,
+  "seconds": 44.14,
+  "bytes": 40598157
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_adaptation_10196",
+  "animal_id": "decoy_adaptation_10196_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "aux>in>O": 0.9369371346108839
+  },
+  "motif": "decoy_adaptation",
+  "seed": 10196,
+  "seconds": 35.06,
+  "bytes": 26226865
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "decoy_shunt_10197",
+  "animal_id": "decoy_shunt_10197_a0",
+  "n_neurons": 15,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [],
+  "gate_ratios": [],
+  "cross_ratios": {
+   "trig>in>O": 0.889431226782263
+  },
+  "motif": "decoy_shunt",
+  "seed": 10197,
+  "seconds": 42.87,
+  "bytes": 29775574
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "gain_10198",
+  "animal_id": "gain_10198_a0",
+  "n_neurons": 13,
+  "n_trials": 1044,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 142.62204504148346,
+    "threshold": 16.212710843844103,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 6.125457144056568,
+    "tau_off_over_tau_ref": 5.601222309299375,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.3,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   142.62204504148346
+  ],
+  "cross_ratios": {},
+  "motif": "gain",
+  "seed": 10198,
+  "seconds": 38.91,
+  "bytes": 26699918
+ },
+ {
+  "accepted": true,
+  "tries": 1,
+  "reasons": [
+   "ok"
+  ],
+  "circuit_id": "global_shutoff_10199",
+  "animal_id": "global_shutoff_10199_a0",
+  "n_neurons": 24,
+  "n_trials": 1332,
+  "n_bad_trials": 0,
+  "datasheets": [
+   {
+    "gate_id": "g0",
+    "trigger_channel": "trig",
+    "trigger_gain": 0.0963950833498355,
+    "threshold": 6.456445915859398,
+    "threshold_unit": "mV",
+    "tau_on_over_tau_ref": 5.675980515879351,
+    "tau_off_over_tau_ref": 15.404030547468624,
+    "tau_ref_definition": "median_membrane_time_constant",
+    "reach": 0.35,
+    "reach_criterion": "test-pulse response changes by more than 1.0 mV",
+    "priority": 1,
+    "cost_atp_per_flip": null
+   }
+  ],
+  "gate_ratios": [
+   0.0963950833498355
+  ],
+  "cross_ratios": {},
+  "motif": "global_shutoff",
+  "seed": 10199,
+  "seconds": 76.81,
+  "bytes": 60214391
+ }
+]

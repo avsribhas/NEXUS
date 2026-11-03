@@ -39,12 +39,14 @@
 >   this registration, overriding M2's "Abhiram does the OSF registration".
 > - **Where the build is (2026-11-03).** M3: graded motifs (release, gain, winner-take-all,
 >   global shutoff, plain, shunting and adaptation decoys), probe, trial protocol with paired
->   pokes and steps, wiring corruption, NWB run files and library generator are built; a
->   200-circuit pilot runs on the rig. Missing: stochastic switch, bistable decoy, the
->   per-type NEURON check, real twins, sourced corruption rates. M4: scoring code locked and
->   timestamped (`prereg/lock-scoring-0.1.json`); linear baselines, Dusk recovery v0, Dusk
->   response v0, the identifiability step, prediction rows and a pilot evaluation script
->   (validation only) are built. Proposed pre-registration changes, including two scoring-code
+>   pokes and steps, wiring corruption, NWB run files and library generator are built, plus
+>   the bistable decoy, the per-type NEURON check (float64) and twin search. The 200-circuit
+>   pilot ran (`logs/pilot/m3/`). Missing: stochastic switch, winner-take-all twins, sourced
+>   corruption rates. M4: scoring code locked and timestamped
+>   (`prereg/lock-scoring-0.1.json`); linear baselines, Dusk recovery v0, Dusk response v0,
+>   the identifiability step and prediction rows are built and were evaluated on the pilot's
+>   validation split. Those results are committed locally only, not pushed, until Abhiram
+>   says they can be public. Proposed pre-registration changes, including two scoring-code
 >   fixes, are in `prereg/revision-0.3-draft.md`, waiting on Abhiram and Udeern.
 > - **Writing.** Logs, READMEs and reports follow Abhiram's anti-slop rules: plain English,
 >   short sentences, no filler or hype, no em dashes.

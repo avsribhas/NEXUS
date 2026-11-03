@@ -24,8 +24,8 @@ before it's trusted on real recordings. Phase 1 uses graded, non-spiking circuit
 | M0 | Archive the old study, pin the software, set up the repo | Done |
 | M1 | One file format for every run, a checker, a locked test set | Done, except decisions waiting on Udeern |
 | M2 | Pre-registration: fix the tests and pass marks before any held-out data exists | Approved and timestamped, version 0.2 ([`prereg/phase1-prereg.md`](prereg/phase1-prereg.md)); registered on OSF (osf.io/yrghs), private under embargo until 1 November 2030 |
-| M3 | Planted circuits: switch motifs, decoys, the poke protocol, wiring errors, run files | Mostly built; a 200-circuit pilot is running. Still missing: the stochastic switch, the bistable decoy, the per-type NEURON check, real twins |
-| M4 | Poke-and-predict: scoring, baselines, Dusk itself | Scoring locked before training; baselines and first versions of Dusk built and running on the pilot (validation data only) |
+| M3 | Planted circuits: switch motifs, decoys, the poke protocol, wiring errors, run files | Mostly built. The 200-circuit pilot ran (all accepted, about 1 minute and 35 MB per circuit). Every circuit type matches NEURON. Still missing: the stochastic switch (proposed to drop), twins for winner-take-all, sourced wiring error rates |
+| M4 | Poke-and-predict: scoring, baselines, Dusk itself | Scoring locked before training; baselines and first versions of Dusk built and evaluated on the pilot's validation split. Results held until Abhiram's go-ahead |
 | M5 to M7 | Degraded data, energy, a real-data check | Not started (M6, energy, is out of this version's scope) |
 
 Done so far in M1:
@@ -52,9 +52,9 @@ Done so far in M1:
   by about 6e-08.
 
 Done so far in M3 and M4:
-- Seven kinds of graded circuit, built from small motif tables: four switch types (release,
+- Eight kinds of graded circuit, built from small motif tables: four switch types (release,
   gain, winner-take-all, global shutoff), plain circuits, and two decoys that look like a
-  switch but have no gate (shunting inhibition and adaptation). Each circuit's planted
+  switch but have no gate (shunting inhibition, adaptation and a bistable pair). Each circuit's planted
   answers are measured by probing it, and it's kept only if the measured switch behaves as
   planted.
 - Every animal gets the same kinds of poke under 6 brain states with 3 noise seeds:

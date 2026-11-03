@@ -1156,3 +1156,14 @@ targets) will be encrypted with age (X25519) to Udeern's public key inside the g
 `nexus/format/locking.py` already does with the placeholder key. Udeern keeps the private
 key and decrypts once, after predictions are hashed and timestamped. Still needed: Udeern's
 public key. No held-out data is generated until it arrives and version 0.3 is approved.
+
+### M3 pilot: 200 circuits on the rig (2026-11-03)
+
+All 200 circuits were accepted (7 types, 28 or 29 each; the bistable decoy was built after
+the pilot started). 3.06 hours, 55 s and 35 MB per circuit on average. The GPU averaged 33%
+use with a 5.2 GB peak, so the CPU side limits speed. Full numbers and the library estimate
+are in item 3 of `prereg/revision-0.3-draft.md`; raw files in `logs/pilot/m3/`.
+
+One operational lesson: a job started with `nohup` in a WSL shell dies when the SSH session
+that started it closes, because WSL shuts down once nothing is attached. The cache step was
+lost this way at 26 of 200 and rerun attached. Long jobs must keep their SSH session open.
