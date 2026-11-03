@@ -15,15 +15,24 @@ N_KEEP = int(round((KEEP[1] - KEEP[0]) / DT)) // KEEP_EVERY
 NOISE_MV = 10.0
 POKE_TYPES = {"dep_small": (5.0, 100.0), "dep_large": (15.0, 100.0), "hyp": (-15.0, 100.0), "brief": (30.0, 20.0), "long": (10.0, 300.0)}
 TARGETS_PER_TYPE = 10
+PAIRED = {"type": "paired", "amplitude_mV": 15.0, "duration_ms": 100.0, "hold_mV": 30.0}
+PAIRS_PER_ANIMAL = 10
 
 def make_pokes(spec, roles, rng):
-    """Fifty pokes: each of the five poke types on the same ten sampled target neurons."""
+    """Fifty single pokes (five types on the same ten sampled neurons) and ten paired pokes: one input held on for the whole trial while another input is poked."""
     eligible = [n["id"] for n in spec["neurons"] if n["id"] != roles["state"]]
     targets = [str(x) for x in rng.choice(eligible, size=TARGETS_PER_TYPE, replace=len(eligible) < TARGETS_PER_TYPE)]
     pokes = []
     for t in POKE_TYPES:
         for j, target in enumerate(targets):
-            pokes.append({"poke_id": f"{t}_{j}", "type": t, "target": target, "amplitude_mV": float(POKE_TYPES[t][0]), "start_ms": float(POKE_START), "stop_ms": float(POKE_START + POKE_TYPES[t][1])})
+            pokes.append({"poke_id": f"{t}_{j}", "type": t, "target": target, "amplitude_mV": float(POKE_TYPES[t][0]), "start_ms": float(POKE_START), "stop_ms": float(POKE_START + POKE_TYPES[t][1]), "hold": "", "hold_mV": 0.0})
+    inputs = [str(x) for x in roles["inputs"]]
+    pairs = [(a, b) for a in inputs for b in inputs if a != b]
+    if pairs:
+        chosen = rng.choice(len(pairs), size=PAIRS_PER_ANIMAL, replace=len(pairs) < PAIRS_PER_ANIMAL)
+        for j, k in enumerate(chosen):
+            hold, target = pairs[int(k)]
+            pokes.append({"poke_id": f"paired_{j}", "type": PAIRED["type"], "target": target, "amplitude_mV": float(PAIRED["amplitude_mV"]), "start_ms": float(POKE_START), "stop_ms": float(POKE_START + PAIRED["duration_ms"]), "hold": hold, "hold_mV": float(PAIRED["hold_mV"])})
     return pokes
 
 def trial_table(pokes):
@@ -36,7 +45,7 @@ def trial_table(pokes):
     return trials
 
 def trial_currents(spec, ids, roles, poke, state_index, seed_index, circuit_seed, noise=True):
-    """Injected currents in nA for one trial: brain-state drive, the poke, and seeded noise."""
+    """Injected currents in nA for one trial: brain-state drive, the poke, any held input, and seeded noise."""
     out = np.zeros((len(ids), N_STEPS), dtype=np.float64)
     s = ids.index(roles["state"])
     out[s, :] += drive_to_current(spec, roles["state"], STATES_MV[state_index])
@@ -44,6 +53,8 @@ def trial_currents(spec, ids, roles, poke, state_index, seed_index, circuit_seed
     i0 = int(round(poke["start_ms"] / DT))
     i1 = int(round(poke["stop_ms"] / DT))
     out[k, i0:i1] += drive_to_current(spec, poke["target"], poke["amplitude_mV"])
+    if poke.get("hold"):
+        out[ids.index(poke["hold"]), :] += drive_to_current(spec, poke["hold"], poke["hold_mV"])
     if noise:
         rng = np.random.default_rng([int(circuit_seed), int(state_index), int(seed_index), zlib.crc32(poke["poke_id"].encode())])
         sd = np.array([NOISE_MV * drive_to_current(spec, nid, 1.0) for nid in ids])

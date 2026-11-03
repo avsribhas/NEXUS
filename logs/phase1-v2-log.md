@@ -863,3 +863,39 @@ For the plain-circuit recheck I ran a short inline script of my own on the rig i
 having the 7B write it. That breaks the rule that the 7B writes all code. It only printed
 probe results and changed no files. Every later check has been a 7B-written script
 (`scripts/m3_field_ranges.py`).
+
+### Pilot stopped and protocol fixed: paired pokes
+While designing the recovery model I found a gap in the trial protocol. Trigger gain is
+defined as the test pathway's response with the trigger held on versus off. The protocol
+only had single brief pokes, so the trigger was never held while the test input was
+poked. Trigger gain was visible only indirectly, through the brain-state neuron, and the
+identifiability step would probably have marked it "not identifiable" because the data
+never showed it (the pre-registration's own failure case, section 9).
+
+Fix: a sixth poke type, **paired**. One input is held at 30 mV for the whole trial while
+another input gets a 15 mV, 100 ms poke, the same measurement the probe uses. 10 paired
+pokes per animal, sampled from ordered pairs of input neurons (the experimenter knows
+which neurons are inputs). An animal now has 60 pokes and 1,080 trials, 20% more than
+before. The pre-registration says "about 50 pokes"; 60 goes into the next version, along
+with the sourced corruption rates and the library size.
+
+The pilot was stopped after 27 circuits (all accepted on the first try; 32 to 102 s and
+12 to 32 MB each) and restarted on the new protocol. The 27 old files are kept on the rig
+in `outputs/m3_pilot_v1_unpaired/` as a timing reference only. The baselines fit a
+separate gain for paired pokes, and the trials table records the held neuron. The 7B's
+first test update silently dropped two existing checks (no poke on S, every target is a
+real neuron); a correction restored them. Full suite on the rig: 231 passed, 2 skipped
+(network), 2 expected failures (the known translator issue).
+
+### Baselines
+`nexus/baselines/wiring.py` and `linear.py` (11 tests). One linear-response family:
+edges become a signed matrix (gap junctions both ways), each row is divided by one plus
+its total weight, and the response to a poke on neuron j is a fitted gain per poke type
+times column j of inv(I - alpha W). Alpha comes from a grid and the gains from least
+squares, fitted across training circuits. Baseline 1 uses the corrupted diagram, pooled
+over states or fitted per state (an unseen state uses the nearest fitted one). Baseline 4
+adds a gain that changes linearly with the state drive. The other baselines swap the
+matrix: one synapse step, none (wiring-blind), all-to-all, or a shuffled diagram. A pooled
+model makes the same prediction in every state, so its state-dependent part is zero and
+its correlation is undefined; it will be scored as 0. That's a scoring rule for the
+prediction-row builder, which isn't written yet.

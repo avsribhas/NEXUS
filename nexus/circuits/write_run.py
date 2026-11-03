@@ -26,10 +26,11 @@ def write_run(path, spec, roles, measurement, stored, corruption_rows, pokes, tr
     f.add_trial_column(name="state_index", description="Brain-state level, 0 to 5.")
     f.add_trial_column(name="state_mV", description="Brain-state drive on neuron S, in mV.")
     f.add_trial_column(name="seed_index", description="Noise seed index.")
+    f.add_trial_column(name="hold_neuron", description="Input held on for the whole trial in a paired poke; empty otherwise.")
     poke_rows = []
     for k, t in enumerate(trials):
         p = pokes[t["poke_index"]]
-        f.add_trial(start_time=k * WINDOW_S, stop_time=(k + 1) * WINDOW_S, poke_id=p["poke_id"], poke_type=p["type"], target_neuron=p["target"], state_index=int(t["state_index"]), state_mV=float(STATES_MV[t["state_index"]]), seed_index=int(t["seed_index"]))
+        f.add_trial(start_time=k * WINDOW_S, stop_time=(k + 1) * WINDOW_S, poke_id=p["poke_id"], poke_type=p["type"], target_neuron=p["target"], state_index=int(t["state_index"]), state_mV=float(STATES_MV[t["state_index"]]), seed_index=int(t["seed_index"]), hold_neuron=p.get("hold", ""))
         poke_rows.append({"start_time": k * WINDOW_S + (p["start_ms"] - KEEP[0]) / 1000.0, "stop_time": k * WINDOW_S + (p["stop_ms"] - KEEP[0]) / 1000.0, "target_neuron": p["target"], "amplitude": p["amplitude_mV"], "amplitude_unit": "mV of steady-state depolarisation", "modality": "current"})
     add_pokes(f, poke_rows)
     v = np.asarray(voltages, dtype=np.float32); data = v.transpose(0, 2, 1).reshape(-1, v.shape[1])
