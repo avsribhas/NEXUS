@@ -563,3 +563,37 @@ What this leaves for M3:
 - Spiking cells with event synapses can't be used through tarjuman 0.5.1 until the synapse
   problem is fixed or worked around. Graded synapses and gap junctions (worm-style
   circuits) are the next thing to check, because they avoid spike detection altogether.
+
+### Graded synapses and gap junctions work (2026-11-02)
+Why this check: the spiking circuit showed tarjuman drops event synapses. Worm-style circuits
+mostly use graded synapses (the signal depends on the sending cell's voltage, with no
+spikes) and gap junctions (direct electrical links). Neither needs spike detection, so they
+might avoid the problem.
+
+The circuit (`configs/circuits/ref_graded4.net.nml` and `LEMS_ref_graded4.xml`, both by the
+7B, both right on the first try, schema-valid): four passive cells. These are
+integrate-and-fire cells whose threshold (0 mV) is never reached, so each one is a plain
+leaky cell. Cell 0 gets 0.2 nA from 10 to 210 ms. Cell 0 and cell 1 share a 2 nS gap
+junction. Cell 0 drives cell 2 through a graded synapse. Cell 3 has nothing.
+
+Results on the rig (300 ms, 0.01 ms step):
+- tarjuman converts it with nothing dropped.
+- **Jaxley and NEURON agree to within 0.01 mV for all four cells over the whole run.**
+- Gap junction against the exact steady state (cell 0 at -52.857 mV, cell 1 at -67.143 mV, at
+  209 ms): NEURON is off by about 0.001 mV, and Jaxley by about 0.01 mV. Jaxley's small offset
+  is the same in both cells and in the graded cell. Its cause isn't known; it's far below
+  anything that matters for the six datasheet fields, and the tests allow 0.02 mV.
+- The graded synapse lifts cell 2 from -70 mV to -49.9 mV in both simulators.
+- The control cell stays at exactly -70 mV in both.
+
+Tests (`tests/test_m1_graded.py`, 7 tests, by the 7B, not frozen because of D6). The 7B put
+the checks for trace names and lengths into the shared setup functions rather than into the
+conversion test. They still run, and a failure there still fails the suite, so I accepted
+it. The configs-folder test now lists the four circuit files (one edit, clean).
+
+Suite: 107 passed, 2 expected failures (the event-synapse problem), with network tests on.
+
+**What this means for M3.** Through tarjuman 0.5.1, graded synapses and gap junctions are
+safe to use, and spiking cells with event synapses are not. Worm-style switch circuits built
+from graded synapses and gap junctions can go ahead on Jaxley, with NEURON as the check.
+That's a D6 recommendation for Udeern, not a decision.

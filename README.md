@@ -40,6 +40,9 @@ Done so far in M1:
   conversion as complete. NEURON and the official NeuroML simulator (jNeuroML) both run the
   same circuit with the synapse working, which confirms it. NEURON is the second simulator
   that every circuit type is checked against; its spike times match Jaxley's exactly.
+- A second reference circuit with graded synapses and gap junctions (the kind worm circuits
+  use) runs the same in Jaxley and NEURON, to within 0.01 mV. These connection types are safe
+  to build on; spike-triggered synapses aren't, until the translator is fixed.
 - The train/test split works on four kinds of unit: whole circuits, single neurons, kinds
   of poke, and brain states. Every trial of a unit lands on the same side, whatever its
   random seed.
@@ -80,7 +83,7 @@ timestamp test needs the internet and only runs with `NEXUS_NETWORK_TESTS=1`.
 | `logs/phase1-v2-log.md` | The build log: every step, decision, mistake and test run |
 | `nexus/format/` | File format, checker, train/test splits and locking (the M1 code) |
 | `nexus/circuits/` | Runs NeuroML circuits in Jaxley and in NEURON |
-| `configs/circuits/` | The reference circuit |
+| `configs/circuits/` | The two reference circuits |
 | `nexus/` (other folders) | Empty for now; filled in M3 to M7 |
 | `tests/` | The test suite and the frozen-test hashes |
 | `prereg/` | The pre-registration, once written (M2) |

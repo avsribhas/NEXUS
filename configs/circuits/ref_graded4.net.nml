@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="ref_graded4">
+  <gapJunction id="gj" conductance="2nS"/>
+  <silentSynapse id="silent"/>
+  <gradedSynapse id="gs" conductance="5nS" delta="5mV" Vth="-60mV" k="0.025per_ms" erev="0mV"/>
+  <pulseGenerator id="drive" delay="10ms" duration="200ms" amplitude="0.2nA"/>
+  <iafCell id="passive" leakConductance="10nS" leakReversal="-70mV" thresh="0mV" reset="-70mV" C="0.2nF"/>
+  <network id="net">
+    <population id="pop0" component="passive" size="4"/>
+    <electricalProjection id="gap_0_1" presynapticPopulation="pop0" postsynapticPopulation="pop0">
+      <electricalConnection id="0" preCell="0" postCell="1" synapse="gj"/>
+    </electricalProjection>
+    <continuousProjection id="graded_0_2" presynapticPopulation="pop0" postsynapticPopulation="pop0">
+      <continuousConnection id="0" preCell="0" postCell="2" preComponent="silent" postComponent="gs"/>
+    </continuousProjection>
+    <explicitInput target="pop0[0]" input="drive"/>
+  </network>
+</neuroml>

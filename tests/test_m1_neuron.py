@@ -51,4 +51,4 @@ def test_cell1_matches_neuron(nrn, jax):
     assert np.max(np.abs(v_j["v1"] - v_n["v1"])) < 0.5
 
 def test_run_leaves_configs_clean(nrn):
-    assert sorted(p.name for p in CIRCUITS.iterdir()) == ["LEMS_ref_iaf3.xml", "ref_iaf3.net.nml"]
+    assert sorted(p.name for p in CIRCUITS.iterdir()) == ["LEMS_ref_graded4.xml", "LEMS_ref_iaf3.xml", "ref_graded4.net.nml", "ref_iaf3.net.nml"]

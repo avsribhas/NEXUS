@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Lems>
+  <Target component="sim1"/>
+  <Include file="Cells.xml"/>
+  <Include file="Networks.xml"/>
+  <Include file="Simulation.xml"/>
+  <Include file="ref_graded4.net.nml"/>
+  <Simulation id="sim1" length="300ms" step="0.01ms" target="net">
+    <OutputFile id="of0" fileName="ref_graded4.v.dat">
+      <OutputColumn id="v0" quantity="pop0[0]/v"/>
+      <OutputColumn id="v1" quantity="pop0[1]/v"/>
+      <OutputColumn id="v2" quantity="pop0[2]/v"/>
+      <OutputColumn id="v3" quantity="pop0[3]/v"/>
+    </OutputFile>
+  </Simulation>
+</Lems>
