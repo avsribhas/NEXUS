@@ -904,3 +904,18 @@ poke needs an unpaired reference, the same 15 mV, 100 ms poke on the same target
 nothing held. That's the existing 15 mV poke type, but only when the input happened to be
 sampled as a target. Now every input neuron is always one of the 10 targets, and the rest
 are filled at random. No extra trials. New test: inputs are targets for every poke type.
+Third and last protocol change before the pilot (stopped again, nothing kept). Working
+through what each planted field needs, two were still unmeasurable:
+- **Threshold** is the trigger level where the gate is halfway open, but paired pokes
+  held the trigger only at 30 mV. Paired pokes now hold at 10, 20 or 30 mV, covering each
+  ordered input pair and level before repeating any.
+- **Timing** is measured with the test input held while the trigger steps on and off. No
+  trial did that. New poke type **paired step**: one input held at 15 mV for the whole
+  trial, another stepped to 30 mV from 1500 to 1800 ms. Pairs are ordered, so each input
+  is held in some steps and stepped in others.
+
+An animal now has 70 pokes (50 single, 10 paired, 10 paired steps) and 1,260 trials, 40%
+more than the original 900. Tests updated (not frozen ones); full suite on the rig: 233
+passed, 2 skipped, 2 expected failures. The off-time window is 200 ms (1800 to 2000 ms),
+which is short for the slowest cells (time constants up to 500 ms). Whether off-time is
+recoverable is for the identifiability step to say.

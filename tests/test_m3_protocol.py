@@ -4,7 +4,7 @@ import pytest
 from nexus.circuits.batch import BatchRunner
 from nexus.circuits.build import build_circuit, drive_to_current, load_motifs
 from nexus.circuits.graded import write_network
-from nexus.perturb.protocol import (DT, KEEP, N_KEEP, N_SEEDS, N_STEPS, NOISE_MV, POKE_START, POKE_TYPES, STATES_MV, T_TRIAL, TARGETS_PER_TYPE, make_pokes, run_trials, trial_currents, trial_table, PAIRED, PAIRS_PER_ANIMAL)
+from nexus.perturb.protocol import (DT, KEEP, N_KEEP, N_SEEDS, N_STEPS, NOISE_MV, POKE_START, POKE_TYPES, STATES_MV, T_TRIAL, TARGETS_PER_TYPE, make_pokes, run_trials, trial_currents, trial_table, PAIRED, PAIRS_PER_ANIMAL, PAIRED_STEP)
 
 COMMON, MOTIFS = load_motifs(Path(__file__).resolve().parents[1] / "configs" / "motifs")
 SPEC, ROLES = build_circuit("release", COMMON, MOTIFS, np.random.default_rng(0), "proto")
@@ -19,22 +19,22 @@ def test_constants_agree():
 
 def test_make_pokes():
     pokes = make_pokes(SPEC, ROLES, np.random.default_rng(1))
-    assert len(pokes) == 50 + PAIRS_PER_ANIMAL
+    assert len(pokes) == 50 + 2 * PAIRS_PER_ANIMAL
     assert all(p["target"] != "S" for p in pokes)
     assert all(p["target"] in IDS for p in pokes)
-    assert len(set(p["poke_id"] for p in pokes)) == 50 + PAIRS_PER_ANIMAL
+    assert len(set(p["poke_id"] for p in pokes)) == 50 + 2 * PAIRS_PER_ANIMAL
     for t in POKE_TYPES:
         assert sum(1 for p in pokes if p["type"] == t) == TARGETS_PER_TYPE
         assert all(p["amplitude_mV"] == POKE_TYPES[t][0] for p in pokes if p["type"] == t)
         assert all(p["start_ms"] == POKE_START and p["stop_ms"] == POKE_START + POKE_TYPES[t][1] for p in pokes if p["type"] == t)
-    assert len(set(p["poke_id"] for p in pokes)) == 50 + PAIRS_PER_ANIMAL
+    assert len(set(p["poke_id"] for p in pokes)) == 50 + 2 * PAIRS_PER_ANIMAL
     pokes_again = make_pokes(SPEC, ROLES, np.random.default_rng(1))
     assert pokes == pokes_again
 
 def test_trial_table():
     pokes = make_pokes(SPEC, ROLES, np.random.default_rng(1))
     trials = trial_table(pokes)
-    assert len(trials) == (50 + PAIRS_PER_ANIMAL) * 6 * 3
+    assert len(trials) == (50 + 2 * PAIRS_PER_ANIMAL) * 6 * 3
     assert len(set((t["poke_index"], t["state_index"], t["seed_index"]) for t in trials)) == len(trials)
     assert [t["trial_id"] for t in trials] == list(range(len(trials)))
 
@@ -94,7 +94,7 @@ def test_paired_pokes():
     p = paired[0]
     c = trial_currents(SPEC, IDS, ROLES, p, 0, 0, 7, noise=False)
     h = IDS.index(p["hold"])
-    assert np.allclose(c[h], drive_to_current(SPEC, p["hold"], PAIRED["hold_mV"]), atol=1e-7)
+    assert np.allclose(c[h], drive_to_current(SPEC, p["hold"], p["hold_mV"]), atol=1e-7)
     k = IDS.index(p["target"])
     i0 = int(round(p["start_ms"] / DT))
     assert np.isclose(c[k, i0], drive_to_current(SPEC, p["target"], PAIRED["amplitude_mV"]), atol=1e-7)
@@ -107,3 +107,14 @@ def test_inputs_are_always_targets():
             targets = [p["target"] for p in pokes if p["type"] == t]
             for nid in ROLES["inputs"]:
                 assert nid in targets
+
+def test_paired_steps():
+    pokes = make_pokes(SPEC, ROLES, np.random.default_rng(1))
+    steps = [p for p in pokes if p["type"] == PAIRED_STEP["type"]]
+    assert len(steps) == PAIRS_PER_ANIMAL
+    for p in steps:
+        assert p["hold"] in ROLES["inputs"] and p["target"] in ROLES["inputs"] and p["hold"] != p["target"]
+        assert p["hold_mV"] == PAIRED_STEP["hold_mV"] and p["amplitude_mV"] == PAIRED_STEP["amplitude_mV"]
+        assert p["stop_ms"] - p["start_ms"] == PAIRED_STEP["duration_ms"]
+    levels = set(p["hold_mV"] for p in pokes if p["type"] == PAIRED["type"])
+    assert levels == set(PAIRED["hold_levels_mV"])
