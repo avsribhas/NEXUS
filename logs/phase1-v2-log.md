@@ -597,3 +597,41 @@ Suite: 107 passed, 2 expected failures (the event-synapse problem), with network
 safe to use, and spiking cells with event synapses are not. Worm-style switch circuits built
 from graded synapses and gap junctions can go ahead on Jaxley, with NEURON as the check.
 That's a D6 recommendation for Udeern, not a decision.
+
+## 2026-11-02 M2: pre-registration, draft 0.1 (stopped at the gate)
+
+`prereg/phase1-prereg.md` (written by Claude; prose isn't 7B work) and
+`prereg/thresholds.json` (the same pass marks as numbers, written by the 7B, right on the
+first try). Every number in the JSON was checked against the document.
+
+What the draft fixes, in short:
+- Recovery: a field counts only if the 90% interval contains the planted value and is at
+  most half the prior range wide; pass if 80% of held-out switch circuits get every
+  recoverable field right. A prior-only estimator must fail.
+- Fields that can't be recovered even from perfect data are found first, on training data
+  only, and hashed before scoring.
+- No false switches: 90% of no-switch and decoy circuits. Degenerate twins: 80%. Leak: median
+  at most 10%, reported as a property of the library.
+- Prediction: scored against each circuit's noise ceiling (10 extra seeds); NEXUS must beat
+  the fitted wiring-only model, pooled and per state. A tie with the state-by-input linear
+  model within 0.02 cancels a pass.
+- At least 100 held-out circuits per switch type. With 100, an 80% pass rate has a 95%
+  interval of 71% to 87% (Wilson interval, checked).
+- Access limit: 3 openings of the held-out set.
+- What M1 found is built in: the measured repeat tolerances by device, the 2-of-4 training
+  states problem, the logged Cost exemption until M6, and the limit to graded synapses and
+  gap junctions while tarjuman drops spike-triggered synapses.
+
+Locked: both files hashed into `prereg/lock-draft-0.1.json` and timestamped
+(`prereg/lock-draft-0.1.json.ots`) on the rig with `nexus/format/exam.py`. The lock check
+passes, and the hashes on the Mac match:
+- `phase1-prereg.md`: aba1f7b864ae6de21e29ade0d9389f3f4439a37d8b90e9cbe9a5821204662b31
+- `thresholds.json`: 81a3cc1d24c4b039192f900e4598cb10e65a46df123dc27ce3b7d59e5c34f9bb
+
+The timestamp proves the draft existed on 2 November 2026. It is not an approval. Any
+change, including the approval itself, makes a new version with its own lock.
+
+**Stopped here, as the spec requires.** Nothing held-out will be generated until Abhiram and
+Udeern approve. Section 10 of the draft lists what they need to settle: D3, D4, D6, D7 (the
+key holder), 4 or 6 brain states, worm-only or a fix for spiking circuits, and each
+proposed number. Abhiram registers the approved version on OSF.

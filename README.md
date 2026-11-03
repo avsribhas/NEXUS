@@ -22,8 +22,8 @@ before it's trusted on real recordings.
 | Step | What it is | Status |
 |---|---|---|
 | M0 | Archive the old study, pin the software, set up the repo | Done |
-| M1 | One file format for every run, a checker, a locked test set | In progress |
-| M2 | Pre-registration: fix the tests and pass marks before any held-out data exists | Not started; needs sign-off from Abhiram and Udeern |
+| M1 | One file format for every run, a checker, a locked test set | Done, except decisions waiting on Udeern |
+| M2 | Pre-registration: fix the tests and pass marks before any held-out data exists | Draft written and timestamped ([`prereg/phase1-prereg.md`](prereg/phase1-prereg.md)); waiting for approval from Abhiram and Udeern |
 | M3 to M7 | Planted circuits, poke-and-predict, degraded data, energy, a real-data check | Not started |
 
 Done so far in M1:
@@ -86,7 +86,7 @@ timestamp test needs the internet and only runs with `NEXUS_NETWORK_TESTS=1`.
 | `configs/circuits/` | The two reference circuits |
 | `nexus/` (other folders) | Empty for now; filled in M3 to M7 |
 | `tests/` | The test suite and the frozen-test hashes |
-| `prereg/` | The pre-registration, once written (M2) |
+| `prereg/` | The pre-registration draft, its pass marks as numbers, and the timestamped lock |
 | `pyproject.toml`, `uv.lock` | Exact software versions |
 | `Dockerfile` | A container recipe, kept but not used; the build runs in WSL2 |
 | `archive/phase1-betse/` | The earlier Phase 1 study, closed |
