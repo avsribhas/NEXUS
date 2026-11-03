@@ -30,13 +30,20 @@ Done so far in M1:
 - Every run is saved as an NWB file, with the planted answers, the run settings and the
   simulated pokes stored inside it.
 - A checker rejects any run that is missing its answers, its settings, or its energy number.
-- The locking tools exist: held-out answers can be encrypted to a named key holder, and a
-  log counts and caps every opening. Connecting them to real held-out data is still to do,
-  and no held-out data will be made until a key holder is named.
+- The exam lock: the files that decide the result get hashed into one lock file, and one call
+  says whether any changed. Held-out data can only be opened through one function that logs
+  every opening and stops at a set limit. No held-out data will be made until a key holder is
+  named.
+- A small reference circuit, written in NeuroML, runs in the Jaxley simulator and matches the
+  exact textbook answer to within one time step. The same check found a problem: the
+  translator we use (tarjuman 0.5.1) drops the circuit's synaptic input while reporting the
+  conversion as complete. The comparison against the second simulator (Brian2) is still to
+  do.
 - The train/test split works on four kinds of unit: whole circuits, single neurons, kinds
   of poke, and brain states. Every trial of a unit lands on the same side, whatever its
   random seed.
-- Training repeats exactly on the same device. Runs on CPU and GPU differ by about 6e-08.
+- Training and simulation repeat exactly on the same device. Training on CPU and GPU differs
+  by about 6e-08.
 
 There are no results yet. Nothing here should be read as a finding.
 
@@ -69,6 +76,8 @@ timestamp test needs the internet and only runs with `NEXUS_NETWORK_TESTS=1`.
 | `CLAUDE.md` | The Phase 1 build spec and the current status box |
 | `logs/phase1-v2-log.md` | The build log: every step, decision, mistake and test run |
 | `nexus/format/` | File format, checker, train/test splits and locking (the M1 code) |
+| `nexus/circuits/` | Runs NeuroML circuits in Jaxley |
+| `configs/circuits/` | The reference circuit |
 | `nexus/` (other folders) | Empty for now; filled in M3 to M7 |
 | `tests/` | The test suite and the frozen-test hashes |
 | `prereg/` | The pre-registration, once written (M2) |

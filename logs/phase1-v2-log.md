@@ -159,7 +159,7 @@ of the 6 GB card for the display. 2 to 9 minutes per file. Not fixable on this c
 3. **Cross-machine reproducibility.** Compare `train_tiny` parameters between Mac CPU, rig CPU
    and rig GPU and record exact equality or the max difference. The spec says record, not
    assume.
-4. **Jaxley rerun tolerance.** Belongs with the NeuroML2 circuits (D6); not yet written.
+4. **Jaxley rerun tolerance.** Belongs with the NeuroML2 circuits (D6). Met 2026-11-02: bit-for-bit on the same GPU.
 5. **Checker split.** Metadata checks do not depend on D3; ground-truth checks do. Freeze the
    metadata half separately from the ground-truth half.
 6. **nwbinspector.** Run it on the full round-trip file and record any CRITICAL or BEST
@@ -388,3 +388,99 @@ split always gives the same bytes and the same hash.
 - Design choices to put in the pre-registration: 20% test and 20% validation per kind, at
   least one unit each, at least 3 units of every kind. With 4 brain states that leaves only 2
   for training. If the pass marks need more training states, M2 should say so.
+
+### Exam locking done (2026-11-02)
+What it does: before any scoring, the files that decide the result (the split manifest, the
+scoring script, the pass marks) get their SHA-256 hashes written into one lock file, which
+can be timestamped. Later, one call says whether any of those files changed. Held-out data
+can only be opened through one function, which logs the opening first and refuses once the
+limit is reached. A failed opening (for example, the wrong key) still counts against the
+limit, so nobody can probe it for free.
+
+- Tests (7B): `tests/test_m1_exam.py`, 10 tests. The first draft overrode pytest's `tmp_path`
+  with an old-style path object, which would have broken most tests; one edit request fixed
+  it. **Frozen** (added to `tests/frozen.sha256`): nothing in it depends on an open decision.
+- Code (7B): `nexus/format/exam.py`, first try, matches the spec.
+- The scoring script and the pass marks don't exist yet; they are written in M2. M1 delivers
+  the lock, and M2 uses it.
+
+### The rig's Linux side has no internet (2026-11-02)
+- With the network tests switched on, both timestamp tests failed: no timestamp server
+  answered. WSL can't reach any site at all (pypi.org times out too), while Windows on the
+  same laptop reaches pypi.org fine, and the Mac reaches the timestamp servers. WSL's DNS
+  search list includes `vpn.utexas.edu`, so the UT VPN is the likely cause: VPN clients often
+  break WSL's network route.
+- What it blocks: timestamping (tracked requirement 7 passed on 2026-10-29, when WSL had
+  internet), and installing Java, which the Brian2 check needs (below).
+- I haven't changed any network setting. Two fixes for Abhiram: disconnect the VPN while the
+  rig works, or switch WSL to mirrored networking (`networkingMode=mirrored` in
+  `%UserProfile%\.wslconfig`, then `wsl --shutdown`).
+
+### Simulator check: NeuroML to Jaxley (2026-11-02)
+What was built (all by the 7B):
+- `configs/circuits/ref_iaf3.net.nml` and `LEMS_ref_iaf3.xml`: a reference circuit of three
+  identical integrate-and-fire cells. Cell 0 is driven by a 0.3 nA current from 10 to 210 ms,
+  cell 0 connects to cell 1 by an excitatory synapse, and cell 2 has no input and no
+  connection. Both files matched the spec on the first try, and the circuit file passes the
+  NeuroML 2 schema check.
+- `nexus/circuits/run.py`: runs a LEMS file in Jaxley through tarjuman 0.5.1, and gives the
+  exact firing interval of a driven integrate-and-fire cell to check against. The first
+  version gave the wrong units in its docstring (farads, siemens, milliamps instead of nF,
+  nS, nA); one edit request fixed it.
+- `tests/test_m1_circuits.py`, 7 tests. Not frozen: D6 (Jaxley as the main simulator) is
+  still open with Udeern.
+
+What the rig showed (GPU, float32, 0.01 ms step):
+- tarjuman reads the circuit and says nothing was dropped or approximated.
+- The driven cell fires every 21.98 ms. The exact answer is 20 x ln 3 = 21.972 ms, so the
+  error is under one time step. The first spike lands at 31.98 ms, also within a step.
+- The cell with no input stays at -70 mV.
+- **Rerun tolerance (tracked requirement 4):** two runs on the same GPU are bit-for-bit
+  identical. The tolerance to pre-register is "identical on the same device". Across
+  devices, state a tolerance, as with PyTorch.
+- **The synapse delivers nothing.** Cell 0 fires nine times, and cell 1 never moves from
+  exactly -70 mV. tarjuman reports one synapse built and calls the conversion faithful. For
+  this kind of source cell, tarjuman counts a spike when the voltage goes above the cell's
+  threshold (-50 mV). The recorded peak does reach -49.997 mV, so the cause isn't proven; the
+  likely suspect is the order of the cell's reset and the synapse's check within one time
+  step. The test for it is marked "expected to fail", so the suite will flag it the day it
+  starts passing.
+- Why this matters: a translator that silently drops synaptic input is exactly what the M1
+  check is for. It means we can't trust a tarjuman conversion just because its report says
+  "faithful". Each kind of cell and synapse a generator uses needs its own check like this
+  one.
+
+Not done, and why:
+- **Jaxley against Brian2.** pyNeuroML's Brian2 export runs through jNeuroML, which needs
+  Java. WSL has no Java and, right now, no internet to install it. The test isn't written
+  yet; a test that has never run would prove nothing.
+- **Which cell and synapse types the switch circuits use** is an M3 design choice under D6. If
+  the circuits use spiking cells with event synapses, the tarjuman problem above must be
+  fixed or worked around first (an in-house translator for a short list of types, as D6
+  allows). Worm-style circuits with graded synapses and gap junctions avoid that path, and
+  tarjuman's own validation covers them (the c302 C oscillator), but we haven't checked them
+  ourselves yet.
+- Running JAX tests while Ollama holds the GPU failed at first: JAX tries to reserve most of
+  the GPU memory at start-up. `run.py` now turns that off before JAX loads.
+
+### M1 status (2026-11-02)
+Done: NWB run files with planted answers, run settings and pokes; the checker (now requiring
+an energy value); the stored-input check; train/test splits; exam locking and the
+held-out access cap; bit-for-bit repeats for PyTorch and Jaxley on the same device; the
+reference NeuroML circuit running in Jaxley.
+
+Suite on the rig: 92 passed, 2 skipped (they need internet), 1 expected failure (the
+tarjuman synapse problem).
+
+Open, blocking the rest of M1:
+1. WSL internet (VPN). Blocks timestamping and installing Java.
+2. Jaxley against Brian2, after (1).
+3. Udeern: D3 (six fields), D4 (animal and trial), D6 (Jaxley as main simulator, and which
+   cell and synapse types). The ground-truth, split and circuit tests stay unfrozen until
+   then.
+4. D7: who holds the key for held-out data. No held-out data until named.
+5. Whether to report the tarjuman synapse problem to its maintainer (a public GitHub issue,
+   so Abhiram decides).
+
+Next is M2, the pre-registration. Writing it doesn't need any of the above, but approving it
+does.

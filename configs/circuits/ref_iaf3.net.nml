@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<neuroml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/schema/neuroml2 https://raw.github.com/NeuroML/NeuroML2/development/Schemas/NeuroML2/NeuroML_v2.3.xsd" id="ref_iaf3">
+  <expTwoSynapse id="syn_exc" gbase="5nS" erev="0mV" tauRise="0.5ms" tauDecay="5ms"/>
+  <pulseGenerator id="drive" delay="10ms" duration="200ms" amplitude="0.3nA"/>
+  <iafCell id="iaf_ref" leakConductance="10nS" leakReversal="-70mV" thresh="-50mV" reset="-70mV" C="0.2nF"/>
+  <network id="net">
+    <population id="pop0" component="iaf_ref" size="3"/>
+    <projection id="proj_0_1" presynapticPopulation="pop0" postsynapticPopulation="pop0" synapse="syn_exc">
+      <connection id="0" preCellId="../pop0[0]" postCellId="../pop0[1]"/>
+    </projection>
+    <explicitInput target="pop0[0]" input="drive"/>
+  </network>
+</neuroml>
