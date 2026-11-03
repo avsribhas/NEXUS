@@ -980,3 +980,31 @@ numbers mean nothing yet). The median noise ceiling was 0.92 with 3 seeds.
 Gap against the pre-registration: it asks for at least 10 noise seeds per circuit for the
 ceiling, and the protocol has 3. That's fine for development, but held-out circuits will
 need 10. To go in the pre-registration revision.
+
+### Dusk response model, version 0
+`nexus/models/response.py`, written by the 7B (one correction pass to add docstrings,
+checked to change no code line). It predicts every neuron's response to every poke under
+every state, from the stored (corrupted) diagram. Each neuron gets 8 numbers: poke size
+and length if it is the target, hold level if it is held, whether it is the state neuron
+or an input, and the state level. Four rounds of message passing follow, one sum per edge
+kind (excitatory, inhibitory, shunting, gap junction) plus that sum times the neuron's own
+state, so a held input can scale the effect of another. It is trained across circuits on
+seed-averaged responses, with the part that changes across states counted twice in the
+loss, since that part is what's scored. Poke size, length and state level are numbers,
+not labels, so it can be asked about held-out poke types and states, which the
+pre-registration requires. 4 tests, including that it learns a gain that rises with state.
+
+It doesn't use the recovered datasheets yet. Whether adding them helps is the comparison
+that tests the switch view directly; that is version 1.
+
+The evaluation script now runs the pre-registered prediction test on validation: Dusk
+against baseline 1 pooled and per state, and the tie rule against baseline 4.
+
+### A flaw in the locked scoring code
+The smoke run gave an undefined lower bound for the bootstrap. Cause: one shunting decoy
+had a mean noise ceiling of 0.125, just above the 0.1 floor, so it is kept, but 28 of its
+100 split-half samples were exactly 0. The bootstrap divides each circuit's score by a
+sampled ceiling, so a zero gives infinity. Ten seeds, as the pre-registration requires,
+make this rarer but not impossible. The locked code is not changed. Proposed fix for the
+next scoring lock, for Udeern to approve: floor each ceiling sample at 0.1, the floor the
+pre-registration already applies to whole circuits.

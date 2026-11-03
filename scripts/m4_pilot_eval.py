@@ -7,9 +7,10 @@ import numpy as np
 from nexus.baselines.linear import LinearBaseline
 from nexus.format.splits import make_split_manifest, write_manifest
 from nexus.models.dusk import DuskRecovery
+from nexus.models.response import DuskResponse
 from nexus.models.rows import prediction_row
 from nexus.score.recovery import CONTINUOUS_FIELDS
-from nexus.score.report import apply_scales, score_calibration, score_no_false_switch, score_recovery
+from nexus.score.report import apply_scales, score_calibration, score_no_false_switch, score_prediction, score_recovery
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = json.loads((ROOT / "configs" / "scoring_priors.json").read_text())
@@ -70,24 +71,29 @@ def switch_calls(truth, preds) -> dict:
         out[st] = {"n": len(sel), "called_switch": float(np.mean(said)), "right_triggers": float(np.mean(right))}
     return out
 
-def main(cache, out, epochs) -> None:
+def main(cache, out, epochs, response_epochs) -> None:
     out.mkdir(parents=True, exist_ok=True)
     parts = split(load_cache(cache), out)
     train = parts["train"]
     val = parts["val"]
     baselines = fit_baselines(train)
     dusk = DuskRecovery(CONFIG, epochs=epochs).fit(train)
-    rows = [prediction_row(a, {name: b.predict(circuit(a)) for name, b in baselines.items()}) for a in val]
+    response = DuskResponse(epochs=response_epochs).fit(train)
+    rows = []
+    for a in val:
+        p = {name: b.predict(circuit(a)) for name, b in baselines.items()}
+        p["dusk"] = response.predict(a)
+        rows.append(prediction_row(a, p))
     preds = {a["animal_id"]: dusk.predict(a) for a in val}
     truth = [truth_row(a) for a in val]
     calls = switch_calls(truth, preds)
     identifiable = {t["switch_type"]: list(CONTINUOUS_FIELDS) for t in truth}
     truth_s, preds_s, priors = apply_scales(copy.deepcopy(truth), copy.deepcopy(preds), CONFIG)
-    report = {"n_train": len(train), "n_val": len(val), "epochs": epochs, "identifiable_fields": "all, provisional until the identifiability step", "switch_calls": calls, "recovery": score_recovery(truth_s, preds_s, priors, identifiable, THRESHOLDS), "no_false_switch": score_no_false_switch(truth_s, preds_s, THRESHOLDS), "calibration": score_calibration(truth_s, preds_s), "prediction": prediction_summary(rows)}
+    report = {"n_train": len(train), "n_val": len(val), "epochs": epochs, "response_epochs": response_epochs, "identifiable_fields": "all, provisional until the identifiability step", "switch_calls": calls, "recovery": score_recovery(truth_s, preds_s, priors, identifiable, THRESHOLDS), "no_false_switch": score_no_false_switch(truth_s, preds_s, THRESHOLDS), "calibration": score_calibration(truth_s, preds_s), "prediction": prediction_summary(rows), "prediction_test": score_prediction(rows, "dusk", THRESHOLDS)}
     (out / "report.json").write_text(json.dumps(report, indent=1, default=float))
     with open(out / "val_predictions.pkl", "wb") as f:
         pickle.dump({"rows": rows, "preds": preds}, f)
     print(json.dumps(report, indent=1, default=float))
 
 if __name__ == "__main__":
-    main(Path(sys.argv[1]), Path(sys.argv[2]), int(sys.argv[3]) if len(sys.argv) > 3 else 400)
+    main(Path(sys.argv[1]), Path(sys.argv[2]), int(sys.argv[3]) if len(sys.argv) > 3 else 400, int(sys.argv[4]) if len(sys.argv) > 4 else 100)
