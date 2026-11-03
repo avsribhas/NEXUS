@@ -685,3 +685,24 @@ Abhiram renamed the program from NEXUS to Dusk. It isn't an acronym. The README,
 box in `CLAUDE.md` and new log entries use the new name. Locked files keep the old one: the
 approved pre-registration says NEXUS, and changing it would need a new version for no gain.
 The repository, the Python package (`nexus/`) and old log entries keep the old name too.
+
+## 2026-11-02 M3: planted circuits
+
+### Two building blocks: a circuit writer and a batched runner
+Every M3 circuit is graded (no spikes), so two pieces are needed before any switch:
+
+- **`nexus/circuits/graded.py`** turns a circuit description (neurons, graded synapses, gap
+  junctions) into NeuroML and LEMS files. Each neuron is a passive cell that can't fire. The
+  7B's first version had two bugs (a stray period, and `xmlns_xsi` instead of `xmlns:xsi`);
+  one edit fixed both. Check: rebuilding the M1 graded reference circuit from a description
+  gives the same NEURON voltages to within 1e-6 mV, and Jaxley matches NEURON within 0.02 mV
+  (6 tests, `tests/test_m3_writer.py`).
+- **`nexus/circuits/batch.py`** builds a circuit in Jaxley once and runs many trials of it
+  together on the GPU. Pokes, the brain-state drive and noise all enter as injected-current
+  arrays, so each circuit compiles once however many trials it has. It matches an ordinary
+  Jaxley run within 0.001 mV, and trials in one batch don't affect each other (5 tests,
+  `tests/test_m3_batch.py`).
+
+One director mistake: the first runner test assumed every cell rests at -70 mV. A graded
+synapse is partly open at rest (about 12% here), so the cell it feeds rests near -66.1 mV.
+The runner was right; the test was fixed to expect the true resting value.
