@@ -657,3 +657,31 @@ status and a `library` block with 6 states and no spiking; one clean edit). Lock
 
 Draft 0.1's lock (`prereg/lock-draft-0.1.json`) verifies against commit f6747f6, not the
 current files. That's intended.
+
+### Registered on OSF, privately (2026-11-02)
+Abhiram asked Claude to do the OSF step in his account. Done in the built-in browser:
+- **Project:** "Dusk Phase 1" (osf.io/h9fg5), private. The six files in `prereg/` (the plan,
+  the thresholds, both locks and both timestamp proofs) were uploaded to a `prereg` folder.
+  OSF's own SHA-256 for every file matches the repo.
+- **Registration:** https://osf.io/yrghs, an Open-Ended Registration with
+  `phase1-prereg.md`, `thresholds.json`, `lock-0.2.json` and `lock-0.2.json.ots` attached.
+  The summary gives both hashes, says no held-out data exists, and says the D7 key holder
+  isn't named yet.
+- **Kept private by embargo until 1 November 2030**, the longest OSF allows. A registration
+  can't be fully private forever: when the embargo ends it becomes public on its own, unless
+  it's made public earlier. It can't be deleted, only withdrawn. Admins get an email asking
+  them to approve the embargo; with no answer, OSF approves it after 48 hours.
+- **License:** OSF's default, CC0. Change it before the embargo ends if a different license
+  is wanted.
+- OSF was archiving the registration at the time of writing. Don't change files in the OSF
+  project until the "archiving complete" email arrives, or the registration fails.
+- One correction before submitting: the first summary said the timestamp proof was
+  "anchored to the Bitcoin blockchain". It isn't yet. The `.ots` files hold receipts from
+  the OpenTimestamps calendars, which become a full Bitcoin proof after an upgrade step. The
+  registered text says that.
+
+### Program renamed: Dusk (2026-11-02)
+Abhiram renamed the program from NEXUS to Dusk. It isn't an acronym. The README, the status
+box in `CLAUDE.md` and new log entries use the new name. Locked files keep the old one: the
+approved pre-registration says NEXUS, and changing it would need a new version for no gain.
+The repository, the Python package (`nexus/`) and old log entries keep the old name too.

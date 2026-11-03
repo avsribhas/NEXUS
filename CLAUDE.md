@@ -33,6 +33,10 @@
 >   No spiking circuits this phase: graded neurons, graded synapses and gap junctions only
 >   (overrides M3's spiking fly-like and mouse-like circuits). M6 is out of scope for this
 >   version. D7 key holder still open: no held-out data until named.
+> - **Name and OSF (2026-11-02).** The program is now called Dusk (not an acronym). Code,
+>   repo and locked files keep "NEXUS". The approved prereg is registered at osf.io/yrghs
+>   (project osf.io/h9fg5), private under embargo until 2030-11-01. Abhiram asked Claude to do
+>   this registration, overriding M2's "Abhiram does the OSF registration".
 > - **Writing.** Logs, READMEs and reports follow Abhiram's anti-slop rules: plain English,
 >   short sentences, no filler or hype, no em dashes.
 > - **Environment:** Python 3.12, pynwb 3.1.3, `jax[cuda13]` with torch 2.15 in one CUDA 13 GPU

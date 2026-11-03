@@ -1,6 +1,6 @@
-# NEXUS
+# Dusk
 
-NEXUS measures the rules that decide which parts of a nervous system switch on, given the
+Dusk (called NEXUS until 2 November 2026; the code package is still `nexus`) measures the rules that decide which parts of a nervous system switch on, given the
 animal's state. Each rule is written up as a datasheet with six fields:
 
 | Field | What it says |
@@ -16,14 +16,14 @@ animal's state. Each rule is written up as a datasheet with six fields:
 
 Phase 1 is building a test bench: simulated circuits with switches planted in them on
 purpose, some with no switch at all, and some that only look like they have one. The point
-is to check that NEXUS finds the switches that are there and doesn't invent ones that aren't,
-before it's trusted on real recordings.
+is to check that Dusk finds the switches that are there and doesn't invent ones that aren't,
+before it's trusted on real recordings. Phase 1 uses graded, non-spiking circuits only, under 6 brain states.
 
 | Step | What it is | Status |
 |---|---|---|
 | M0 | Archive the old study, pin the software, set up the repo | Done |
 | M1 | One file format for every run, a checker, a locked test set | Done, except decisions waiting on Udeern |
-| M2 | Pre-registration: fix the tests and pass marks before any held-out data exists | Approved and timestamped, version 0.2 ([`prereg/phase1-prereg.md`](prereg/phase1-prereg.md)); registered privately on OSF |
+| M2 | Pre-registration: fix the tests and pass marks before any held-out data exists | Approved and timestamped, version 0.2 ([`prereg/phase1-prereg.md`](prereg/phase1-prereg.md)); registered on OSF (osf.io/yrghs), private under embargo until 1 November 2030 |
 | M3 to M7 | Planted circuits, poke-and-predict, degraded data, energy, a real-data check | Not started |
 
 Done so far in M1:
