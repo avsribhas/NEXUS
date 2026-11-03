@@ -929,3 +929,27 @@ The 7B twice dropped existing test lines when rewriting the whole test file; the
 attempt had it write only the changed functions, which were then joined with the
 unchanged ones (the split CLAUDE.md suggests for long files). Full suite: 234 passed,
 2 skipped, 2 expected failures.
+
+### Dusk recovery, version 0
+Two files, both written by the 7B.
+
+`nexus/models/summary.py` turns one animal's measured voltages into 12 numbers per
+candidate trigger (each input neuron): how much holding that input changes the response
+to a poke on another input at 10, 20 and 30 mV, the half-way hold level, on and off times
+from the paired steps, the cell's own time constant, how many neurons move, and how much
+the response changes across brain states. Each number has a "missing" flag, giving 24
+features. Only voltages go in; the planted answers are never read here.
+
+`nexus/models/dusk.py` is a small network (24 inputs, two layers of 128, 11 outputs)
+trained across circuits. For each candidate it gives a switch probability and a 5% and
+95% value for each continuous field on the scoring scale, which become the interval.
+Priority is the rank by size of the predicted gain. The loss is cross-entropy for the
+switch call plus a quantile loss for the intervals, counted only where a switch exists.
+
+4 tests: scale conversions, the output format, array shapes, and that a model trained on
+one release circuit and one shunting decoy calls both correctly. That last test only
+shows the code can learn; it says nothing about circuits it hasn't seen. Two tests in
+the summary file check features on a release circuit and a decoy. All pass on the rig.
+
+This is a first version to get the full pipeline running end to end on the pilot. It
+treats each candidate separately, so it can't use the wiring diagram yet.
