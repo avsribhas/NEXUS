@@ -33,6 +33,9 @@ Done so far in M1:
 - The locking tools exist: held-out answers can be encrypted to a named key holder, and a
   log counts and caps every opening. Connecting them to real held-out data is still to do,
   and no held-out data will be made until a key holder is named.
+- The train/test split works on four kinds of unit: whole circuits, single neurons, kinds
+  of poke, and brain states. Every trial of a unit lands on the same side, whatever its
+  random seed.
 - Training repeats exactly on the same device. Runs on CPU and GPU differ by about 6e-08.
 
 There are no results yet. Nothing here should be read as a finding.
@@ -65,7 +68,7 @@ timestamp test needs the internet and only runs with `NEXUS_NETWORK_TESTS=1`.
 |---|---|
 | `CLAUDE.md` | The Phase 1 build spec and the current status box |
 | `logs/phase1-v2-log.md` | The build log: every step, decision, mistake and test run |
-| `nexus/format/` | File format, checker and locking (the M1 code); splits come next |
+| `nexus/format/` | File format, checker, train/test splits and locking (the M1 code) |
 | `nexus/` (other folders) | Empty for now; filled in M3 to M7 |
 | `tests/` | The test suite and the frozen-test hashes |
 | `prereg/` | The pre-registration, once written (M2) |

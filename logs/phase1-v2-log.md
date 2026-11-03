@@ -365,6 +365,26 @@ poke. That would be a format change, so it needs Udeern's sign-off along with D3
   had several bugs: it shuffled the shared test data in place, called the split function with
   loose arguments, and picked the wrong units. A second try got stuck repeating one line until
   it hit the output limit. Splitting the work into two smaller test files fixed both problems.
-  The trial-sorting tests are now right. The manifest tests still need one more fix (one test
-  still ignores its spec, and the neuron check compares the wrong thing). Neither file is in
-  the repo yet.
+  Both test files were then fixed (see the next entry).
+
+### Split manifest done (2026-11-02)
+What it does: it decides, before any model is trained, which circuits, neurons, kinds of
+poke and brain states are kept back for testing, and which are used for validation. A trial
+counts as test data if any one of its four units is held back. The decision depends only on
+unit names and one seed, never on a trial's own noise seed, so repeats of the same trial
+can't end up on both sides. The manifest is saved as JSON with sorted keys, so the same
+split always gives the same bytes and the same hash.
+
+- Tests (7B): `tests/test_m1_splits_manifest.py` (8 tests: same seed gives same split, input
+  order doesn't matter, each kind is a clean three-way split, sizes, neuron splits only for
+  training circuits, too few units fails, file round trip) and `tests/test_m1_splits_trials.py`
+  (4 tests: how a trial is sorted, seeds don't matter, which kinds a trial is held out on,
+  unknown units fail). It took 5 requests to get them right; the problems are in the entry
+  above.
+- Code (7B): `nexus/format/splits.py`, first try. Matches the spec line by line.
+- Rig: 77 passed, 1 skipped (network test).
+- Not frozen: the split depends on D4 (what an animal and a trial are), which Udeern hasn't
+  confirmed.
+- Design choices to put in the pre-registration: 20% test and 20% validation per kind, at
+  least one unit each, at least 3 units of every kind. With 4 brain states that leaves only 2
+  for training. If the pass marks need more training states, M2 should say so.
