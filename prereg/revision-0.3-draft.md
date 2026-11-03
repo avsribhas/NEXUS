@@ -1,0 +1,100 @@
+# Dusk Phase 1 pre-registration: proposed changes for version 0.3
+
+**Status: draft, not approved.** Written by Claude on 3 November 2026 for Abhiram and
+Udeern. Version 0.2 ([`phase1-prereg.md`](phase1-prereg.md)) stays in force until this is
+approved, and then 0.3 is written out in full, hashed and timestamped. No held-out data
+exists, so none of these changes can have been shaped by held-out results.
+
+Each item says what changes, why, and whether it needs a decision.
+
+## Changes that follow from building M3 and M4
+
+1. **Name.** The program is called Dusk (it was NEXUS). The code package keeps the name
+   `nexus`.
+
+2. **Pokes per animal (section 3).** Version 0.2 says "about 50 pokes". The protocol now
+   has 50 single pokes plus two new kinds, because threshold and timing couldn't be
+   measured from single pokes alone:
+   - **paired pokes:** one input held at 10, 20 or 30 mV for the whole trial while another
+     gets the standard 15 mV, 100 ms poke, for every ordered pair of inputs and every hold
+     level;
+   - **paired steps:** one input held at 15 mV while another steps to 30 mV from 1500 to
+     1800 ms, for every ordered pair.
+
+   A two-input circuit gets 58 pokes (1,044 trials); winner-take-all, with four inputs,
+   gets 98 (1,764 trials). Every input is always one of the single-poke targets, so each
+   paired poke has an unpaired reference.
+
+3. **Library size (section 3).** Version 0.2 fixes the count after the 200-circuit pilot.
+   *To be filled in from the pilot:* acceptance per type, hours and disk space per
+   circuit, and the resulting count. The rig is free to run, so no cloud cost is expected.
+
+4. **Scoring scales (section 5.1).** Gain and both timing ratios are scored on a log10
+   scale, threshold and reach on a linear one, with the prior ranges in
+   `configs/scoring_priors.json`. This was locked and timestamped on 3 November 2026
+   (`lock-scoring-0.1.json`), before any training. It belongs in the document itself.
+
+5. **Identifiability (section 5.2).** How the step works, now that it's built:
+   - one neural posterior per switch type, trained on the measured summary features of
+     training circuits;
+   - each circuit's interval comes from a model that did not train on it (5 folds);
+   - "perfect simulated data" means voltages with recording noise but no wiring
+     corruption. Corruption only changes the stored diagram, which the features don't use;
+   - a switch type with fewer than 20 planted triggers in training is left undecided.
+
+   With the full library every type has far more than 20, so this only matters in
+   development.
+
+## Fixes to the locked scoring code (need approval)
+
+Both were found on the first end-to-end run, on a handful of development animals. Neither
+changes a pass mark.
+
+6. **A noise-ceiling sample of zero breaks the prediction bootstrap.** The bootstrap
+   divides each circuit's score by a sampled ceiling. A circuit whose mean ceiling is
+   just above the 0.1 floor can still have split-half samples of exactly 0, which gives
+   infinity. One shunting decoy had 28 of 100 samples at 0. **Proposed:** floor each sample
+   at 0.1, the floor that section 5.6 already applies to whole circuits.
+
+7. **Tied priorities get credit.** The priority check counts a predicted tie as agreement
+   whenever the planted order happens to run the other way. A model that ranks every gate
+   equal, as the prior-only null does, then passes about half of all one-pair circuits,
+   depending only on how the gates are labelled. Section 9 counts a passing null as a
+   failure of the plan, so this has to be fixed. **Proposed:** a predicted tie counts as
+   disagreement.
+
+## Open decisions
+
+8. **Noise seeds for the prediction test (sections 3 and 5.6).** Section 3 says 3 seeds;
+   section 5.6 says each scored circuit is rerun with at least 10 for its noise ceiling.
+   With 3, the ceiling is a one-against-two split, which is noisy (item 6 is one
+   symptom). Options:
+   - **(a)** 10 seeds for every trial on the test side of any split. Test trials include
+     held-out neurons, poke types and states inside training circuits, about 54% of all
+     trials, so simulation time goes up by about 2.3 times.
+   - **(b)** 10 seeds for held-out circuits only, and report the other three held-out
+     kinds with a 3-seed ceiling, saying so. Adds about half (1.5 times) to simulation time.
+   - **(c)** keep 3 seeds and drop the "at least 10" from section 5.6.
+
+   Recommendation: (b). It keeps the main comparison (unseen circuits) on a sound ceiling
+   at a moderate cost.
+
+9. **Wiring error rates (section 3).** Version 0.2 says "measured error rates". The
+   current rates (10% of edges missing, 5% false edges, 5% sign flips, weight errors with
+   a spread of 0.3 in log10 units) are placeholders with no source. They need either a
+   published source or an explicit statement that they're assumptions, plus a check of
+   how the results change at half and double the rates.
+
+10. **Degenerate twins (section 5.4).** The current twins are scaled copies of one
+    circuit, which match trivially, so the twins test would pass without testing
+    anything. Twins need different structure (for example, a different number of
+    interneurons or a gap junction in place of a synapse) with the same planted values.
+    Not built yet.
+
+11. **Switch and decoy types still missing (section 3).** The two-state stochastic switch
+    and the bistable decoy aren't built yet, and the per-type check against NEURON hasn't
+    been run. Either they're built before generation or this version drops them and says
+    so.
+
+12. **D7, the held-out key holder.** Still open from version 0.2. Nothing held out can be
+    generated until it's settled.

@@ -1030,3 +1030,21 @@ choice. An empty list would have let recovery pass on the trigger and priority a
 the pilot, with about 17 training circuits per type, most types will be undecided; the
 full library settles it. 3 tests, including that an informative feature gives a narrow
 interval and a pure-noise feature doesn't.
+
+### Another flaw in the locked scoring code, and a draft revision of the pre-registration
+The smoke run showed the prior-only null passing recovery for winner-take-all. Part of
+that was the small sample: winner-take-all had no training circuits yet, so no fields
+were checked. The real problem is in the priority check: a predicted tie counts as
+agreement whenever the planted order happens to run the other way. The null ranks every
+gate equal, so it passes about half of all one-pair circuits on label order alone.
+Section 9 of the pre-registration counts a passing null as a failure of the plan.
+Proposed fix for the next scoring lock: a tie counts as disagreement. The locked code is
+not changed.
+
+`prereg/revision-0.3-draft.md` collects every change the build has forced so far, for
+Abhiram and Udeern: the new poke counts, the scoring scales, how identifiability works,
+the two scoring fixes, and open decisions on noise seeds, wiring error rates, twins, the
+missing switch and decoy types, and D7. On noise seeds: about 54% of trials fall on the
+test side of at least one split, so 10 seeds for all of them would multiply simulation
+time by about 2.3; 10 seeds for held-out circuits only, by about 1.5. I recommend the
+second. The library size is left blank until the pilot finishes.
