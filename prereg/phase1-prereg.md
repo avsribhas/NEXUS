@@ -1,12 +1,16 @@
 # NEXUS Phase 1 pre-registration
 
-**Status: draft 0.1, 2 November 2026. Not approved.** Written by Claude for Abhiram
-Sribhashyam and Udeern Varanasi to approve, change or reject. No held-out data exists, and
-none will be generated until both approve and the open items in section 10 are settled.
-Abhiram registers the approved version on OSF.
+**Status: version 0.2, approved 2 November 2026** by Abhiram Sribhashyam and Udeern
+Varanasi (Udeern's approval relayed by Abhiram). Written by Claude. Registered privately on
+OSF at Abhiram's request. No held-out data exists. None will be generated until the
+held-out key holder is named (section 10, item 6).
 
-Once approved, this document doesn't change. Any later change is a new, dated, timestamped
-version that says what changed and why, and the old version stays in the repository.
+This document doesn't change from here. Any later change is a new, dated, timestamped
+version that says what changed and why. Earlier versions stay in the repository's history
+(draft 0.1 is commit f6747f6).
+
+**Changes from draft 0.1:** 6 brain states instead of 4 (section 3 and 4); Phase 1 uses
+non-spiking circuits only (section 3); approvals recorded (sections 10 and 11).
 
 ## 1. What Phase 1 tests
 
@@ -46,9 +50,10 @@ then.
 
 ## 3. The circuit library
 
-- **Size.** About 5,000 circuits, each with about 50 pokes, under 4 brain states, with 3
-  noise seeds (target from the build spec, M3). The exact count is fixed after the
-  200-circuit pilot and added here before generation.
+- **Size.** About 5,000 circuits, each with about 50 pokes, under 6 brain states, with 3
+  noise seeds. The build spec planned 4 states; 6 adds half again to the simulation cost.
+  The exact count is fixed after the 200-circuit pilot and added here, as a new version,
+  before generation.
 - **Switch types.** Five, each built from a published model: release (disinhibition),
   volume knob (gain), winner-take-all, global shutoff, and the two-state stochastic switch.
 - **Circuits with no switch.** Between a third and a half of the library: plain circuits,
@@ -58,12 +63,17 @@ then.
   biophysical parameters.
 - **Wiring corruption.** Each simulated animal is one draw of wiring errors (signs, weights
   and edges) at measured error rates. A circuit's "animal" is that draw (D4).
-- **Which connection types can be used.** The M1 checks found that the translator from
-  NeuroML to Jaxley (tarjuman 0.5.1) drops spike-triggered synapses entirely, while graded
-  synapses and gap junctions match NEURON to within 0.01 mV. Until that's fixed, circuits
-  can only use graded synapses and gap junctions. That covers worm-style circuits but not
-  the spiking fly-style and mouse-style ones the build spec also plans. See section 10, item
-  5.
+- **No spiking circuits in this phase (Abhiram, 2 November 2026).** Every circuit uses
+  graded, non-spiking neurons connected by graded synapses and gap junctions, the way worm
+  circuits work. Switch types whose published models spike (for example winner-take-all,
+  after Wang 2002) are built as graded versions, and the report says so. Two reasons: the
+  team wants the non-spiking results first, and the M1 checks found that the translator
+  from NeuroML to Jaxley (tarjuman 0.5.1) drops spike-triggered synapses, while graded
+  synapses and gap junctions match NEURON to within 0.01 mV. Spiking circuits come in a
+  later version of this plan.
+- **Consequence for energy (M6).** The build spec's energy milestone needs one spiking
+  switch, and the worm energy route has no published check. M6 is out of this version's
+  scope, and Cost is not scored in it.
 
 ## 4. What is held out
 
@@ -81,9 +91,8 @@ seed of a unit sits on the same side of the split.
   units of each kind must exist.
 - A trial counts as test data if any of its four units is held out.
 - Model and design choices use the validation split only.
-- **With 4 brain states, this leaves 2 for training, 1 for validation and 1 for testing.**
-  A model then learns state-dependence from two states. If that's too few, the fix is more
-  states (D4 sets 4), not a different split rule. See section 10, item 3.
+- **With 6 brain states, this leaves 4 for training, 1 for validation and 1 for testing.**
+  (Draft 0.1 had 4 states, which left only 2 for training.)
 - **Held-out circuits per switch type:** at least 100. With 100 circuits, an observed pass
   rate of 80% has a 95% interval of about 71% to 87%, which is enough to tell 80% from
   70%. With about 3,000 switch circuits over five types and 20% held out, each type gets
@@ -223,23 +232,23 @@ Each of these would be reported, not hidden:
 
 ## 10. Open before approval
 
-1. **D3 (Udeern):** the six fields, their types, units and scoring, as in section 5.1.
-2. **D4 (Udeern):** a brain state is a slow input at 4 levels; an animal is one wiring
-   corruption draw; a trial is one poke under one state with one seed.
-3. **Brain states:** keep 4 (2 for training), or raise to 6 (4 for training).
-4. **D6 (Udeern):** Jaxley as the main simulator, with NEURON 9.0.2 as the check (Abhiram
-   chose NEURON on 2 November 2026; pyNeuroML can't send networks to Brian2).
-5. **Spiking circuits:** either Phase 1 uses worm-style graded circuits only, or the
-   tarjuman spike-synapse problem gets fixed or worked around first. The build spec's M6
-   needs one spiking switch, so the first choice moves that milestone.
-6. **D7:** who holds the held-out key (name and public key).
-7. **The numbers:** 0.5 interval width, 80% recovery, 90% no false switches, 80% twins, 10%
-   leak, 10 ceiling seeds, 0.1 ceiling floor, 0.02 tie margin, 100 held-out circuits per
-   type, 3 openings, and the exclusion bounds in 5.9. Each is a proposal.
+Settled on 2 November 2026 (Abhiram, with Udeern's agreement relayed by Abhiram):
+
+1. **D3:** the six fields, their types, units and scoring, as in section 5.1. Accepted.
+2. **D4:** a brain state is a slow input, now at 6 levels; an animal is one wiring
+   corruption draw; a trial is one poke under one state with one seed. Accepted.
+3. **Brain states:** 6 (4 for training).
+4. **D6:** Jaxley as the main simulator, with NEURON 9.0.2 as the check. Accepted.
+5. **Spiking circuits:** not in this version. Graded circuits only.
+7. **The numbers** in sections 4 to 7: accepted as proposed.
+
+Still open:
+
+6. **D7:** who holds the held-out key (name and public key). Held-out data waits for it.
 
 ## 11. Approval
 
 | Name | Role | Decision | Date |
 |---|---|---|---|
-| Abhiram Sribhashyam | Founder | | |
-| Udeern Varanasi | Head of Research | | |
+| Abhiram Sribhashyam | Founder | Approved | 2 November 2026 |
+| Udeern Varanasi | Head of Research | Approved (relayed by Abhiram) | 2 November 2026 |

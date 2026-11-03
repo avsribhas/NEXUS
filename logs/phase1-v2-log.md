@@ -635,3 +635,25 @@ change, including the approval itself, makes a new version with its own lock.
 Udeern approve. Section 10 of the draft lists what they need to settle: D3, D4, D6, D7 (the
 key holder), 4 or 6 brain states, worm-only or a fix for spiking circuits, and each
 proposed number. Abhiram registers the approved version on OSF.
+
+### Pre-registration version 0.2, approved (2026-11-02)
+Abhiram's decisions, and Udeern's approval relayed by him:
+- **6 brain states instead of 4**, so models train on 4 states, not 2. This adds half again to
+  the library's simulation cost.
+- **No spiking circuits in this phase.** All circuits are graded and non-spiking (worm-style),
+  connected by graded synapses and gap junctions. This also avoids the tarjuman spike-synapse
+  problem. Switch types whose published models spike are built as graded versions. M6
+  (energy) is out of this version's scope, because the build spec's milestone needs a spiking
+  switch; Cost is not scored.
+- **D3, D4 (with 6 states) and D6 (Jaxley plus NEURON) accepted**, and all proposed numbers
+  accepted.
+- **Still open: D7, the held-out key holder.** No held-out data until named.
+
+Changes went into `prereg/phase1-prereg.md` (Claude) and `prereg/thresholds.json` (7B: new
+status and a `library` block with 6 states and no spiking; one clean edit). Locked in
+`prereg/lock-0.2.json` and timestamped:
+- `phase1-prereg.md`: 7f12e8ae3a03a264aa6565520113f1b2d318e4376c412b4c81ccd356c117ca9c
+- `thresholds.json`: cb45d5bc5869a8b70a3d223ae0acae522c8a213be70c03c45b21fa756f54bceb
+
+Draft 0.1's lock (`prereg/lock-draft-0.1.json`) verifies against commit f6747f6, not the
+current files. That's intended.

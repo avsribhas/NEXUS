@@ -28,6 +28,11 @@
 >   each use is logged.
 > - **Second simulator (overrides D6's Brian2 spot-check, Abhiram 2026-11-02).** NEURON 9.0.2
 >   through pyNeuroML. pyNeuroML's Brian2 export can't take networks at all.
+> - **Pre-registration approved (2026-11-02).** `prereg/phase1-prereg.md` version 0.2, approved by
+>   Abhiram and Udeern (relayed). D3, D4 and D6 settled. 6 brain states (overrides D4's 4).
+>   No spiking circuits this phase: graded neurons, graded synapses and gap junctions only
+>   (overrides M3's spiking fly-like and mouse-like circuits). M6 is out of scope for this
+>   version. D7 key holder still open: no held-out data until named.
 > - **Writing.** Logs, READMEs and reports follow Abhiram's anti-slop rules: plain English,
 >   short sentences, no filler or hype, no em dashes.
 > - **Environment:** Python 3.12, pynwb 3.1.3, `jax[cuda13]` with torch 2.15 in one CUDA 13 GPU

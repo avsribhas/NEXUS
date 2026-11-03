@@ -1,6 +1,10 @@
 {
   "schema_version": "0.1.0",
-  "status": "draft 0.1, not approved",
+  "status": "version 0.2, approved",
+  "library": {
+    "n_brain_states": 6,
+    "spiking_circuits": false
+  },
   "recovery": {
     "interval_level": 0.9,
     "max_width_fraction_of_prior": 0.5,
