@@ -1,0 +1,10 @@
+{
+  "provisional": true,
+  "note": "Placeholder rates. Not yet taken from a measured comparison of connectomes; replace with sourced values and a new pre-registration version before generating the library.",
+  "rates": {
+    "missing_edge": 0.1,
+    "false_edge": 0.05,
+    "sign_flip": 0.05,
+    "weight_sd_log": 0.3
+  }
+}

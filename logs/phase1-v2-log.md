@@ -758,3 +758,57 @@ design was wrong, not the code. Weights changed: test input to gain neuron 0.05 
 (was 0.3 to 0.6), trigger to gain neuron 0.25 to 0.45 (was 0.5 to 1.0), which puts the
 gain neuron near the output synapse's midpoint at full trigger. 45 tests pass on the rig
 (probe and builder), about 20 s per circuit including compilation.
+
+### The trial protocol
+`nexus/perturb/protocol.py`. Decisions (mine):
+- **One trial** is 2000 ms at 0.2 ms steps. The brain-state drive on neuron S is held from
+  the start at one of 6 levels (0, 6, 12, 18, 24, 30 mV). The poke starts at 1500 ms, after
+  the circuit has settled. Voltages are kept from 1400 to 2000 ms at 1 ms.
+- **Pokes:** 5 types (5 mV for 100 ms, 15 mV for 100 ms, -15 mV for 100 ms, 30 mV for 20 ms,
+  10 mV for 300 ms), each on the same 10 sampled neurons, so 50 pokes. Using the same
+  targets for every type means a held-out poke type is new as a poke, not as a target.
+- **Noise:** independent Gaussian current noise on every neuron at every step, sized as
+  10 mV of steady drive per step (about 0.1 to 1.4 mV of voltage noise, depending on the
+  cell's time constant). Drawn in advance from the circuit seed, state, seed index and poke.
+- 50 pokes x 6 states x 3 seeds = 900 trials per animal. Batches are padded to one size so
+  each circuit compiles once. 6 tests.
+
+### Wiring corruption
+`nexus/circuits/corrupt.py`. The model is given an imperfect wiring diagram; the simulated
+circuit is never changed. Each edge can be missing, have its sign flipped, or get a weight
+error (log-normal), and false edges are added. Weights are in units of the receiving cell's
+leak, so a twin gets the same diagram. **The rates in `configs/corruption.json` (10% missing,
+5% false, 5% sign flips, weight error sd 0.3 in log units) are placeholders, flagged
+`"provisional": true` in the file.** They aren't from a measured comparison of connectomes.
+They need sourced values, and a new pre-registration version, before the library is
+generated. 7 tests.
+
+### Run files
+`nexus/circuits/write_run.py` writes one animal (one circuit, one corruption draw, 900
+trials) as one NWB file: run metadata, the planted answers, the corruption rows, a trials
+table, the pokes, the voltages (gzip), the true circuit, the corrupted diagram and the
+simulator inputs. **Simulator inputs:** storing every trial's full current array would be
+about 0.7 GB per animal, so the file stores the parameters that generate them and a SHA-256
+of each trial's exact array, taken at the moment it goes to the simulator. A test
+regenerates the arrays from the stored parameters and checks the hashes match. That is the
+check the pre-registration asks for (section 6), done by hash. The file passes the M1
+checker, with Cost blank as section 8 allows. Two fixes: NWB can't store 0-d arrays (the
+7B's writer was fixed to use one-element arrays), and my test compared hashes with `str()`
+when HDF5 returns bytes (the test was fixed). 5 tests.
+
+### Acceptance survey and one motif fix
+8 circuits per motif through the probe (`scripts/m3_acceptance.py`): release 7/8, gain 8/8,
+winner-take-all 7/8, global shutoff 8/8, both decoys 8/8, plain 1/8. Plain circuits failed
+because a second excitatory input onto the same cell halves the first input's response
+(less driving force, more conductance). That's real biophysics, but it makes a plain
+circuit look like a switch. Fix: the second input now drives its own output and makes only
+a weak connection (0.05 to 0.15) onto the first output. After the change, plain circuits
+pass 8 of 8 (ratios 0.79 to 0.93).
+
+### A known weakness: twins
+Degenerate twins are made by scaling every capacitance and conductance by one factor. The
+voltages and the leak-relative wiring are then identical, so a twin is indistinguishable
+from its original to any model that reads voltages and the diagram. The twin test
+(pre-registration 5.4) would pass trivially. Twins that differ in a way a model can see,
+yet have the same datasheet, need a search over parameters. That's not built yet and is
+listed as open.
