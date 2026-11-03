@@ -1008,3 +1008,25 @@ sampled ceiling, so a zero gives infinity. Ten seeds, as the pre-registration re
 make this rarer but not impossible. The locked code is not changed. Proposed fix for the
 next scoring lock, for Udeern to approve: floor each ceiling sample at 0.1, the floor the
 pre-registration already applies to whole circuits.
+
+### Which fields can be recovered: the identifiability step
+`nexus/models/identifiability.py`, written by the 7B (two corrections: it first computed
+the always-defined fields per animal instead of over all of them, and subtracted a set
+from a list). This is pre-registration section 5.2. For each switch type, sbi's neural
+posterior estimator (NPE, a masked autoregressive flow) learns the planted field values
+from the summary features of training circuits, with the scoring priors as a uniform box.
+Each circuit's 90% interval comes from a model trained without it (5 folds), so the
+widths aren't flattered by fitting. A field counts as identifiable for a type when that
+interval is at most half the prior range in at least 80% of the type's circuits.
+
+The pre-registration asks for "perfect" training data. The summary features use only
+voltages, and wiring corruption changes only the stored diagram, so the features already
+meet that. They still carry the recording noise, which is part of the measurement.
+
+A type with fewer than 20 planted triggers in training is marked "not decided", because
+sbi can't train on so few (its batch size came out as 0 on the first smoke run). In the
+pilot evaluation an undecided type is scored on every field defined for it, the strict
+choice. An empty list would have let recovery pass on the trigger and priority alone. In
+the pilot, with about 17 training circuits per type, most types will be undecided; the
+full library settles it. 3 tests, including that an informative feature gives a narrow
+interval and a pure-noise feature doesn't.
