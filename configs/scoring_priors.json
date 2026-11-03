@@ -1,0 +1,25 @@
+{
+  "note": "Prior range and scale of each continuous datasheet field, used by the recovery width rule. Gains and timing ratios are scored in log10 because they span decades.",
+  "fields": {
+    "trigger_gain": {
+      "scale": "log10",
+      "range": [-3.0, 4.0]
+    },
+    "threshold": {
+      "scale": "linear",
+      "range": [0.0, 30.0]
+    },
+    "tau_on_over_tau_ref": {
+      "scale": "log10",
+      "range": [-1.0, 2.0]
+    },
+    "tau_off_over_tau_ref": {
+      "scale": "log10",
+      "range": [-1.0, 2.0]
+    },
+    "reach": {
+      "scale": "linear",
+      "range": [0.0, 1.0]
+    }
+  }
+}

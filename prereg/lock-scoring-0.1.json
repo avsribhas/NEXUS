@@ -1,0 +1,13 @@
+{
+  "files": {
+    "configs/scoring_priors.json": "0f1966877364a2b41adc256edbe88e3d070e98dd2e47b532b88bce2061579abb",
+    "nexus/score/prediction.py": "5fd488d762e9c89e025e228748b8ea292aa353b5ee7d2fbb32bd923ba37eb2b0",
+    "nexus/score/recovery.py": "871d03aaad40b742d881f6336cfce79d641e632efcb0a176f6c87eb7d2e00165",
+    "nexus/score/report.py": "565d97c4a278c99da103d86dea8a83d574d5534a6519b500334920de9c40720c",
+    "tests/test_m4_prediction.py": "96898d028b39acc1f292473dcfd60b6b3a71d8ff9eaffb5a6c40caf7faedae01",
+    "tests/test_m4_recovery.py": "a7ab3c3f750e8444ec0503fceacd0b5cbfda999d71c848f93f78fcab4e9a3db2",
+    "tests/test_m4_report.py": "7ef375dd81198a350f0ebf974b672407f4d25bba6a60124e9f0e24640bb083bd",
+    "tests/test_m4_scales.py": "ffe4e981d5f068ad32f7d71538b694da0956aaa56f22421ec090c84465caabf2"
+  },
+  "schema_version": "0.1.0"
+}
