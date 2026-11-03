@@ -118,5 +118,8 @@ changes a pass mark.
     simulation time. Recommendation: keep 0.2 ms and state it; errors under 1 mV are
     small next to the 10 mV recording noise.
 
-14. **D7, the held-out key holder.** Still open from version 0.2. Nothing held out can be
-    generated until it's settled.
+14. **D7, the held-out key holder.** Udeern holds the key (Abhiram, 3 November 2026).
+    Held-out answers are encrypted with age (X25519) to Udeern's public key inside the
+    generator. Udeern keeps the private key and decrypts once, after predictions are hashed
+    and timestamped. Still needed: Udeern's public key (the `age1...` line). Nothing held out
+    is generated until it arrives.

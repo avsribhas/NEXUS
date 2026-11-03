@@ -1148,3 +1148,11 @@ shutoff, plain, and the shunting, adaptation and bistable decoys), every neuron 
 0.02 mV of NEURON for the full 600 ms. 8 minutes on the rig's CPU. Command:
 `JAX_ENABLE_X64=1 JAX_PLATFORMS=cpu .venv/bin/python -m pytest tests/test_m3_neuron_types.py`.
 In the normal suite (float32) this test skips and says why.
+
+### D7 settled: Udeern holds the held-out key (2026-11-03)
+
+Abhiram named Udeern as the key holder. Held-out answers (planted datasheets and response
+targets) will be encrypted with age (X25519) to Udeern's public key inside the generator, as
+`nexus/format/locking.py` already does with the placeholder key. Udeern keeps the private
+key and decrypts once, after predictions are hashed and timestamped. Still needed: Udeern's
+public key. No held-out data is generated until it arrives and version 0.3 is approved.
