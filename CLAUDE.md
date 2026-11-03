@@ -1,6 +1,6 @@
 # NEXUS Phase 1 (v2): build the switch-finding test bench
 
-> **Status and overrides (read first; updated 2026-10-29).** The prompt below is kept as
+> **Status and overrides (read first; updated 2026-11-02).** The prompt below is kept as
 > written. Where this box and the prompt disagree, this box wins.
 >
 > - **Who writes code (overrides section 2, last paragraph).** Abhiram reinstated the
@@ -17,6 +17,15 @@
 >   key until named, no held-out data); the source of the 0.82 Creamer number (D9).
 > - **D2:** Rev 3 is committed at `archive/phase1-betse/REV3.md`. `scripts/v2_realization.py` and
 >   `scripts/confound_experiment.py` are absent from every branch.
+> - **Branches (overrides D1 and section 7, 2026-11-02).** Abhiram asked for everything to be on
+>   `main`. `phase1-v2` stays the working branch, and `main` is fast-forwarded to it after each
+>   push. Making new *results* public still needs his go-ahead.
+> - **Where things run.** Everything runs in WSL2 on the rig (`~/NEXUS`), never on the Mac.
+> - **Cost rule (overrides M1's "except Cost before M6").** Per the new P0 protocol, the checker
+>   rejects a missing energy value by default; a caller must pass `allow_null_cost=True`, and
+>   each use is logged.
+> - **Writing.** Logs, READMEs and reports follow Abhiram's anti-slop rules: plain English,
+>   short sentences, no filler or hype, no em dashes.
 > - **Environment:** Python 3.12, pynwb 3.1.3, `jax[cuda13]` with torch 2.15 in one CUDA 13 GPU
 >   image (see `logs/phase1-v2-log.md`, M0).
 

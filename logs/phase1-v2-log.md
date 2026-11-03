@@ -345,3 +345,26 @@ be logged each time it happens.
 field belongs to each switch, so a circuit with no switch (a decoy or a no-switch control)
 has no energy value at all. Decide before M3 whether runs also need an energy value per
 poke. That would be a format change, so it needs Udeern's sign-off along with D3 and D4.
+
+### Outage cause, READMEs, and main (2026-11-02)
+- **Why the rig dropped on 2026-10-29.** It didn't sleep. Idle sleep is off on both mains and
+  battery, the system log has no sleep event, and it hasn't rebooted since 29 October. So the
+  connection dropped, not the machine. What follows from that: long jobs (M3 onward) must run
+  inside WSL in a way that survives the SSH session ending, and must write their progress to
+  disk.
+- **READMEs.** The root README now says what's built, what isn't, how the work is done and how
+  to run the tests. The archive README lists two more old files that overstate: the
+  experimental-data README (it says the model "correctly learned" that gap junctions don't
+  matter) and the old test-suite README (it says passing tests mean correct code). Those two
+  files and the original Phase 1 README now open with a short "archived, read against Rev 3"
+  note. Their old text is otherwise unchanged.
+- **main.** At Abhiram's request, `main` now gets everything. It was 11 commits behind
+  `phase1-v2` with nothing of its own, so it moved straight forward with no merge. From now
+  on, `main` is moved forward to `phase1-v2` after each push.
+- **Split manifest, in progress, not committed.** The 7B's first full test file for the splits
+  had several bugs: it shuffled the shared test data in place, called the split function with
+  loose arguments, and picked the wrong units. A second try got stuck repeating one line until
+  it hit the output limit. Splitting the work into two smaller test files fixed both problems.
+  The trial-sorting tests are now right. The manifest tests still need one more fix (one test
+  still ignores its spec, and the neuron check compares the wrong thing). Neither file is in
+  the repo yet.

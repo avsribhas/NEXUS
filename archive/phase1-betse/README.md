@@ -56,7 +56,9 @@ Rev 3.
 | `data/synthetic/DATASET_CARD.md` | Diverged copy of the dataset card (R9) |
 | `DEVIATIONS.md` and `logs/DEVIATIONS.md` | Two diverged copies (R9); the root copy reads "complete in 46 simulated seconds" where "4 to 6" lost its dash |
 | `logs/director-log.md` | v2 results reported as confirming the graph hypothesis; the log is the only source for all v2 numbers |
-| `logs/research-report.md` at commit d82c41a | "v2 dataset confirms the graph hypothesis; Phase 1 complete". Replaced on branch `phase1-v2` by the plain-language report; the original is in git history |
+| `data/experimental/README.md` | Says the model "correctly learned" that gap-junction conductance does not matter; Rev 3 reads the near-zero blockade prediction as most likely a limit of the BETSE setup, and the direct check (R3) was never run |
+| `tests/README.md` | "When all tests pass, the code is correct"; passing tests did not catch the v2 input mismatch |
+| `logs/research-report.md` at commit d82c41a | "v2 dataset confirms the graph hypothesis; Phase 1 complete". Replaced by the plain-language report; the original is in git history |
 
 ## Status of Rev 3's open items (R1 to R9)
 

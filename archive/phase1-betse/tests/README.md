@@ -1,3 +1,7 @@
+> **Archived.** This file is part of the closed Phase 1 BETSE study and was left as written
+> at the time. Read it against [Rev 3](../REV3.md) and the [archive README](../README.md), which say
+> what the study did and did not establish.
+
 # NEXUS Phase 1 — Test Suite
 
 ## Purpose
