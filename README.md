@@ -53,7 +53,7 @@ Done so far in M1:
 
 Done so far in M3 and M4:
 - Eight kinds of graded circuit, built from small motif tables: four switch types (release,
-  gain, winner-take-all, global shutoff), plain circuits, and two decoys that look like a
+  gain, winner-take-all, global shutoff), plain circuits, and three decoys that look like a
   switch but have no gate (shunting inhibition, adaptation and a bistable pair). Each circuit's planted
   answers are measured by probing it, and it's kept only if the measured switch behaves as
   planted.
