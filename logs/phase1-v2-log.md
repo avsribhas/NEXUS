@@ -484,3 +484,39 @@ Open, blocking the rest of M1:
 
 Next is M2, the pre-registration. Writing it doesn't need any of the above, but approving it
 does.
+
+### VPN off, Java in, and the Brian2 route doesn't exist (2026-11-02)
+- **VPN.** At Abhiram's request I disconnected Cisco Secure Client (AnyConnect, connected to
+  `vpn.utexas.edu`) on the rig with its own command-line client. SSH over Tailscale kept
+  working. WSL then reached pypi.org, the timestamp servers and the Ubuntu archive. It breaks
+  again whenever the VPN reconnects; the lasting fix (WSL mirrored networking) is Abhiram's
+  to make.
+- **Java.** Installed Ubuntu's `default-jre-headless` (OpenJDK 21.0.12) in WSL, as root
+  through `wsl -u root`, because `sudo` needs a password.
+- **Timestamps.** With network tests on, the full suite is 94 passed and 1 expected failure.
+  Both timestamp tests pass again.
+- **pyNeuroML can't export a network to Brian2.** jNeuroML's Brian2 writer refuses the
+  reference circuit. It lists no support at all for populations with more than one cell,
+  connections between populations, gap junctions, or graded connections. It only handles
+  single cells. So the spec's plan, running "the same NeuroML2 circuit in Jaxley and in Brian2
+  (exported through pyNeuroML)", can't work for any circuit NEXUS will use. A director miss:
+  I should have checked the export's limits when the plan was written, not at the end of M1.
+- **jNeuroML as the referee.** jNeuroML, the official NeuroML simulator, runs networks
+  directly from the same files, with no translation step. The reference circuit in it:
+  - The synapse works. Cell 1 rises to -59.4 mV with each spike from cell 0. **This confirms
+    the tarjuman problem:** the circuit is fine, and tarjuman drops the synaptic input.
+  - Cell 0 fires every 21.97 ms (exact answer 21.972 ms). Jaxley fires every 21.98 ms, one
+    0.01 ms step later each time, so it falls 0.01 ms further behind per spike (0.10 ms by
+    the ninth). Around each spike, that offset shows up as a 20 mV gap between the two traces
+    (one is reset while the other isn't yet), so any trace comparison must be made on spike
+    times, not on voltage at each step.
+  - The cell with no input matches exactly.
+- **Decision needed (D6).** The second simulator for the equivalence test can't be Brian2
+  through pyNeuroML. The options are below, in the order I'd recommend them:
+  1. jNeuroML. It already works on the rig, reads the same files, and is the reference that
+     tarjuman itself is validated against. It is slow for big circuits, but the equivalence
+     test only needs small ones.
+  2. NEURON through pyNeuroML. Supports networks; needs the `neuron` package added and
+     pinned.
+  3. Our own Brian2 builder for a short list of cell and synapse types. Most work, and a
+     second translator that would itself need checking.

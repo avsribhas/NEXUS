@@ -37,8 +37,9 @@ Done so far in M1:
 - A small reference circuit, written in NeuroML, runs in the Jaxley simulator and matches the
   exact textbook answer to within one time step. The same check found a problem: the
   translator we use (tarjuman 0.5.1) drops the circuit's synaptic input while reporting the
-  conversion as complete. The comparison against the second simulator (Brian2) is still to
-  do.
+  conversion as complete. The official NeuroML simulator (jNeuroML) runs the same circuit
+  with the synapse working, which confirms it. Which simulator to use as the second check is
+  still being decided: the planned one (Brian2, via pyNeuroML) can't take networks at all.
 - The train/test split works on four kinds of unit: whole circuits, single neurons, kinds
   of poke, and brain states. Every trial of a unit lands on the same side, whatever its
   random seed.
