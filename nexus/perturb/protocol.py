@@ -21,7 +21,14 @@ PAIRS_PER_ANIMAL = 10
 def make_pokes(spec, roles, rng):
     """Fifty single pokes (five types on the same ten sampled neurons) and ten paired pokes: one input held on for the whole trial while another input is poked."""
     eligible = [n["id"] for n in spec["neurons"] if n["id"] != roles["state"]]
-    targets = [str(x) for x in rng.choice(eligible, size=TARGETS_PER_TYPE, replace=len(eligible) < TARGETS_PER_TYPE)]
+    inputs_first = [str(x) for x in roles["inputs"] if x in eligible][:TARGETS_PER_TYPE]
+    rest = [x for x in eligible if x not in inputs_first]
+    need = TARGETS_PER_TYPE - len(inputs_first)
+    if len(rest) >= need:
+        fill = [str(x) for x in rng.choice(rest, size=need, replace=False)]
+    else:
+        fill = [str(x) for x in rng.choice(eligible, size=need, replace=True)]
+    targets = inputs_first + fill
     pokes = []
     for t in POKE_TYPES:
         for j, target in enumerate(targets):

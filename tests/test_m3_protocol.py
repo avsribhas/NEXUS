@@ -99,3 +99,11 @@ def test_paired_pokes():
     i0 = int(round(p["start_ms"] / DT))
     assert np.isclose(c[k, i0], drive_to_current(SPEC, p["target"], PAIRED["amplitude_mV"]), atol=1e-7)
     assert c[k, 0] == 0.0
+
+def test_inputs_are_always_targets():
+    for seed in range(5):
+        pokes = make_pokes(SPEC, ROLES, np.random.default_rng(seed))
+        for t in POKE_TYPES:
+            targets = [p["target"] for p in pokes if p["type"] == t]
+            for nid in ROLES["inputs"]:
+                assert nid in targets

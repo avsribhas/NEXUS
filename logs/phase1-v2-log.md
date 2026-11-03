@@ -899,3 +899,8 @@ matrix: one synapse step, none (wiring-blind), all-to-all, or a shuffled diagram
 model makes the same prediction in every state, so its state-dependent part is zero and
 its correlation is undefined; it will be scored as 0. That's a scoring rule for the
 prediction-row builder, which isn't written yet.
+Second fix a minute into the restarted pilot (stopped again, nothing kept): a paired
+poke needs an unpaired reference, the same 15 mV, 100 ms poke on the same target with
+nothing held. That's the existing 15 mV poke type, but only when the input happened to be
+sampled as a target. Now every input neuron is always one of the 10 targets, and the rest
+are filled at random. No extra trials. New test: inputs are targets for every poke type.
