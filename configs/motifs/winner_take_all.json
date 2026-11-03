@@ -1,0 +1,130 @@
+{
+  "switch_type": "winner_take_all",
+  "is_decoy": false,
+  "decoy_kind": "",
+  "neurons": {
+    "inA": {},
+    "inB": {},
+    "trigA": {},
+    "trigB": {},
+    "UA": {},
+    "UB": {},
+    "OA": {},
+    "OB": {}
+  },
+  "synapses": [
+    {
+      "pre": "inA",
+      "post": "UA",
+      "sign": "exc",
+      "w": [
+        0.3,
+        0.6
+      ]
+    },
+    {
+      "pre": "inB",
+      "post": "UB",
+      "sign": "exc",
+      "w": [
+        0.3,
+        0.6
+      ]
+    },
+    {
+      "pre": "trigA",
+      "post": "UA",
+      "sign": "exc",
+      "w": [
+        0.4,
+        0.8
+      ]
+    },
+    {
+      "pre": "trigB",
+      "post": "UB",
+      "sign": "exc",
+      "w": [
+        0.4,
+        0.8
+      ]
+    },
+    {
+      "pre": "UA",
+      "post": "UB",
+      "sign": "inh",
+      "w": [
+        1.0,
+        3.0
+      ],
+      "delta_mV": [
+        2.0,
+        3.0
+      ]
+    },
+    {
+      "pre": "UB",
+      "post": "UA",
+      "sign": "inh",
+      "w": [
+        1.0,
+        3.0
+      ],
+      "delta_mV": [
+        2.0,
+        3.0
+      ]
+    },
+    {
+      "pre": "UA",
+      "post": "OA",
+      "sign": "exc",
+      "w": [
+        0.4,
+        0.8
+      ]
+    },
+    {
+      "pre": "UB",
+      "post": "OB",
+      "sign": "exc",
+      "w": [
+        0.4,
+        0.8
+      ]
+    }
+  ],
+  "state": {
+    "target": "UA",
+    "sign": "exc",
+    "w": [
+      0.2,
+      0.6
+    ]
+  },
+  "inputs": [
+    "inA",
+    "inB",
+    "trigA",
+    "trigB"
+  ],
+  "outputs": [
+    "OA",
+    "OB"
+  ],
+  "gates": [
+    {
+      "gate_id": "gA",
+      "trigger": "trigA",
+      "test_input": "inB",
+      "output": "OB"
+    },
+    {
+      "gate_id": "gB",
+      "trigger": "trigB",
+      "test_input": "inA",
+      "output": "OA"
+    }
+  ],
+  "candidates": []
+}

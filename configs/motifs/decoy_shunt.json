@@ -1,0 +1,39 @@
+{
+  "switch_type": "none",
+  "is_decoy": true,
+  "decoy_kind": "shunting",
+  "neurons": {
+    "in": {},
+    "trig": {},
+    "O": {}
+  },
+  "synapses": [
+    {
+      "pre": "in",
+      "post": "O",
+      "sign": "exc",
+      "w": [0.3, 0.6]
+    },
+    {
+      "pre": "trig",
+      "post": "O",
+      "sign": "shunt",
+      "w": [0.1, 0.3]
+    }
+  ],
+  "state": {
+    "target": "O",
+    "sign": "shunt",
+    "w": [0.05, 0.15]
+  },
+  "inputs": ["in", "trig"],
+  "outputs": ["O"],
+  "gates": [],
+  "candidates": [
+    {
+      "trigger": "trig",
+      "test_input": "in",
+      "output": "O"
+    }
+  ]
+}

@@ -706,3 +706,55 @@ Every M3 circuit is graded (no spikes), so two pieces are needed before any swit
 One director mistake: the first runner test assumed every cell rests at -70 mV. A graded
 synapse is partly open at rest (about 12% here), so the cell it feeds rests near -66.1 mV.
 The runner was right; the test was fixed to expect the true resting value.
+
+### Motif tables and the circuit builder
+- **`configs/motifs/`** holds one JSON table per circuit kind: the four switch types that
+  can be built now (release, gain, winner-take-all, global shutoff), two decoys (adaptation,
+  shunting inhibition) and plain circuits. A table lists the core neurons, the synapses
+  between them with weight ranges, where the brain-state neuron connects, and which input
+  pairs to probe. `common.json` holds the shared ranges (capacitance, leak, synapse
+  midpoints, 2 to 15 background neurons, 6 brain states from 0 to 30 mV). The 7B garbled
+  a single all-motifs file (it dropped both decoys); one file per motif fixed that.
+- **`nexus/circuits/build.py`** samples one circuit from a table. Synapse weights are in
+  units of the receiving cell's leak, and drives are in mV of steady-state depolarisation,
+  so multiplying every capacitance and conductance by the same factor gives a degenerate
+  twin with identical voltages. Background neurons only listen to the motif, never feed it,
+  so they can't create or break a switch; gap junctions join background neurons only. One
+  7B bug (range overrides ignored) was fixed by an edit. 35 tests, including the twin check
+  (voltages within 1e-3 mV).
+- **`nexus/circuits/measure.py`**: small measurement functions (window means, threshold
+  crossing, 63% times, gate ratios, the switch/none/ambiguous rule, priority ranks).
+  11 tests.
+
+### Measuring the planted answers: the probe
+The planted datasheet is measured, not assumed, by a fixed protocol in
+`nexus/circuits/probe.py` (brain state 0):
+- **Trigger and threshold.** The trigger is held at 13 levels from 0 to 30 mV; at each, a
+  15 mV, 100 ms pulse goes into the test input. The response is the output's mean voltage
+  over the last 50 ms of the pulse, minus the same window in a matching run without the
+  pulse. Trigger gain is the response at 30 mV over the response at 0. Threshold is the
+  trigger level where the response is halfway between the two.
+- **Timing.** The test input is held on, the trigger switched on at 1500 ms and off at
+  3200 ms; on and off times are the 63% times, divided by the median membrane time constant
+  of the neurons the switch reaches.
+- **Reach.** The share of non-input neurons whose pulse response changes by more than 1 mV
+  when the trigger goes from 0 to 30 mV.
+- **Priority.** With every trigger on, the gate whose response changes most ranks first.
+- **Accepted** circuits: every gate changes its response at least 2-fold, with all timing
+  and threshold values defined. A no-switch or decoy circuit is accepted only if no probed
+  pair changes by more than 1.5-fold. Anything in between is rejected as ambiguous, so the
+  library has no borderline cases.
+
+The 7B's first version had a non-code line where a docstring belonged, never collected the
+gate ratios, and merged the two acceptance rules; one edit fixed all of it. The tests check
+the direction of each switch (release and gain raise the response, shutoff lowers it),
+that shunting inhibition never raises it, that winner-take-all gets two ranked gates, and
+that a twin gets the same datasheet within 0.1%.
+
+One gain circuit (seed 1) went the wrong way: ratio 0.28. Cause, from the motif numbers:
+the trigger synapse onto the gain neuron was strong enough to push it past the steep part
+of the output synapse into saturation, so the test pulse had less room, not more. The
+design was wrong, not the code. Weights changed: test input to gain neuron 0.05 to 0.15
+(was 0.3 to 0.6), trigger to gain neuron 0.25 to 0.45 (was 0.5 to 1.0), which puts the
+gain neuron near the output synapse's midpoint at full trigger. 45 tests pass on the rig
+(probe and builder), about 20 s per circuit including compilation.

@@ -1,0 +1,54 @@
+{
+  "switch_type": "none",
+  "is_decoy": true,
+  "decoy_kind": "adaptation",
+  "neurons": {
+    "in": {},
+    "aux": {},
+    "O": {},
+    "A": {
+      "C_nF": [1.0, 2.5]
+    }
+  },
+  "synapses": [
+    {
+      "pre": "in",
+      "post": "O",
+      "sign": "exc",
+      "w": [0.3, 0.6]
+    },
+    {
+      "pre": "O",
+      "post": "A",
+      "sign": "exc",
+      "w": [0.5, 1.0]
+    },
+    {
+      "pre": "A",
+      "post": "O",
+      "sign": "inh",
+      "w": [0.5, 1.5]
+    },
+    {
+      "pre": "aux",
+      "post": "A",
+      "sign": "exc",
+      "w": [0.05, 0.15]
+    }
+  ],
+  "state": {
+    "target": "A",
+    "sign": "exc",
+    "w": [0.05, 0.15]
+  },
+  "inputs": ["in", "aux"],
+  "outputs": ["O"],
+  "gates": [],
+  "candidates": [
+    {
+      "trigger": "aux",
+      "test_input": "in",
+      "output": "O"
+    }
+  ]
+}

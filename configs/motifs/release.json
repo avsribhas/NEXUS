@@ -1,0 +1,95 @@
+{
+  "switch_type": "release",
+  "is_decoy": false,
+  "decoy_kind": "",
+  "neurons": {
+    "in": {},
+    "trig": {},
+    "G": {
+      "e_leak_mV": [
+        -48.0,
+        -42.0
+      ]
+    },
+    "R": {},
+    "O": {}
+  },
+  "synapses": [
+    {
+      "pre": "in",
+      "post": "R",
+      "sign": "exc",
+      "w": [
+        0.3,
+        0.6
+      ]
+    },
+    {
+      "pre": "G",
+      "post": "R",
+      "sign": "inh",
+      "w": [
+        1.0,
+        2.0
+      ],
+      "vth_mV": [
+        -56.0,
+        -54.0
+      ],
+      "delta_mV": [
+        2.0,
+        4.0
+      ]
+    },
+    {
+      "pre": "trig",
+      "post": "G",
+      "sign": "inh",
+      "w": [
+        2.0,
+        4.0
+      ]
+    },
+    {
+      "pre": "R",
+      "post": "O",
+      "sign": "exc",
+      "w": [
+        0.4,
+        0.8
+      ],
+      "vth_mV": [
+        -62.0,
+        -58.0
+      ],
+      "delta_mV": [
+        2.0,
+        4.0
+      ]
+    }
+  ],
+  "state": {
+    "target": "G",
+    "sign": "inh",
+    "w": [
+      0.5,
+      1.5
+    ]
+  },
+  "inputs": [
+    "in",
+    "trig"
+  ],
+  "outputs": [
+    "O"
+  ],
+  "gates": [
+    {
+      "gate_id": "g0",
+      "trigger": "trig",
+      "test_input": "in",
+      "output": "O"
+    }
+  ],
+  "candidates": []
+}

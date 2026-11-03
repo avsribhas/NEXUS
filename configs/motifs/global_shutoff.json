@@ -1,0 +1,81 @@
+{
+  "switch_type": "global_shutoff",
+  "is_decoy": false,
+  "decoy_kind": "",
+  "neurons": {
+    "in1": {},
+    "in2": {},
+    "trig": {},
+    "I": {
+      "C_nF": [1.0, 2.5]
+    },
+    "R1": {},
+    "R2": {},
+    "O1": {},
+    "O2": {}
+  },
+  "synapses": [
+    {
+      "pre": "trig",
+      "post": "I",
+      "sign": "exc",
+      "w": [0.5, 1.0]
+    },
+    {
+      "pre": "I",
+      "post": "R1",
+      "sign": "inh",
+      "w": [1.5, 3.0],
+      "vth_mV": [-60.0, -56.0],
+      "delta_mV": [2.0, 3.0]
+    },
+    {
+      "pre": "I",
+      "post": "R2",
+      "sign": "inh",
+      "w": [1.5, 3.0],
+      "vth_mV": [-60.0, -56.0],
+      "delta_mV": [2.0, 3.0]
+    },
+    {
+      "pre": "in1",
+      "post": "R1",
+      "sign": "exc",
+      "w": [0.3, 0.6]
+    },
+    {
+      "pre": "in2",
+      "post": "R2",
+      "sign": "exc",
+      "w": [0.3, 0.6]
+    },
+    {
+      "pre": "R1",
+      "post": "O1",
+      "sign": "exc",
+      "w": [0.4, 0.8]
+    },
+    {
+      "pre": "R2",
+      "post": "O2",
+      "sign": "exc",
+      "w": [0.4, 0.8]
+    }
+  ],
+  "state": {
+    "target": "I",
+    "sign": "exc",
+    "w": [0.2, 0.6]
+  },
+  "inputs": ["in1", "in2", "trig"],
+  "outputs": ["O1", "O2"],
+  "gates": [
+    {
+      "gate_id": "g0",
+      "trigger": "trig",
+      "test_input": "in1",
+      "output": "O1"
+    }
+  ],
+  "candidates": []
+}
