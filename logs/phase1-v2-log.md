@@ -1076,3 +1076,69 @@ only pulled A to about -50 mV, below the pair's threshold. Trigger weight raised
 
 The survey script now takes optional motif names, so one motif can be surveyed alone.
 The bistable decoy isn't in the running pilot, which loaded its motifs at the start.
+
+### The NEURON check per circuit type
+The pre-registration (section 6) requires Jaxley and NEURON to agree to within 0.02 mV
+on graded voltage. M1 showed that for the two reference circuits. This is the same check
+for every motif: one circuit of each type, with current pulses into the state neuron and
+every input so the switches operate, run 600 ms in both simulators. Test and diagnostic
+script (`tests/test_m3_neuron_types.py`, `scripts/m3_neuron_diff.py`) written by the 7B.
+
+The first run, at a 0.01 ms step, failed for 7 of 8 types, in two different ways:
+- **NEURON blew up** in three types (values of 1e300 and then nan). In the bistable
+  decoy it starts at about 172 ms, once the latched pair is far above its synaptic
+  threshold. The NeuroML graded synapse relaxes with a time constant of
+  (1 - s_inf) / k, which goes to zero when the presynaptic cell is far above a sharp
+  threshold; the equation becomes stiff and NEURON's integration of it diverges at
+  0.01 ms. Jaxley stayed in range throughout.
+- **Small excesses** elsewhere, 0.021 to 0.030 mV, mostly in the first 2 ms.
+
+At a 0.0025 ms step NEURON no longer diverged, but the differences grew to 0.08 mV. Fine-
+step Jaxley disagreed with coarse Jaxley by exactly as much as with NEURON, which
+pointed at float32: at that step each voltage update is smaller than float32 can resolve
+around -47 mV, so error builds up over 240,000 steps. Rerun with JAX in float64: Jaxley
+and NEURON agree to within 0.007 mV on every neuron of both types tried (release and
+the bistable decoy), well inside 0.02 mV. The translation from NeuroML to Jaxley is
+correct for these circuits; the earlier failures were numerical, not modelling errors.
+
+The test now runs at 0.0025 ms and skips unless JAX runs in float64
+(`JAX_ENABLE_X64=1`). Turning float64 on inside the test would change every other test
+in the same session.
+
+A separate finding from the same runs, which needs a decision: **the library's own step
+is 0.2 ms**, and at that step voltages differ from the converged solution by 0.03 to
+0.3 mV for most neurons and up to 0.87 mV in the latched bistable pair. The planted
+answers are measured by the probe at the same step as the data, so the test bench is
+consistent with itself. But the simulated circuit is "the NeuroML circuit at 0.2 ms",
+not the continuous model. Options: keep 0.2 ms and say so in the pre-registration, or
+halve the step (doubling simulation time). Added to the revision draft.
+
+### Degenerate twins that actually differ
+The existing twins are uniform rescalings: every capacitance and conductance times one
+factor, which leaves every voltage unchanged, so a twin test on them can't fail.
+The pre-registration defines twins as the same planted values with different biophysical
+parameters. `nexus/circuits/twins.py` (by the 7B, one docstring pass checked to change no
+code) does that: it multiplies each capacitance, leak and conductance by its own
+log-normal factor (sd 0.25, so typical changes of about 25%), re-measures the copy with
+the probe, and accepts it if every continuous field is within a tolerance of the
+original, as a fraction of the prior range on the scoring scale, with the same triggers
+and priorities. Otherwise it tries again, up to a limit. 3 tests.
+
+Survey (`scripts/m3_twin_survey.py`, 3 circuits per switch type, up to 10 tries,
+tolerance 0.1):
+
+| Type | Twins found | Closest distance when not found |
+|---|---|---|
+| release | 2 of 3 | 0.167 |
+| gain | 2 of 3 | 0.125 |
+| global shutoff | 2 of 3 | 0.114 |
+| winner-take-all | 0 of 3 | 0.111 to 0.162 |
+
+Most finds come on the first try. Winner-take-all has four gates and a priority order,
+so every field of every gate has to land inside the tolerance at once, and none did.
+Two things need deciding before the library is generated, and are in the revision
+draft: the tolerance (the pre-registration says "same values", which measured values
+can't meet exactly), and what to do when no twin is found. Pairing only circuits that
+found a twin would leave out winner-take-all entirely and favour circuits whose fields
+are insensitive to their parameters. Smaller perturbations for winner-take-all are one
+option.
