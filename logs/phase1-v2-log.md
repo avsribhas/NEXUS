@@ -1262,3 +1262,5 @@ that is about one frame, and GCaMP6s decays too slowly to see in that window. M5
 simulations on a subset of circuits. The converter (`nexus/degrade/calcium.py`) is built, but
 indicator decay and saturation values are in image-only tables in Chen 2013 and Zhang 2023 and
 are not sourced yet. M5 and M7 are not in the pre-registration and must be labelled as additions.
+
+Abhiram gave the go-ahead on 2026-11-04 to make the Dusk v1 and M7 benchmark numbers public.
