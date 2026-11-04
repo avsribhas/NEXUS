@@ -1209,3 +1209,15 @@ library, then a held-aside calibration set or early stopping), and handle two-ga
 
 Abhiram gave the go-ahead on 2026-11-03 to make these validation results public; commit
 5d665f7 and the files in `logs/pilot/m4/` were pushed with this note.
+
+### Revision 0.3: Abhiram approved, Udeern pending (2026-11-04)
+
+Abhiram approved the revision draft. I read this as taking the recommendation or proposal on
+each open item: 10 noise seeds on held-out circuits only (8b), twin tolerance 0.1 (10), drop
+the stochastic switch (11), float64 NEURON check (12), keep the 0.2 ms step (13). Item 9 has
+no recommended rate, so the wiring error rates still need a source or a statement that they
+are assumptions. Version 0.2 stays in force, and the locked scoring code is unchanged, until
+Udeern also approves. Then 0.3 is written out, hashed and timestamped.
+
+Started 1,000 more development circuits on the rig (seeds 10200 to 11199, all 8 types). These
+are not held out. The final library must use a separate seed range.

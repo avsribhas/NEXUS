@@ -1,6 +1,7 @@
 # Dusk Phase 1 pre-registration: proposed changes for version 0.3
 
-**Status: draft, not approved.** Written by Claude on 3 November 2026 for Abhiram and
+**Status: approved by Abhiram on 4 November 2026, including each recommendation and proposal
+below; waiting on Udeern.** Written by Claude on 3 November 2026 for Abhiram and
 Udeern. Version 0.2 ([`phase1-prereg.md`](phase1-prereg.md)) stays in force until this is
 approved, and then 0.3 is written out in full, hashed and timestamped. No held-out data
 exists, so none of these changes can have been shaped by held-out results.
