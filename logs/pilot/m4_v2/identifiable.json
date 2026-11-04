@@ -1,0 +1,41 @@
+{
+ "gain": {
+  "fields": [],
+  "undefined": [],
+  "fraction": {},
+  "n_rows": 19,
+  "decided": false
+ },
+ "global_shutoff": {
+  "fields": [],
+  "undefined": [],
+  "fraction": {},
+  "n_rows": 15,
+  "decided": false
+ },
+ "release": {
+  "fields": [],
+  "undefined": [],
+  "fraction": {},
+  "n_rows": 11,
+  "decided": false
+ },
+ "winner_take_all": {
+  "fields": [
+   "trigger_gain",
+   "tau_on_over_tau_ref",
+   "tau_off_over_tau_ref",
+   "reach"
+  ],
+  "undefined": [],
+  "fraction": {
+   "trigger_gain": 1.0,
+   "threshold": 0.775,
+   "tau_on_over_tau_ref": 1.0,
+   "tau_off_over_tau_ref": 1.0,
+   "reach": 0.925
+  },
+  "n_rows": 40,
+  "decided": true
+ }
+}

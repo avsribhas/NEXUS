@@ -1293,3 +1293,34 @@ Correction: on the first restart, the first 200 seeds took their circuit type fr
 example seed 10002, a gain circuit, as a shunting decoy). I stopped the run after 3 circuits
 and moved those to `outputs/m3_wrong_type/`. `scripts/m3_pilot.py` now uses the 7-type list for
 the first 200 seeds, so each seed keeps its type and the validation split stays comparable.
+
+### Retest after the trigger fix (2026-11-04)
+
+Same seeds and same split as v0 and v1, with gain and winner-take-all rebuilt: 120 training
+circuits, 40 validation circuits, one training seed. Files are in `logs/pilot/m4_v2/`. These are
+development numbers.
+
+Right triggers, old wiring (v1) then new wiring: gain 0/4 to 4/4, winner-take-all 0/4 to 3/4.
+The two types that were not rebuilt moved by one circuit each: release 5/7 to 6/7, global
+shutoff 6/8 to 7/8. That is about the size of the noise here, since the training set changed.
+Each type has only 4 to 8 validation circuits, so the rise is large but the rates are rough.
+All switches were called. No false switch stayed at 16/17; the one miss is an adaptation decoy.
+Candidate features come from measured responses only, with no neuron name or position, so the
+model can't have read the answer from a label.
+
+Recovery of the full datasheet did not improve: 0 for gain, release and winner-take-all, 1/8 for
+global shutoff. A circuit counts as recovered only if each field's interval contains the planted
+value and is no wider than half the prior range; types with no identifiability decision are held
+to all five fields. Coverage is 88 to 100%, so the intervals do contain the answers. This is now
+the main gap. On v1 the cause was interval width; I have not rechecked that on this run.
+
+Prediction, 35 circuits after excluding 5 with a low ceiling, using the floor from draft item 6
+(`floor_check.json`): Dusk 0.34, per-state baseline 0.12, others 0.09 to 0.12, pooled 0. Dusk
+minus per-state 0.22 [0.15, 0.30]; Dusk minus pooled 0.34 [0.27, 0.43]. The unfloored locked
+code still gives NaN at the top of both intervals, as expected until item 6 is approved.
+
+Identifiability is still decided only for winner-take-all (gain and both timing ratios and reach;
+threshold falls at 0.775). The other types have 11 to 19 training rows, under the minimum of 20.
+The winner-take-all priority imbalance noted above has not been looked at further.
+
+Not pushed: Abhiram's go-ahead is needed for this batch.
