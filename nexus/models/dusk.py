@@ -39,7 +39,7 @@ def animal_rows(animal, config) -> tuple:
 
 class DuskRecovery:
     """Switch probability and quantile intervals per candidate trigger, from measured summaries."""
-    def __init__(self, config, hidden=128, epochs=400, lr=1e-3, seed=0):
+    def __init__(self, config, hidden=128, epochs=400, lr=1e-3, seed=0, calibrate=0.0):
         self.config = config
         self.hidden = hidden
         self.epochs = epochs
@@ -48,6 +48,8 @@ class DuskRecovery:
         self.net = None
         self.mu = None
         self.sd = None
+        self.calibrate = calibrate
+        self.widen = np.zeros(len(CONTINUOUS_FIELDS))
 
     def _make(self) -> torch.nn.Module:
         """The network: two hidden layers; output 1 logit plus a low and a high quantile per field."""
@@ -60,8 +62,8 @@ class DuskRecovery:
             torch.nn.Linear(self.hidden, n_out)
         )
 
-    def fit(self, animals) -> "DuskRecovery":
-        """Train on every candidate trigger of every training animal."""
+    def _fit_net(self, animals) -> "DuskRecovery":
+        """Train the network on every candidate trigger of the given animals."""
         rows = [animal_rows(a, self.config) for a in animals]
         X = np.concatenate([r[0] for r in rows])
         L = np.concatenate([r[1] for r in rows])
@@ -89,6 +91,31 @@ class DuskRecovery:
             opt.step()
         return self
 
+    def fit(self, animals) -> "DuskRecovery":
+        """Train; with calibrate above 0, hold aside that share of animals and widen each field's interval until it covers 90% of their planted values."""
+        if self.calibrate <= 0.0:
+            return self._fit_net(animals)
+        order = np.random.default_rng(self.seed).permutation(len(animals))
+        n_cal = max(1, int(round(self.calibrate * len(animals))))
+        cal = [animals[int(i)] for i in order[:n_cal]]
+        rest = [animals[int(i)] for i in order[n_cal:]]
+        self._fit_net(rest)
+        scores = [[] for _ in CONTINUOUS_FIELDS]
+        for a in cal:
+            _, labels, values, masks, _ = animal_rows(a, self.config)
+            _, _, quant = self.predict_rows(a)
+            for i in range(len(labels)):
+                if labels[i] > 0:
+                    for j in range(len(CONTINUOUS_FIELDS)):
+                        if masks[i, j] > 0:
+                            scores[j].append(max(quant[i, j, 0] - values[i, j], values[i, j] - quant[i, j, 1]))
+        for j in range(len(CONTINUOUS_FIELDS)):
+            if scores[j]:
+                n = len(scores[j])
+                level = min(1.0, 0.9 * (1.0 + 1.0 / n))
+                self.widen[j] = float(np.quantile(scores[j], level))
+        return self
+
     def predict_rows(self, animal) -> tuple:
         """Switch probability and (low, high) per field on the scoring scale, for every candidate trigger."""
         X, _, _, _, triggers = animal_rows(animal, self.config)
@@ -96,6 +123,9 @@ class DuskRecovery:
             out = self.net(torch.tensor((X - self.mu) / self.sd, dtype=torch.float32)).numpy()
         prob = 1.0 / (1.0 + np.exp(-out[:, 0]))
         quant = np.sort(out[:, 1:].reshape(-1, len(CONTINUOUS_FIELDS), 2), axis=2)
+        quant[:, :, 0] -= self.widen
+        quant[:, :, 1] += self.widen
+        quant = np.sort(quant, axis=2)
         return triggers, prob, quant
 
     def predict(self, animal, threshold=0.5) -> dict:

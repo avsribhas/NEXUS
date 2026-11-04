@@ -81,7 +81,7 @@ def main(cache, out, epochs, response_epochs) -> None:
     (out / "identifiable.json").write_text(json.dumps(found, indent=1))
     identifiable = {st: v["fields"] if v["decided"] else [f for f in CONTINUOUS_FIELDS if f not in v["undefined"]] for st, v in found.items()}
     baselines = fit_baselines(train)
-    dusk = DuskRecovery(CONFIG, epochs=epochs).fit(train)
+    dusk = DuskRecovery(CONFIG, epochs=epochs, calibrate=0.2).fit(train)
     response = DuskResponse(epochs=response_epochs).fit(train)
     rows = []
     for a in val:

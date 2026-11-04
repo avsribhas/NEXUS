@@ -4,7 +4,7 @@ from nexus.circuits.measure import crossing, time_to_fraction
 from nexus.models.data import BASE_MS, RESP_MS, SAMPLE_MS, poke_responses
 from nexus.perturb.protocol import KEEP, PAIRED, PAIRED_STEP
 
-FEATURES = ("log_gain_30", "log_gain_20", "log_gain_10", "log_r_off", "threshold_mV", "tau_on_ms", "tau_off_ms", "tau_cell_ms", "log_tau_on_ratio", "log_tau_off_ratio", "reach", "log_state_ratio")
+FEATURES = ("log_gain_30", "log_gain_20", "log_gain_10", "log_r_off", "threshold_mV", "tau_on_ms", "tau_off_ms", "tau_cell_ms", "log_tau_on_ratio", "log_tau_off_ratio", "reach", "log_state_ratio", "log_direct", "log_reverse_gain")
 N_FEATURES = 2 * len(FEATURES)
 EPS = 1e-3
 
@@ -78,6 +78,11 @@ def candidate_features(animal, trigger, traces=None, responses=None) -> np.ndarr
             t_on = RESP_MS[0] - KEEP[0]; t_off = t_on + PAIRED_STEP["duration_ms"]; t_end = KEEP[1] - KEEP[0]
             values["tau_on_ms"] = time_to_fraction(tr, SAMPLE_MS, t_on, t_off)
             values["tau_off_ms"] = time_to_fraction(tr, SAMPLE_MS, t_off, t_end)
+        direct = _index(pokes, type="dep_large", target=trigger)
+        if direct:
+            values["log_direct"] = math.log10(abs(float(R[direct[0], 0, o])) + EPS)
+            back = _index(pokes, type=PAIRED["type"], target=trigger, hold=k_name, hold_mV=30.0)
+            if back: values["log_reverse_gain"] = _log_ratio(float(np.mean([R[i, 0, o] for i in back])), float(R[direct[0], 0, o]))
     tc = tau_cell(animal, traces); values["tau_cell_ms"] = tc
     for name, src in (("log_tau_on_ratio", "tau_on_ms"), ("log_tau_off_ratio", "tau_off_ms")):
         a = values[src]
