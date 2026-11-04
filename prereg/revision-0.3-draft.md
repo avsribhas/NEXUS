@@ -145,3 +145,19 @@ changes a pass mark.
     generator. Udeern keeps the private key and decrypts once, after predictions are hashed
     and timestamped. Still needed: Udeern's public key (the `age1...` line). Nothing held out
     is generated until it arrives.
+
+15. **Rebuilt gain and winner-take-all circuits (added 4 November 2026, after Abhiram's
+    approval, so Abhiram and Udeern both still need to see it).** In the old versions the
+    trigger could not be told apart from an input, so scoring trigger identity by exact match
+    (section 5.1) asked for something impossible:
+    - Winner-take-all: `inA` and `trigA` excited the same neuron with overlapping weights.
+    - Gain: `in` and `trig` both excited the same neuron, and holding either opened the path
+      for the other.
+
+    New wiring. Gain: the trigger inhibits a tonically active neuron that shunts `O`, so it
+    changes the slope of the input's effect without driving `O` directly (divisive gain).
+    Winner-take-all: triggers drive only the competing units, which inhibit each other and the
+    opposite relay; inputs reach their outputs through their own relays. A new test requires
+    that no trigger shares a target with a non-trigger input, in any switch type. This was
+    found on development data only. No scoring code, threshold or prior range changes. All
+    measured values stay inside the locked prior ranges.

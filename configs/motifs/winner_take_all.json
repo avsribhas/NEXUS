@@ -9,109 +9,84 @@
     "trigB": {},
     "UA": {},
     "UB": {},
+    "RA": {},
+    "RB": {},
     "OA": {},
     "OB": {}
   },
   "synapses": [
     {
-      "pre": "inA",
-      "post": "UA",
-      "sign": "exc",
-      "w": [
-        0.3,
-        0.6
-      ]
-    },
-    {
-      "pre": "inB",
-      "post": "UB",
-      "sign": "exc",
-      "w": [
-        0.3,
-        0.6
-      ]
-    },
-    {
       "pre": "trigA",
       "post": "UA",
       "sign": "exc",
-      "w": [
-        0.4,
-        0.8
-      ]
+      "w": [0.4, 0.8]
     },
     {
       "pre": "trigB",
       "post": "UB",
       "sign": "exc",
-      "w": [
-        0.4,
-        0.8
-      ]
+      "w": [0.4, 0.8]
     },
     {
       "pre": "UA",
       "post": "UB",
       "sign": "inh",
-      "w": [
-        1.0,
-        3.0
-      ],
-      "delta_mV": [
-        2.0,
-        3.0
-      ]
+      "w": [1.0, 3.0],
+      "delta_mV": [2.0, 3.0]
     },
     {
       "pre": "UB",
       "post": "UA",
       "sign": "inh",
-      "w": [
-        1.0,
-        3.0
-      ],
-      "delta_mV": [
-        2.0,
-        3.0
-      ]
+      "w": [1.0, 3.0],
+      "delta_mV": [2.0, 3.0]
     },
     {
       "pre": "UA",
-      "post": "OA",
-      "sign": "exc",
-      "w": [
-        0.4,
-        0.8
-      ]
+      "post": "RB",
+      "sign": "inh",
+      "w": [1.5, 3.0],
+      "delta_mV": [2.0, 3.0]
     },
     {
       "pre": "UB",
+      "post": "RA",
+      "sign": "inh",
+      "w": [1.5, 3.0],
+      "delta_mV": [2.0, 3.0]
+    },
+    {
+      "pre": "inA",
+      "post": "RA",
+      "sign": "exc",
+      "w": [0.3, 0.6]
+    },
+    {
+      "pre": "inB",
+      "post": "RB",
+      "sign": "exc",
+      "w": [0.3, 0.6]
+    },
+    {
+      "pre": "RA",
+      "post": "OA",
+      "sign": "exc",
+      "w": [0.4, 0.8]
+    },
+    {
+      "pre": "RB",
       "post": "OB",
       "sign": "exc",
-      "w": [
-        0.4,
-        0.8
-      ]
+      "w": [0.4, 0.8]
     }
   ],
   "state": {
     "target": "UA",
     "sign": "exc",
-    "w": [
-      0.2,
-      0.6
-    ]
+    "w": [0.2, 0.6]
   },
-  "inputs": [
-    "inA",
-    "inB",
-    "trigA",
-    "trigB"
-  ],
-  "outputs": [
-    "OA",
-    "OB"
-  ],
+  "inputs": ["inA", "inB", "trigA", "trigB"],
+  "outputs": ["OA", "OB"],
   "gates": [
     {
       "gate_id": "gA",

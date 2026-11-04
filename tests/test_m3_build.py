@@ -7,7 +7,7 @@ from nexus.circuits.graded import validate_spec, write_network
 
 MOTIF_DIR = Path(__file__).resolve().parents[1] / "configs" / "motifs"
 COMMON, MOTIFS = load_motifs(MOTIF_DIR)
-NAMES = ["release", "gain", "winner_take_all", "global_shutoff", "decoy_adaptation", "decoy_shunt", "plain"]
+NAMES = ["release", "gain", "winner_take_all", "global_shutoff", "decoy_adaptation", "decoy_shunt", "plain", "decoy_bistable"]
 
 def _build(name, seed):
     return build_circuit(name, COMMON, MOTIFS, np.random.default_rng(seed), f"c_{name}_{seed}")

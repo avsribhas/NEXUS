@@ -1264,3 +1264,26 @@ indicator decay and saturation values are in image-only tables in Chen 2013 and 
 are not sourced yet. M5 and M7 are not in the pre-registration and must be labelled as additions.
 
 Abhiram gave the go-ahead on 2026-11-04 to make the Dusk v1 and M7 benchmark numbers public.
+
+### Trigger identity: the bench was at fault for two types (2026-11-04)
+
+Abhiram asked for the trigger confusion to be fixed. On training circuits, gain and release
+candidates had mirror-image features, and winner-take-all inputs and triggers overlapped
+completely. Reading the motifs explained why for two of the types. In winner-take-all, `inA`
+and `trigA` excited the same neuron with overlapping weights, so they were the same neuron with
+two names. In gain, `in` and `trig` both excited `O`, and holding either opened the path for the
+other. No model could score exact trigger identity there. Release and global shutoff reach
+their circuits by different routes and are unchanged.
+
+Rebuilt both (revision draft item 15). Gain: the trigger inhibits a tonic neuron that shunts
+`O`. Winner-take-all: triggers drive only the competing units; inputs use their own relays.
+Survey of 8 each: gain 7 accepted (the other had a ratio of 1.67, a correct rejection),
+winner-take-all 8. All measured values are inside the locked prior ranges, and both types match
+NEURON within 0.02 mV. New test `tests/test_m3_trigger_identity.py`: no trigger may share a
+target with a non-trigger input. Priority in the new winner-take-all favours `trigA` (rank 1 in
+7 of 8), probably because brain state drives `UA`; a model could score well there by always
+ranking A first, so this needs watching.
+
+The 78 old gain and winner-take-all circuits moved to `outputs/m3_old_motifs/` on the rig; the
+same seeds regenerate with the new wiring. The v0 and v1 trigger numbers for these two types
+were measured on the old wiring and don't carry over.
