@@ -1287,3 +1287,9 @@ ranking A first, so this needs watching.
 The 78 old gain and winner-take-all circuits moved to `outputs/m3_old_motifs/` on the rig; the
 same seeds regenerate with the new wiring. The v0 and v1 trigger numbers for these two types
 were measured on the old wiring and don't carry over.
+
+Correction: on the first restart, the first 200 seeds took their circuit type from the current
+8-type list, not the pilot's original 7-type list, so 3 seeds came back as the wrong type (for
+example seed 10002, a gain circuit, as a shunting decoy). I stopped the run after 3 circuits
+and moved those to `outputs/m3_wrong_type/`. `scripts/m3_pilot.py` now uses the 7-type list for
+the first 200 seeds, so each seed keeps its type and the validation split stays comparable.

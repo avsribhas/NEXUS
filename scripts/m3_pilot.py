@@ -19,7 +19,8 @@ def main():
         seed = 10000 + i
         if seed in done:
             continue
-        name = names[i % len(names)]
+        first_round = [m for m in names if m != "decoy_bistable"]
+        name = first_round[i % len(first_round)] if i < 200 else names[i % len(names)]
         path = out / f"{name}_{seed:05d}_a0.nwb"
         t0 = time.time()
         r = generate_animal(name, common, motifs, rates, seed, work, path)
