@@ -1221,3 +1221,44 @@ Udeern also approves. Then 0.3 is written out, hashed and timestamped.
 
 Started 1,000 more development circuits on the rig (seeds 10200 to 11199, all 8 types). These
 are not held out. The final library must use a separate seed range.
+
+### Dusk recovery v1 on the same validation split (2026-11-04)
+
+Two changes, tested on the same 200 circuits and 40 validation circuits as v0
+(`logs/pilot/m4_v1/report.json`). One training seed; 96 training circuits and 24 held aside
+for calibration.
+
+**Calibration worked; the new features did not fix trigger identity, and recovery still
+fails.** Coverage of the 90% intervals rose from 39 to 67% by field to 84 to 100%, and the
+interval score improved on 4 of 5 fields (reach got worse, 1.07 to 1.44). The honest intervals
+are wide, so they now fail the width rule: recovery is 0 for every type (gain was 2/4). Right
+triggers: release 5/7 (was 7/7), global shutoff 6/8 (same), gain 0/4 (was 2/4),
+winner-take-all 0/4 (same). No-switch circuits were unchanged at 16 of 17. With 4 to 8 circuits
+per type and fewer training circuits than v0, these trigger changes can't separate the feature
+change from noise. The next test is the same model on the larger development library.
+
+### M7 start: Creamer data and the data-only benchmark (2026-11-04)
+
+D9 answered: 0.82 is in version 4 of the bioRxiv paper (read at the .full URL, about May
+2026): model 0.14 divided by train-test correlation 0.17, 154 neurons, 110 animals, 80 train
+and 30 test. The ceiling is that train-test correlation, not a split-half.
+
+Data: `2025_creamer_lds.zip` from osf.io/qxhjd (162 MB, SHA-256 matches OSF): 110 recordings,
+5,618 stimulations, 1,164 with a negative target index (values -1, -2, -3; treated as
+unidentified and dropped, meaning not confirmed), 208 labelled neurons. Median gap between
+stimulations is 62 frames, consistent with 2 Hz and the stated 30 s. DANDI 001075 is 4 TB and
+doesn't fit on the rig as a whole.
+
+With no model, the correlation between matrices from 80 and 30 animals is 0.15 (5 random
+splits, 0.14 to 0.18), against the paper's 0.17. Area over 60 frames, off-diagonal, no baseline
+subtraction, 17,221 pairs. The paper reports about 11,000 measured STAMs on 154 neurons, so
+its filtering is stricter and hasn't been matched. Subtracting a 10-frame baseline lowers the
+value to 0.07. Log-only: these numbers came from a console run, not a saved file.
+
+### M5 limit found (2026-11-04)
+
+Stored trials keep 600 ms, about 500 ms after the poke. At the roughly 2 Hz of worm imaging
+that is about one frame, and GCaMP6s decays too slowly to see in that window. M5 needs longer
+simulations on a subset of circuits. The converter (`nexus/degrade/calcium.py`) is built, but
+indicator decay and saturation values are in image-only tables in Chen 2013 and Zhang 2023 and
+are not sourced yet. M5 and M7 are not in the pre-registration and must be labelled as additions.
