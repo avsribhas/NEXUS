@@ -1326,3 +1326,27 @@ The winner-take-all priority imbalance noted above has not been looked at furthe
 Not pushed: Abhiram's go-ahead is needed for this batch.
 
 Abhiram gave the go-ahead on 2026-11-04 to make these retest numbers public.
+
+### Sourced indicator values for M5 (2026-11-04)
+
+Earlier I asked Abhiram for the PDFs because the tables were images and PMC showed a CAPTCHA.
+That was unnecessary: Nature serves the tables as images I can read directly.
+
+Zhang et al. 2023 (Nature 615:884), Extended Data Table 3, read from the image. Kd, Hill and
+saturating fold change are purified protein; the rest are dissociated neuronal culture.
+
+| Indicator | Kd (nM) | Hill | (Fsat-Fapo)/Fapo | 1AP dF/F0 | 160AP dF/F0 | 1AP half-rise (ms) | 1AP half-decay (ms) |
+|---|---|---|---|---|---|---|---|
+| jGCaMP7f | 150 | 3.10 | 31.0 | 0.23 | 6.33 | 26.8 | 297.6 |
+| jGCaMP8f | 334 | 2.08 | 78.8 | 0.37 | 3.7 | 6.6 | 87.5 |
+| jGCaMP8m | 108 | 1.92 | 45.7 | 0.75 | 4.42 | 7.4 | 134.0 |
+| jGCaMP8s | 46 | 2.20 | 49.5 | 1.10 | 4.05 | 10.2 | 330.7 |
+
+GCaMP6, from Rose et al. 2014 (Front. Mol. Neurosci.) Table 1, which cites Chen et al. 2013. This
+is a secondary source. Kd and Hill: 6s 144 nM and 2.90; 6f 375 nM and 2.27. Single AP in mouse V1
+in vivo: half-decay 0.55 s (6s) and 0.14 s (6f); full rise 0.18 s and 0.05 s; dF/F 23% and 19%.
+These come from different preparations, so they shouldn't be mixed without saying so. Still
+missing: the GCaMP6 saturating response, which is in Chen 2013 Supplementary Table 1 (not read).
+Bleaching in M5 still needs a per-frame rate; the table gives photobleaching probabilities per
+molecule, not a rate for a given imaging setup. None of this is in the pre-registration, and M5
+results will be labelled as additions.
