@@ -1,0 +1,105 @@
+# theme<TAB>exact-ish title. Papers the review must read. Harvest also pulls their references and top citers.
+connectome	From the connectome to brain function
+connectome	Beyond the connectome: How neuromodulators shape neural circuits
+connectome	Neural signal propagation atlas of Caenorhabditis elegans
+connectome	Bridging the gap between the connectome and whole-brain activity in C. elegans
+connectome	Connectome-constrained networks predict neural activity across the fly visual system
+connectome	A Drosophila computational brain model reveals sensorimotor processing
+connectome	The neuropeptidergic connectome of C. elegans
+state	Neuromodulation of neuronal circuits: back to the future
+state	Brain-wide representations of behavior spanning multiple timescales and states in C. elegans
+state	Dissecting the functional organization of the C. elegans serotonergic system at whole-brain scale
+state	Global brain dynamics embed the motor command sequence of Caenorhabditis elegans
+state	Dynamic encoding of perception, memory, and movement in a C. elegans chemotaxis circuit
+state	An integrative theory of locus coeruleus-norepinephrine function
+motif	Probabilistic decision making by slow reverberation in cortical circuits
+motif	A suppression hierarchy among competing motor programs drives sequential grooming in Drosophila
+motif	The sleep switch: hypothalamic control of sleep and wakefulness
+motif	Sleep state switching
+motif	A global brain state underlies C. elegans sleep behavior
+motif	A computational model of action selection in the basal ganglia
+motif	Disinhibition, a circuit mechanism for associative learning and memory
+motif	Cortical interneurons that specialize in disinhibitory control
+motif	A network model of catecholamine effects: gain, signal-to-noise ratio, and behavior
+motif	Neural gain modulation
+motif	Gain modulation from background synaptic input
+motif	Normalization as a canonical neural computation
+motif	Thalamocortical circuit motifs: a general framework
+degeneracy	Similar network activity from disparate circuit parameters
+degeneracy	Variability, compensation and homeostasis in neuron and network function
+degeneracy	Degeneracy and complexity in biological systems
+degeneracy	Training deep neural density estimators to identify mechanistic models of neural dynamics
+degeneracy	Universally sloppy parameter sensitivities in systems biology models
+degeneracy	Degeneracy in the nervous system: from neuronal excitability to neural coding
+sbi	The frontier of simulation-based inference
+sbi	sbi: A toolkit for simulation-based inference
+sbi	Benchmarking Simulation-Based Inference
+sbi	Validating Bayesian Inference Algorithms with Simulation-Based Calibration
+sbi	A Crisis In Simulation-Based Inference? Beware, Your Posterior Approximations Can Be Unfaithful
+sbi	Automatic Posterior Transformation for Likelihood-Free Inference
+inference	Could a Neuroscientist Understand a Microprocessor?
+inference	Systematic errors in connectivity inferred from activity in strongly recurrent networks
+inference	Spatio-temporal correlations and visual signalling in a complete neuronal population
+inference	Bayesian Learning and Inference in Recurrent Switching Linear Dynamical Systems
+inference	Inferring single-trial neural population dynamics using sequential auto-encoders
+inference	Computation Through Neural Population Dynamics
+inference	Dissecting neural computations in the human auditory pathway using deep neural networks
+inference	Inferring brain-wide interactions using data-constrained recurrent neural network models
+inference	Interrogating theoretical models of neural computation with emergent property inference
+calibration	Conformalized Quantile Regression
+calibration	Strictly Proper Scoring Rules, Prediction, and Estimation
+calibration	A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification
+ceiling	Measuring the performance of neural models
+ceiling	How close are we to understanding V1?
+rigor	The preregistration revolution
+rigor	Leakage and the reproducibility crisis in machine-learning-based science
+rigor	The reusable holdout: Preserving validity in adaptive data analysis
+rigor	Variability in the analysis of a single neuroimaging dataset by many teams
+rigor	Reproducible brain-wide association studies require thousands of individuals
+rigor	A manifesto for reproducible science
+rigor	Power failure: why small sample size undermines the reliability of neuroscience
+rigor	False-Positive Psychology
+sim	Differentiable simulation enables large-scale training of detailed biophysical models of neural dynamics
+sim	The NEURON simulation environment
+sim	NeuroML: a language for describing data driven models of neurons and networks with a high degree of biological detail
+sim	c302: a multiscale framework for modelling the nervous system of Caenorhabditis elegans
+sim	Brian 2, an intuitive and efficient neural simulator
+sim	C. elegans AWA olfactory neurons fire calcium-mediated all-or-none action potentials
+sim	Structure of the nervous system of the nematode Caenorhabditis elegans
+errors	A connectome and analysis of the adult Drosophila central brain
+errors	Synaptic partner prediction from point annotations in insect brains
+errors	Automatic detection of synaptic partners in a whole-brain Drosophila electron microscopy data set
+errors	Neurotransmitter classification from electron microscopy images at synaptic sites in Drosophila melanogaster
+errors	Connectomes across development reveal principles of brain maturation
+errors	Neuronal wiring diagram of an adult brain
+errors	Whole-brain annotation and multi-connectome cell typing of Drosophila
+errors	Whole-animal connectomes of both Caenorhabditis elegans sexes
+calcium	Sensitive fluorescent proteins for imaging neuronal activity
+calcium	Fast and sensitive GCaMP calcium indicators for imaging neural populations
+calcium	High-performance calcium sensors for imaging activity in neuronal populations and microcompartments
+calcium	Benchmarking spike rate inference in population calcium imaging
+calcium	NeuroPAL: A Multicolor Atlas for Whole-Brain Neuronal Identification in C. elegans
+calcium	A database and deep learning toolbox for noise-optimized, generalized spike inference from calcium imaging
+energy	An energy budget for signaling in the grey matter of the brain
+energy	Synaptic energy use and supply
+motif	Serotonin and the Neuropeptide PDF Initiate and Extend Opposing Behavioral States in C. elegans
+motif	Mechanisms underlying gain modulation in the cortex
+motif	Gain modulation: a major computational principle of the central nervous system
+motif	Neuronal arithmetic
+motif	A neural circuit for flexible control of persistent behavioral states
+state	Decoding a neural circuit controlling global animal state in C. elegans
+state	State-dependent network interactions differentially gate sensory input at the motor and command neuron level in Caenorhabditis elegans
+connectome	System-wide mapping of peptide-GPCR interactions in C. elegans
+connectome	The fly connectome reveals a path to the effectome
+connectome	Prediction of neural activity in connectome-constrained recurrent networks
+connectome	To reverse engineer an entire nervous system
+inference	Computation-through-Dynamics Benchmark: Simulated datasets and quality metrics
+inference	Decomposed Linear Dynamical Systems (dLDS) models reveal instantaneous, context-dependent dynamic connectivity in C. elegans
+inference	Inferring Active Neural Circuits Using Diffusion Scores
+inference	A Python toolbox for neural circuit parameter inference
+sbi	Simulation-Based Inference: A Practical Guide
+sim	Active currents regulate sensitivity and dynamic range in C. elegans neurons
+calcium	Fast nonnegative deconvolution for spike train inference from population calcium imaging
+calcium	Putting a finishing touch on GECIs
+calcium	High-sensitivity imaging of neuronal activity GCaMP8 jGCaMP8 fast genetically encoded calcium indicators
+calcium	Sensitive red protein calcium indicators for imaging neural activity

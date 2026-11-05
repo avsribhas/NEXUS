@@ -1,0 +1,69 @@
+# theme<TAB>search query. Research notes for the Dusk literature review.
+connectome	connectome constrained model predicts neural activity
+connectome	connectome does not determine function neuromodulation
+connectome	signal propagation atlas Caenorhabditis elegans optogenetic
+connectome	whole-brain connectome neural circuit simulation Drosophila
+connectome	wiring diagram insufficient predict dynamics
+connectome	extrasynaptic neuropeptide connectome wireless signaling
+state	brain state dependent neural circuit function
+state	neuromodulation reconfigures neural circuits
+state	behavioral state switching C. elegans neurons
+state	neuromodulator gain control locus coeruleus norepinephrine
+state	stomatogastric ganglion neuromodulation circuit reconfiguration
+state	whole-brain imaging C. elegans behavior encoding
+state	serotonin dopamine state transitions internal state Drosophila
+motif	disinhibition circuit motif gating cortex interneuron
+motif	basal ganglia disinhibition action selection model
+motif	neural gain modulation divisive shunting inhibition
+motif	winner-take-all mutual inhibition decision circuit
+motif	behavioral hierarchy suppression competition grooming
+motif	flip-flop switch sleep wake circuit
+motif	stochastic switching persistent behavioral states dwell time
+motif	bistability recurrent network neural circuit attractor
+motif	adaptation mimics state change spike frequency
+degeneracy	degeneracy neural circuits similar activity different parameters
+degeneracy	sloppy models parameter identifiability biophysical neuron
+degeneracy	neuronal parameter variability compensation homeostasis
+degeneracy	model identifiability neural circuit inference from activity
+sbi	simulation-based inference neural posterior estimation
+sbi	likelihood-free inference mechanistic neuroscience models
+sbi	simulation-based calibration posterior coverage
+sbi	amortized Bayesian inference overconfidence posterior
+sbi	benchmarking simulation-based inference
+inference	inferring connectivity from neural activity spurious
+inference	systematic errors functional connectivity recurrent networks
+inference	could a neuroscientist understand microprocessor analysis methods ground truth
+inference	perturbation neural population dynamics causal inference
+inference	latent dynamical system switching neural recordings
+inference	ground truth validation neural data analysis method simulated data
+inference	data-driven dynamical model perturbation prediction neurons
+inference	recurrent neural network model of multi-region recordings inferring interactions
+calibration	conformalized quantile regression prediction intervals
+calibration	distribution-free uncertainty quantification conformal prediction
+calibration	strictly proper scoring rules interval score
+ceiling	noise ceiling neural model explainable variance
+ceiling	split-half reliability Spearman-Brown neural predictivity
+ceiling	measuring performance of neural models normalized correlation
+rigor	preregistration computational machine learning research
+rigor	data leakage machine learning reproducibility science
+rigor	reusable holdout adaptive data analysis
+rigor	analytic flexibility neuroimaging results variability
+rigor	reproducibility of neuroscience low statistical power
+sim	differentiable simulation biophysical neuron models
+sim	NEURON simulation environment
+sim	NeuroML standard computational neuroscience model description
+sim	OpenWorm c302 multiscale C. elegans model
+sim	graded potentials non-spiking neurons C. elegans electrophysiology
+sim	action potentials C. elegans AWA neurons calcium
+errors	automated synapse detection connectome error rate
+errors	neurotransmitter prediction electron microscopy deep learning
+errors	connectome variability between individuals C. elegans development
+errors	proofreading FlyWire hemibrain connectome completeness
+errors	comparison Drosophila connectomes male female stereotypy
+errors	gap junction connectome C. elegans whole-animal
+calcium	genetically encoded calcium indicator kinetics GCaMP
+calcium	calcium imaging spike inference deconvolution accuracy
+calcium	calcium indicator nonlinearity saturation model
+calcium	NeuroPAL neuron identification whole brain C. elegans
+calcium	photobleaching correction calcium imaging
+energy	energy budget neural signaling ATP

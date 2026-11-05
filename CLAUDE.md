@@ -14,7 +14,7 @@
 >   form `windows-rig@abhiram-lenovo` fails. The remote shell is PowerShell 5.1.
 > - **Decisions D1 to D9:** proposed defaults accepted by Abhiram on 2026-10-29. Still open:
 >   Udeern's confirmation of D3, D4 and of Jaxley as primary (D6); the D7 key holder (placeholder
->   key until named, no held-out data); the source of the 0.82 Creamer number (D9).
+>   key until named, no held-out data); D9 is answered: 0.82 is in version 4 of the Creamer preprint (see the log, 2026-11-04).
 > - **D2:** Rev 3 is committed at `archive/phase1-betse/REV3.md`. `scripts/v2_realization.py` and
 >   `scripts/confound_experiment.py` are absent from every branch.
 > - **Branches (overrides D1 and section 7, 2026-11-02).** Abhiram asked for everything to be on

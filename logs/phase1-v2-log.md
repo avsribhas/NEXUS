@@ -1350,3 +1350,31 @@ missing: the GCaMP6 saturating response, which is in Chen 2013 Supplementary Tab
 Bleaching in M5 still needs a per-frame rate; the table gives photobleaching probabilities per
 molecule, not a rate for a given imaging setup. None of this is in the pre-registration, and M5
 results will be labelled as additions.
+
+### Literature review and paper draft (2026-11-05)
+
+Abhiram asked for a full literature review and a separate paper draft, using the local model.
+Both are private Google Docs, not in this repo.
+
+How the review was done: 69 search queries (`docs/literature/topics.tsv`) and a seed list
+(`docs/literature/seeds.tsv`) gave 10,383 records, 9,892 with usable abstracts. OpenAlex ran
+out of daily budget, so the rest came from Europe PMC, arXiv and Crossref. The local
+qwen2.5-coder:7b screened abstracts and extracted notes (899 notes, with the supporting quote
+found in the source for 864). Its relevance scores ran high, so they were used only for sorting.
+Claude read the notes and sources, and wrote the prose. Each cited DOI was looked up through
+doi.org (`docs/literature/refs.tsv`, 156 looked up, 0 failed). The corpus and notes stay on the rig
+(`~/lit_review/`). The scripts in `scripts/lit/` were written by the 7B. The topic, seed and
+reference lists are research notes written by Claude, not code.
+
+One thing to check before submission: a preprint on gating (SSRN abstract 7629591) has not been read.
+
+The 1,200-circuit development library finished generating on 5 November, and a development
+evaluation ran on its validation split, with one training seed. Its test part was not opened.
+The results are in the private paper draft only, because Abhiram hasn't approved those numbers
+for the public repo. They stay out of this log until he does. The files are on the rig in
+`outputs/m3_pilot` and `outputs/m4_1200`.
+
+D9: the review also confirms the versions of the Creamer preprint: version 4 reports 82% and
+versions 1 and 3 report 92%. Item 9 now has a sourced proposal for wiring error rates, in
+section 10 of the review. `configs/corruption.json` hasn't changed, and the decision is still
+open for Abhiram and Udeern.
