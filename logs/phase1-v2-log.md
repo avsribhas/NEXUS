@@ -1324,3 +1324,5 @@ threshold falls at 0.775). The other types have 11 to 19 training rows, under th
 The winner-take-all priority imbalance noted above has not been looked at further.
 
 Not pushed: Abhiram's go-ahead is needed for this batch.
+
+Abhiram gave the go-ahead on 2026-11-04 to make these retest numbers public.
