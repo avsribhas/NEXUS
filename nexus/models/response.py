@@ -31,9 +31,10 @@ def node_features(animal, states=STATES_MV) -> np.ndarray:
         x[p, :, t, 1] = (poke["stop_ms"] - poke["start_ms"]) / 300.0
         x[p, :, t, 2] = 1.0
         if poke["hold"]:
-            h = ids.index(poke["hold"])
-            x[p, :, h, 3] = poke["hold_mV"] / 30.0
-            x[p, :, h, 4] = 1.0
+            for held in poke["hold"].split("+"):
+                h = ids.index(held)
+                x[p, :, h, 3] = poke["hold_mV"] / 30.0
+                x[p, :, h, 4] = 1.0
     x[:, :, ids.index(animal["roles"]["state"]), 5] = 1.0
     for s, v in enumerate(states):
         x[:, s, :, 6] = v / 30.0

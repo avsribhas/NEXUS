@@ -2,6 +2,7 @@ import hashlib
 import zlib
 import numpy as np
 from nexus.circuits.build import drive_to_current
+from itertools import combinations
 
 DT = 0.2
 T_TRIAL = 2000.0
@@ -17,9 +18,10 @@ POKE_TYPES = {"dep_small": (5.0, 100.0), "dep_large": (15.0, 100.0), "hyp": (-15
 TARGETS_PER_TYPE = 10
 PAIRED = {"type": "paired", "amplitude_mV": 15.0, "duration_ms": 100.0, "hold_levels_mV": (10.0, 20.0, 30.0)}
 PAIRED_STEP = {"type": "paired_step", "amplitude_mV": 30.0, "duration_ms": 300.0, "hold_mV": 15.0}
+PAIRED_BOTH = {"type": "paired_both", "amplitude_mV": 15.0, "duration_ms": 100.0, "hold_mV": 30.0}
 
 def make_pokes(spec, roles, rng):
-    """Fifty single pokes (five types on ten neurons that always include the inputs), a paired poke for every ordered pair of inputs at every hold level, and a paired step for every ordered pair."""
+    """Fifty single pokes (five types on ten neurons that always include the inputs), a paired poke for every ordered pair of inputs at every hold level, a paired step for every ordered pair, and, with three or more inputs, a paired-both poke holding every pair of inputs while poking each other input"""
     eligible = [n["id"] for n in spec["neurons"] if n["id"] != roles["state"]]
     inputs_first = [str(x) for x in roles["inputs"] if x in eligible][:TARGETS_PER_TYPE]
     rest = [x for x in eligible if x not in inputs_first]
@@ -39,6 +41,9 @@ def make_pokes(spec, roles, rng):
         pokes.append({"poke_id": f"paired_{j}", "type": PAIRED["type"], "target": target, "amplitude_mV": float(PAIRED["amplitude_mV"]), "start_ms": float(POKE_START), "stop_ms": float(POKE_START + PAIRED["duration_ms"]), "hold": hold, "hold_mV": float(level)})
     for j, (hold, target) in enumerate(pairs):
         pokes.append({"poke_id": f"paired_step_{j}", "type": PAIRED_STEP["type"], "target": target, "amplitude_mV": float(PAIRED_STEP["amplitude_mV"]), "start_ms": float(POKE_START), "stop_ms": float(POKE_START + PAIRED_STEP["duration_ms"]), "hold": hold, "hold_mV": float(PAIRED_STEP["hold_mV"])})
+    triples = [(a, b, c) for a, b in combinations(inputs, 2) for c in inputs if c != a and c != b]
+    for j, (a, b, c) in enumerate(triples):
+        pokes.append({"poke_id": f"paired_both_{j}", "type": PAIRED_BOTH["type"], "target": c, "amplitude_mV": float(PAIRED_BOTH["amplitude_mV"]), "start_ms": float(POKE_START), "stop_ms": float(POKE_START + PAIRED_BOTH["duration_ms"]), "hold": f"{a}+{b}", "hold_mV": float(PAIRED_BOTH["hold_mV"])})
     return pokes
 
 def trial_table(pokes):
@@ -60,7 +65,8 @@ def trial_currents(spec, ids, roles, poke, state_index, seed_index, circuit_seed
     i1 = int(round(poke["stop_ms"] / DT))
     out[k, i0:i1] += drive_to_current(spec, poke["target"], poke["amplitude_mV"])
     if poke.get("hold"):
-        out[ids.index(poke["hold"]), :] += drive_to_current(spec, poke["hold"], poke["hold_mV"])
+        for held in poke["hold"].split("+"):
+            out[ids.index(held), :] += drive_to_current(spec, held, poke["hold_mV"])
     if noise:
         rng = np.random.default_rng([int(circuit_seed), int(state_index), int(seed_index), zlib.crc32(poke["poke_id"].encode())])
         sd = np.array([NOISE_MV * drive_to_current(spec, nid, 1.0) for nid in ids])

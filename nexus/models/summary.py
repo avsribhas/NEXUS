@@ -2,11 +2,12 @@ import math
 import numpy as np
 from nexus.circuits.measure import crossing, time_to_fraction
 from nexus.models.data import BASE_MS, RESP_MS, SAMPLE_MS, poke_responses
-from nexus.perturb.protocol import KEEP, PAIRED, PAIRED_STEP
+from nexus.perturb.protocol import KEEP, PAIRED, PAIRED_BOTH, PAIRED_STEP
 
 FEATURES = ("log_gain_30", "log_gain_20", "log_gain_10", "log_r_off", "threshold_mV", "tau_on_ms", "tau_off_ms", "tau_cell_ms", "log_tau_on_ratio", "log_tau_off_ratio", "reach", "log_state_ratio", "log_direct", "log_reverse_gain")
 N_FEATURES = 2 * len(FEATURES)
 EPS = 1e-3
+SELECT_EPS = 0.5
 
 def _log_ratio(a, b) -> float:
     """log10 of |a| / |b|, with a small floor on both."""
@@ -35,18 +36,13 @@ def tau_cell(animal, traces) -> float:
         if math.isfinite(t) and t > 0: times.append(t)
     return float(np.median(times)) if times else math.nan
 
-def candidate_features(animal, trigger, traces=None, responses=None) -> np.ndarray:
-    """Feature vector for one candidate trigger: values with nan replaced by 0, followed by one is-missing flag per value."""
-    traces = mean_traces(animal) if traces is None else traces
-    responses = poke_responses(animal) if responses is None else responses
-    R = np.nanmean(responses, axis=2)   # shape (pokes, states, neurons)
+def select_path(animal, trigger, R, exclude=()) -> tuple:
+    """The input and output whose response changes most when the trigger is held at 30 mV, as (k_name, o_index, r_off, r_on); None when no path has both pokes. SELECT_EPS (mV) stops tiny responses from winning on ratio alone."""
     ids = animal["ids"]; pokes = animal["pokes"]; roles = animal["roles"]
     outputs = [ids.index(o) for o in roles["outputs"]]
-    others = [i for i, nid in enumerate(ids) if nid not in set(roles["inputs"]) | {roles["state"]}]
-    values = dict.fromkeys(FEATURES, math.nan)
-    best = None   # will hold (abs log gain, k_name, o_index, r_off, {level: r_on})
+    best = None
     for k_name in roles["inputs"]:
-        if k_name == trigger: continue
+        if k_name == trigger or k_name in exclude: continue
         off = _index(pokes, type="dep_large", target=k_name)
         if not off: continue
         for o in outputs:
@@ -56,10 +52,21 @@ def candidate_features(animal, trigger, traces=None, responses=None) -> np.ndarr
                 on = _index(pokes, type=PAIRED["type"], target=k_name, hold=trigger, hold_mV=float(level))
                 if on: r_on[level] = float(np.mean([R[i, 0, o] for i in on]))
             if 30.0 in r_on:
-                score = abs(_log_ratio(r_on[30.0], r_off))
+                score = abs(math.log10((abs(r_on[30.0]) + SELECT_EPS) / (abs(r_off) + SELECT_EPS)))
                 if best is None or score > best[0]: best = (score, k_name, o, r_off, r_on)
+    return best[1:] if best is not None else None
+
+def candidate_features(animal, trigger, traces=None, responses=None) -> np.ndarray:
+    """Feature vector for one candidate trigger: values with nan replaced by 0, followed by one is-missing flag per value."""
+    traces = mean_traces(animal) if traces is None else traces
+    responses = poke_responses(animal) if responses is None else responses
+    R = np.nanmean(responses, axis=2)   # shape (pokes, states, neurons)
+    ids = animal["ids"]; pokes = animal["pokes"]; roles = animal["roles"]
+    others = [i for i, nid in enumerate(ids) if nid not in set(roles["inputs"]) | {roles["state"]}]
+    values = dict.fromkeys(FEATURES, math.nan)
+    best = select_path(animal, trigger, R)
     if best is not None:
-        _, k_name, o, r_off, r_on = best
+        k_name, o, r_off, r_on = best
         for level in (30.0, 20.0, 10.0):
             if level in r_on: values[f"log_gain_{int(level)}"] = _log_ratio(r_on[level], r_off)
         values["log_r_off"] = math.log10(abs(r_off) + EPS)
@@ -90,3 +97,16 @@ def candidate_features(animal, trigger, traces=None, responses=None) -> np.ndarr
     x = np.array([values[f] for f in FEATURES], dtype=float)
     missing = ~np.isfinite(x)
     return np.concatenate([np.where(missing, 0.0, x), missing.astype(float)])
+
+def both_held_effect(animal, trigger, partner, responses=None) -> float:
+    """Size of the trigger's effect on its own path while the partner is also held: |log10| of the response with both held at 30 mV over the response with neither; nan when those pokes are missing."""
+    responses = animal["responses"] if responses is None and "responses" in animal else (poke_responses(animal) if responses is None else responses)
+    R = np.nanmean(responses, axis=2)
+    pokes = animal["pokes"]; order = list(animal["roles"]["inputs"])
+    path = select_path(animal, trigger, R, exclude=(partner,))
+    if path is None: return math.nan
+    k_name, o, r_off, _ = path
+    a, b = sorted((trigger, partner), key=order.index)
+    on = _index(pokes, type=PAIRED_BOTH["type"], target=k_name, hold=f"{a}+{b}")
+    if not on: return math.nan
+    return abs(_log_ratio(float(R[on[0], 0, o]), r_off))

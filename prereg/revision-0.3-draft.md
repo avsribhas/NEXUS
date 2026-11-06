@@ -161,3 +161,35 @@ changes a pass mark.
     that no trigger shares a target with a non-trigger input, in any switch type. This was
     found on development data only. No scoring code, threshold or prior range changes. All
     measured values stay inside the locked prior ranges.
+
+16. **A poke that measures priority (added 5 November 2026, so Abhiram and Udeern both still
+    need to see it).** The planted priority is measured with both triggers held on, and the
+    protocol had no such trial, so priority could not be recovered from the data.
+    - New poke: with three or more inputs, hold every pair of inputs at 30 mV and give each
+      remaining input a 15 mV, 100 ms poke. Winner-take-all goes from 98 to 110 pokes (1,764 to
+      1,980 trials). Circuits with two inputs don't change.
+    - Dusk ranks the triggers it calls by the size of this measured effect.
+    - Path selection now uses a 0.5 mV floor on response size, so a tiny response can't win
+      on ratio alone. The value was chosen on training circuits.
+
+    This was found on development data only. No scoring code, threshold or prior range changes.
+
+17. **What the 90% interval rule asks of a two-gate circuit (added 6 November 2026; a question
+    for Abhiram and Udeern, nothing is changed yet).** A circuit counts as recovered only if
+    every identifiable field of every gate falls inside its 90% interval. Winner-take-all has
+    two gates with five identifiable fields each, so ten intervals must all hold. If the
+    intervals are honest and their errors independent, that happens 0.9^10, about 35%, of the
+    time, however good the model is. The pass bar is 80%. Correlated errors raise the 35%, but
+    the bar may still be out of reach for an honest 90% interval. One-gate types are less
+    affected (four fields gives about 66%, five about 59%, on the same assumption), and the
+    same arithmetic applies to them.
+    - Widening each interval until circuits pass would break the rule that coverage should be
+      near 90%, so Dusk will not do that without a decision here.
+    - Option A: keep the rule and accept that this bar may fail for winner-take-all.
+    - Option B: make the 90% a joint level per circuit, so the set of all a circuit's intervals
+      holds together 90% of the time. Intervals get wider, and the 0.5 of prior width limit
+      still applies.
+    - Option C: score each field separately and set the pass bar per field.
+
+    Any change has to be locked before held-out data is touched. This arithmetic uses no
+    results.

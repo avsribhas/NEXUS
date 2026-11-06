@@ -1,7 +1,7 @@
 import math
 import numpy as np
 import torch
-from nexus.models.summary import N_FEATURES, candidate_features, mean_traces
+from nexus.models.summary import N_FEATURES, both_held_effect, candidate_features, mean_traces
 from nexus.models.data import poke_responses
 from nexus.score.recovery import CONTINUOUS_FIELDS
 
@@ -142,6 +142,15 @@ class DuskRecovery:
                 s[f] = [from_scale(quant[i, j, 0], scale), from_scale(quant[i, j, 1], scale)]
             s["_size"] = abs(float(quant[i, gain].mean()))
             sheets.append(s)
+        if len(sheets) >= 2:
+            effects = []
+            for s in sheets:
+                partner = max((sheet for sheet in sheets if sheet != s), key=lambda x: x["probability"])["trigger_channel"]
+                effect = both_held_effect(animal, s["trigger_channel"], partner)
+                effects.append(effect)
+            if all(math.isfinite(effect) for effect in effects):
+                for s, effect in zip(sheets, effects):
+                    s["_size"] = effect
         order = sorted(range(len(sheets)), key=lambda k: -sheets[k]["_size"])
         for rank, k in enumerate(order):
             sheets[k]["priority"] = rank + 1

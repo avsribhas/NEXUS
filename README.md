@@ -25,7 +25,7 @@ before it's trusted on real recordings. Phase 1 uses graded, non-spiking circuit
 | M1 | One file format for every run, a checker, a locked test set | Done, except decisions waiting on Udeern |
 | M2 | Pre-registration: fix the tests and pass marks before any held-out data exists | Approved and timestamped, version 0.2 ([`prereg/phase1-prereg.md`](prereg/phase1-prereg.md)); registered on OSF (osf.io/yrghs), private under embargo until 1 November 2030 |
 | M3 | Planted circuits: switch motifs, decoys, the poke protocol, wiring errors, run files | Mostly built. The 200-circuit pilot ran (all accepted, about 1 minute and 35 MB per circuit), and a larger 1,200-circuit development library has been generated. Every circuit type matches NEURON. Still missing: the stochastic switch (proposed to drop), twins for winner-take-all, sourced wiring error rates |
-| M4 | Poke-and-predict: scoring, baselines, Dusk itself | Scoring locked before training; baselines and first versions of Dusk built and evaluated on the pilot's validation split ([log](logs/phase1-v2-log.md), [files](logs/pilot/m4/)) |
+| M4 | Poke-and-predict: scoring, baselines, Dusk itself | Scoring locked before training; baselines and first versions of Dusk built and evaluated on the pilot's validation split ([log](logs/phase1-v2-log.md), [files](logs/pilot/m4/)). Winner-take-all is still being worked on: a new poke and ranking are proposed in revision 0.3 (item 16), and a question about the interval rule is open (item 17) |
 | M5 to M7 | Degraded data, energy, a real-data check | Not started (M6, energy, is out of this version's scope) |
 
 Done so far in M1:
@@ -59,7 +59,7 @@ Done so far in M3 and M4:
   planted.
 - Every animal gets the same kinds of poke under 6 brain states with 3 noise seeds:
   50 single pokes, plus paired pokes (one input held while another is poked) and paired
-  steps, so threshold and timing can be measured. 58 to 98 pokes, 1,044 to 1,764 trials.
+  steps, so threshold and timing can be measured. 58 to 98 pokes, 1,044 to 1,764 trials (110 and 1,980 for winner-take-all if revision 0.3 item 16 is approved).
 - The scoring code was written and locked before any model was trained.
 - Seven linear baselines that know the wiring, or not, and the first version of Dusk:
   one network that reads the measured responses and writes the datasheets, and one that

@@ -1,7 +1,7 @@
 import zlib
 import numpy as np
 from nexus.baselines.wiring import response_columns
-from nexus.perturb.protocol import PAIRED, PAIRED_STEP, POKE_TYPES, STATES_MV
+from nexus.perturb.protocol import PAIRED, PAIRED_BOTH, PAIRED_STEP, POKE_TYPES, STATES_MV
 
 class LinearBaseline:
     """Gain-times-response-column baseline; kind picks the response matrix."""
@@ -42,7 +42,7 @@ class LinearBaseline:
         s = np.array(s)
         params = {}
         sse = 0.0
-        for tn in list(POKE_TYPES) + [PAIRED["type"], PAIRED_STEP["type"]]:
+        for tn in list(POKE_TYPES) + [PAIRED["type"], PAIRED_STEP["type"], PAIRED_BOTH["type"]]:
             for si in range(len(STATES_MV)) if self.per_state else [None]:
                 sel = (t == tn) if si is None else ((t == tn) & (s == si))
                 if not np.any(sel):

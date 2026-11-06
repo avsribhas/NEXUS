@@ -1378,3 +1378,39 @@ D9: the review also confirms the versions of the Creamer preprint: version 4 rep
 versions 1 and 3 report 92%. Item 9 now has a sourced proposal for wiring error rates, in
 section 10 of the review. `configs/corruption.json` hasn't changed, and the decision is still
 open for Abhiram and Udeern.
+
+## 2026-11-06: Winner-take-all changes on development data
+
+Abhiram asked for the winner-take-all failure to be fixed. Three things changed, all found on
+the training and validation parts of the 1,200-circuit library. The test part was not opened.
+
+- A new poke holds each pair of inputs at 30 mV and pokes each remaining input. Planted priority
+  is measured with both triggers held, and the protocol had no such trial. Winner-take-all goes
+  from 98 to 110 pokes and from 1,764 to 1,980 trials. Circuits with two inputs don't change.
+- Dusk ranks the triggers it calls by the measured effect of that poke, not by predicted gain.
+- Path selection uses a 0.5 mV floor on response size, chosen on training circuits.
+
+All of this is in revision 0.3 as item 16, which Abhiram and Udeern still need to see. No scoring
+code, threshold or prior range changed.
+
+The 153 winner-take-all circuits were regenerated with the same seeds and all were accepted. The
+new code is `scripts/m3_regen_motif.py` and `scripts/m3_merge_library.py`, both written by the
+7B. Features were rebuilt for all 1,200 circuits and Dusk was retrained with one seed. The
+circuit split is identical to the previous run's. The results are in the private paper draft
+only, because Abhiram hasn't approved those numbers for the public repo. The files are on the rig
+in `outputs/m3_wta2`, `outputs/m3_lib2`, `outputs/m4_cache1200b` and `outputs/m4_1200b`.
+
+This does not finish the job. Winner-take-all is still expected to fail, and work on it continues.
+
+New question, revision 0.3 item 17: a circuit passes only if every identifiable field of every
+gate falls inside its 90% interval. Winner-take-all needs ten intervals to hold at once. For
+honest intervals with independent errors that is 0.9^10, about 35%, against a pass bar of 80%. Dusk's
+intervals were not widened to get around this. The decision belongs to Abhiram and Udeern.
+
+Tests: 298 passed, 10 skipped, 2 expected failures, 1 failure, run on CPU. The failure is the known
+`test_m3_batch.py::test_trials_are_independent` (see the earlier entry). It also fails on the
+previous commit. The measured difference is 0.0004 mV on CPU in float32, and 0 on GPU and in
+float64. The test was not edited.
+
+The rig's SSH link dropped several times during this work. Nothing was lost, since the
+regeneration can resume and the evaluation had finished before each drop.
