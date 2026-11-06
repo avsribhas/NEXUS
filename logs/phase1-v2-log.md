@@ -1418,3 +1418,15 @@ regeneration can resume and the evaluation had finished before each drop.
 Later on 6 November: Abhiram chose a joint 90% level per circuit as the proposal for item 17.
 Item 17 now states that change. Udeern still has to approve it, and nothing in the code or the
 thresholds has changed. Whether joint intervals fit the width limit has not been tested.
+
+Abhiram then asked for the joint rule to be tested against the width limit. The 7B wrote
+`scripts/m4_joint_check.py` and `tests/test_m4_joint_check.py`. Its first version had three wrong
+functions (`load_side`, `raw_scores`, `joint_margins`), so those were sent back with narrow
+corrections and spliced in. The script retrains only the recovery model, with seeds 0, 1 and 2,
+loads only the training and validation circuits, and scores validation under both rules. Joint
+widening is set on the calibration circuits and was not tuned on validation. As a check, seed 0
+under the current rule reproduced the full evaluation's recovery counts exactly. The results are
+in the private paper draft, and the file is on the rig at `outputs/m4_joint/report.json`.
+
+This is an analysis only. Dusk itself still uses the per-field intervals, and no threshold or
+scoring code changed.

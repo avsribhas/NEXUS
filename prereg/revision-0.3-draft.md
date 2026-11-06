@@ -193,8 +193,11 @@ changes a pass mark.
     - Section 5.2 is not changed. The identifiable list still uses a 90% posterior interval per
       field, so a field can be on the list and its wider joint interval can still break the width
       limit. That counts as a failure and is not excused.
-    - The bar becomes harder to clear on width and easier on coverage. Whether the joint intervals
-      fit inside the width limit has not been tested.
+    - The bar becomes harder to clear on width and easier on coverage. This has been tested on
+      development data with `scripts/m4_joint_check.py`. The results are in the private paper
+      draft until Abhiram approves them for this repo.
+    - The width limit stays at 0.5 whatever that test shows. Loosening it after seeing results
+      is not proposed.
     - This was raised after looking at development results, and the paper will say so. It must be
       locked before held-out data is touched.
     - The alternatives were to keep the rule and accept that the bar may fail for winner-take-all,
