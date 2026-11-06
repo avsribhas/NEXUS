@@ -1414,3 +1414,7 @@ float64. The test was not edited.
 
 The rig's SSH link dropped several times during this work. Nothing was lost, since the
 regeneration can resume and the evaluation had finished before each drop.
+
+Later on 6 November: Abhiram chose a joint 90% level per circuit as the proposal for item 17.
+Item 17 now states that change. Udeern still has to approve it, and nothing in the code or the
+thresholds has changed. Whether joint intervals fit the width limit has not been tested.

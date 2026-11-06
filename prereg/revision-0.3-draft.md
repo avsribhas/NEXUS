@@ -174,22 +174,28 @@ changes a pass mark.
 
     This was found on development data only. No scoring code, threshold or prior range changes.
 
-17. **What the 90% interval rule asks of a two-gate circuit (added 6 November 2026; a question
-    for Abhiram and Udeern, nothing is changed yet).** A circuit counts as recovered only if
-    every identifiable field of every gate falls inside its 90% interval. Winner-take-all has
-    two gates with five identifiable fields each, so ten intervals must all hold. If the
-    intervals are honest and their errors independent, that happens 0.9^10, about 35%, of the
-    time, however good the model is. The pass bar is 80%. Correlated errors raise the 35%, but
-    the bar may still be out of reach for an honest 90% interval. One-gate types are less
-    affected (four fields gives about 66%, five about 59%, on the same assumption), and the
-    same arithmetic applies to them.
-    - Widening each interval until circuits pass would break the rule that coverage should be
-      near 90%, so Dusk will not do that without a decision here.
-    - Option A: keep the rule and accept that this bar may fail for winner-take-all.
-    - Option B: make the 90% a joint level per circuit, so the set of all a circuit's intervals
-      holds together 90% of the time. Intervals get wider, and the 0.5 of prior width limit
-      still applies.
-    - Option C: score each field separately and set the pass bar per field.
-
-    Any change has to be locked before held-out data is touched. This arithmetic uses no
-    results.
+17. **Make the 90% interval level joint per circuit (added 6 November 2026; Abhiram's proposal,
+    Udeern still needs to approve it).** A circuit counts as recovered only if every identifiable
+    field of every gate falls inside its 90% interval. Winner-take-all has two gates with five
+    identifiable fields each, so ten intervals must all hold. If each interval is an honest 90%
+    interval and their errors are independent, that happens 0.9^10, about 35%, of the time,
+    however good the model is. The pass bar is 80%. Correlated errors raise the 35%, but the bar
+    may still be out of reach. One-gate types are less affected (four fields gives about 66%,
+    five about 59%, on the same assumption).
+    - Proposed change to section 5.1: "90% interval" means a joint level per circuit. A method's
+      intervals for one circuit, across all its identifiable fields and gates, should all contain
+      the planted values together in about 90% of circuits.
+    - What stays the same: the 80% pass bar, the limit of 0.5 of the prior range on each interval,
+      the priority rule, trigger matching, and the recovery scoring code, which checks intervals
+      and never reads the level.
+    - Reporting: joint coverage per type is added and should be near 90%. Per-field coverage is
+      still reported, and it is now expected to sit above 90%.
+    - Section 5.2 is not changed. The identifiable list still uses a 90% posterior interval per
+      field, so a field can be on the list and its wider joint interval can still break the width
+      limit. That counts as a failure and is not excused.
+    - The bar becomes harder to clear on width and easier on coverage. Whether the joint intervals
+      fit inside the width limit has not been tested.
+    - This was raised after looking at development results, and the paper will say so. It must be
+      locked before held-out data is touched.
+    - The alternatives were to keep the rule and accept that the bar may fail for winner-take-all,
+      or to score each field separately with a pass bar per field.
