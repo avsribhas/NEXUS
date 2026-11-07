@@ -1430,3 +1430,20 @@ in the private paper draft, and the file is on the rig at `outputs/m4_joint/repo
 
 This is an analysis only. Dusk itself still uses the per-field intervals, and no threshold or
 scoring code changed.
+
+Abhiram then asked for work on the reach intervals and the missed gates, on training and
+validation circuits only. The 7B wrote `path_evidence` and `_seed_z` in `nexus/models/summary.py`
+and `tests/test_m4_path_evidence.py`. They add seven features from data already recorded, so no
+circuits were generated again. Features were rebuilt in `outputs/m4_cache1200c`, and the three-seed
+check is in `outputs/m4_joint2/report.json`. The results are in the private paper draft.
+
+The features stay. They did what they were meant to for missed gates, and they did not raise false
+switches. They did not solve interval width, so this work is not finished.
+
+New question, revision 0.3 item 18: a global shutoff gates two interchangeable paths and its
+datasheet is measured on one, which a method can't identify. The decision belongs to Abhiram and
+Udeern.
+
+Tests: 307 passed, 10 skipped, 2 expected failures, 1 failure, the known
+`test_m3_batch.py::test_trials_are_independent`. The test was not edited.
+

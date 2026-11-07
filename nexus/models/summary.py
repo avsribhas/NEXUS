@@ -4,7 +4,7 @@ from nexus.circuits.measure import crossing, time_to_fraction
 from nexus.models.data import BASE_MS, RESP_MS, SAMPLE_MS, poke_responses
 from nexus.perturb.protocol import KEEP, PAIRED, PAIRED_BOTH, PAIRED_STEP
 
-FEATURES = ("log_gain_30", "log_gain_20", "log_gain_10", "log_r_off", "threshold_mV", "tau_on_ms", "tau_off_ms", "tau_cell_ms", "log_tau_on_ratio", "log_tau_off_ratio", "reach", "log_state_ratio", "log_direct", "log_reverse_gain")
+FEATURES = ("log_gain_30", "log_gain_20", "log_gain_10", "log_r_off", "threshold_mV", "tau_on_ms", "tau_off_ms", "tau_cell_ms", "log_tau_on_ratio", "log_tau_off_ratio", "reach", "log_state_ratio", "log_direct", "log_reverse_gain", "reach_path_1", "reach_path_2", "reach_path_3", "log_gain_all_states", "max_others_diff", "output_z", "output_z_all_states")
 N_FEATURES = 2 * len(FEATURES)
 EPS = 1e-3
 SELECT_EPS = 0.5
@@ -56,6 +56,40 @@ def select_path(animal, trigger, R, exclude=()) -> tuple:
                 if best is None or score > best[0]: best = (score, k_name, o, r_off, r_on)
     return best[1:] if best is not None else None
 
+def _seed_z(x) -> float:
+    """Mean over seeds divided by its standard error, with a 0.05 mV floor on the error; nan with fewer than two seeds."""
+    x = np.asarray(x, dtype=float)
+    x = x[np.isfinite(x)]
+    if len(x) < 2: return math.nan
+    return float(np.mean(x) / (np.std(x, ddof=1) / math.sqrt(len(x)) + 0.05))
+
+def path_evidence(animal, trigger, k_name, o, responses) -> dict:
+    """Extra evidence for one candidate trigger: reach measured on every path, largest first, and how strongly holding the trigger changes the chosen path at the output, using all states and seeds."""
+    ids = animal["ids"]; pokes = animal["pokes"]; roles = animal["roles"]
+    others = [i for i, nid in enumerate(ids) if nid not in set(roles["inputs"]) | {roles["state"]}]
+    R = np.nanmean(responses, axis=2)
+    reaches = []
+    for k in roles["inputs"]:
+        if k == trigger: continue
+        on = _index(pokes, type=PAIRED["type"], target=k, hold=trigger, hold_mV=30.0)
+        off = _index(pokes, type="dep_large", target=k)
+        if on and off and others:
+            diff = np.abs(np.mean([R[i, 0, :] for i in on], axis=0) - R[off[0], 0, :])
+            reaches.append(float(np.mean([diff[i] > 1.0 for i in others])))
+    reaches.sort(reverse=True)
+    out = {f"reach_path_{n + 1}": reaches[n] if n < len(reaches) else math.nan for n in range(3)}
+    out.update(log_gain_all_states=math.nan, max_others_diff=math.nan, output_z=math.nan, output_z_all_states=math.nan)
+    on = _index(pokes, type=PAIRED["type"], target=k_name, hold=trigger, hold_mV=30.0)
+    off = _index(pokes, type="dep_large", target=k_name)
+    if on and off:
+        out["log_gain_all_states"] = _log_ratio(float(np.nanmean([R[i, :, o] for i in on])), float(np.nanmean(R[off[0], :, o])))
+        if others:
+            diff = np.abs(np.mean([R[i, 0, :] for i in on], axis=0) - R[off[0], 0, :])
+            out["max_others_diff"] = float(np.max(diff[others]))
+        out["output_z"] = _seed_z(np.mean([responses[i, 0, :, o] for i in on], axis=0) - responses[off[0], 0, :, o])
+        out["output_z_all_states"] = _seed_z(np.nanmean(np.mean([responses[i, :, :, o] for i in on], axis=0) - responses[off[0], :, :, o], axis=0))
+    return out
+
 def candidate_features(animal, trigger, traces=None, responses=None) -> np.ndarray:
     """Feature vector for one candidate trigger: values with nan replaced by 0, followed by one is-missing flag per value."""
     traces = mean_traces(animal) if traces is None else traces
@@ -79,6 +113,7 @@ def candidate_features(animal, trigger, traces=None, responses=None) -> np.ndarr
             diff = np.abs(np.mean([R[i, 0, :] for i in on30], axis=0) - R[off15[0], 0, :])
             values["reach"] = float(np.mean([diff[i] > 1.0 for i in others])) if others else math.nan
         values["log_state_ratio"] = _log_ratio(R[off15[0], -1, o], R[off15[0], 0, o]) if off15 else math.nan
+        values.update(path_evidence(animal, trigger, k_name, o, responses))
         steps = _index(pokes, type=PAIRED_STEP["type"], target=trigger, hold=k_name)
         if steps:
             tr = np.mean([traces[i, 0, o] for i in steps], axis=0)

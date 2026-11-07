@@ -202,3 +202,18 @@ changes a pass mark.
       locked before held-out data is touched.
     - The alternatives were to keep the rule and accept that the bar may fail for winner-take-all,
       or to score each field separately with a pass bar per field.
+
+18. **Which path a global shutoff is measured on (added 6 November 2026; a question for Abhiram
+    and Udeern, nothing is changed yet).** A global shutoff gates two interchangeable paths, but
+    its datasheet is measured on one of them, `in1` to `O1`. The other path has its own sampled
+    weights, so its trigger gain, threshold, timing and reach can differ. A method has no way to
+    know which path was used without reading names or positions, which Dusk does not do. So part
+    of the score for this type depends on an arbitrary choice in the probe.
+    - Option A: keep the rule and report this as a limit of the type.
+    - Option B: measure the gate on every path it controls, and let the datasheet hold the mean.
+      This changes the planted answers for this type, so the probe changes and these circuits
+      have to be generated again.
+    - Option C: count a global shutoff as recovered if the intervals match any one path, measured
+      the same way as B. That needs a scoring change as well.
+
+    The other types have one planted path per gate, so this applies to global shutoff only.
