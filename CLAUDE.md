@@ -299,6 +299,7 @@ Also:
 - Expected totals from the Engineering Plan: circuit library 45 to 450 A100-hours. Re-estimate from the M3 pilot, including compile time, before scaling.
 - Gate: before the first cloud launch, and before any job estimated above $200, stop and send Abhiram the task file, machine type, hours and dollar estimate. Do not create cloud projects, billing accounts or quota requests yourself.
 - Track every run (config, commit, seed, metrics, cost) in self-hosted MLflow; version data with DVC. Ask Abhiram where the MLflow server and DVC remote live before first use. Commit all outputs that results depend on.
+- The Windows laptop is shared with a second Claude Code session (repo s9mlabs/measured-vs-learned). Before any heavy job on it, take a lock: create `C:\s9m\locks\cpu.lock` or `gpu.lock` holding owner (`dusk`), session, PID and start time. Wait if the other session holds it. Delete it when the job exits. A lock whose PID is dead is stale and can be cleared. The 7B counts as a GPU job. Run jobs detached so an SSH drop can't kill them. Don't touch anything under `C:\s9m\mvl`. `scripts/rig_job.ps1` does the locking and cleanup.
 
 ## 7. Rules
 
