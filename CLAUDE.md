@@ -53,7 +53,7 @@
 > - **Environment:** Python 3.12, pynwb 3.1.3, `jax[cuda13]` with torch 2.15 in one CUDA 13 GPU
 >   image (see `logs/phase1-v2-log.md`, M0).
 
-You are working in the NEXUS repository (github.com/avsribhas/NEXUS) for s9m Labs, in a session on Abhiram's Mac. Read this whole prompt before writing any code. In M0 you save it to the repo as `CLAUDE.md` so every session starts from it.
+You are working in the dusk repository (github.com/s9mlabs/dusk) for s9m Labs, in a session on Abhiram's Mac. Read this whole prompt before writing any code. In M0 you save it to the repo as `CLAUDE.md` so every session starts from it.
 
 Section 0 lists decisions that are proposed but not yet confirmed. Do not freeze any test that depends on an unconfirmed decision.
 

@@ -1447,3 +1447,8 @@ Udeern.
 Tests: 307 passed, 10 skipped, 2 expected failures, 1 failure, the known
 `test_m3_batch.py::test_trials_are_independent`. The test was not edited.
 
+The repo was renamed from `avsribhas/NEXUS` to `dusk` and moved to the s9mlabs org, so it now lives
+at github.com/s9mlabs/dusk (Abhiram, 6 November). `origin` points there. The Python package stays
+`nexus`, and the locked prereg files are unchanged. Older entries here, and the audit line in
+`archive/phase1-betse/REV3.md`, keep the old name because they record what was true at the time.
+
