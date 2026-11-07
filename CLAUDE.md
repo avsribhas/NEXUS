@@ -66,7 +66,7 @@ Section 0 lists decisions that are proposed but not yet confirmed. Do not freeze
    - `nvidia-smi` runs on it.
 
    If any step fails, stop and report. Do not guess hostnames.
-2. CPU work (format, checker, tests, generators at small scale) runs on the Mac. GPU work (Jaxley batches, PyTorch training, GPU reproducibility tests) runs on the Windows machine over SSH, inside the same pinned container if Docker with GPU support is available there; otherwise in a pinned conda env, with the gap logged.
+2. No compute jobs on the Mac. The Mac only edits code, runs git, reads documents and drives the laptop over SSH. Every script, test, install and model run executes on the Windows laptop, inside the same pinned container if Docker with GPU support is available there; otherwise in a pinned conda env, with the gap logged.
 3. Never store credentials in the repo.
 
 ### 0.2 Decisions to confirm with Abhiram (and Udeern where marked)
@@ -195,7 +195,7 @@ Work through these in order. Each milestone ends with frozen tests passing and a
   - Held-out labels and response targets are encrypted per D7.
   - Log every access to the held-out set and enforce the access limit set in the pre-registration.
 - Reproducibility:
-  - PyTorch reproduces bitwise with the same seed on the same machine (deterministic mode, `CUBLAS_WORKSPACE_CONFIG=:4096:8`). Test on CPU on the Mac and on GPU on the Windows machine.
+  - PyTorch reproduces bitwise with the same seed on the same machine (deterministic mode, `CUBLAS_WORKSPACE_CONFIG=:4096:8`). Test on CPU and on GPU on the Windows machine.
   - Jaxley reruns are checked to a stated tolerance.
   - Test across the two machines and record what happens instead of assuming.
 
@@ -294,7 +294,7 @@ Also:
 
 ## 6. Compute
 
-- Develop and test on the Mac (CPU) and the Windows laptop (GPU, over Tailscale). Use cloud GPUs only for runs whose results will be kept.
+- No compute jobs on the Mac: it only edits code, runs git, reads documents and drives the laptop over SSH. Develop and test on the Windows laptop (CPU and GPU, over Tailscale). Use cloud GPUs only for runs whose results will be kept.
 - Cloud is Google Cloud on the Antler credits. Write SkyPilot task files with auto-stop and spot instances, checkpointing so a reclaimed machine loses minutes. L4 for debugging, A100 for the circuit library.
 - Expected totals from the Engineering Plan: circuit library 45 to 450 A100-hours. Re-estimate from the M3 pilot, including compile time, before scaling.
 - Gate: before the first cloud launch, and before any job estimated above $200, stop and send Abhiram the task file, machine type, hours and dollar estimate. Do not create cloud projects, billing accounts or quota requests yourself.
