@@ -20,7 +20,7 @@
 > - **Branches (overrides D1 and section 7, 2026-11-02).** Abhiram asked for everything to be on
 >   `main`. `phase1-v2` stays the working branch, and `main` is fast-forwarded to it after each
 >   push. Making new *results* public still needs his go-ahead.
-> - **Where things run.** Everything runs in WSL2 on the rig (`~/NEXUS`), never on the Mac.
+> - **Where things run.** Everything happens in WSL2 on the rig, in the working clone of s9mlabs/dusk at `~/NEXUS`: code edits, commits, pushes, scripts, tests, installs and model runs. Nothing happens on the Mac except Abhiram's prompts and the SSH connection.
 >   Cisco Secure Client (the UT VPN) cuts WSL off from the internet; disconnect it while the
 >   rig needs the network.
 > - **Cost rule (overrides M1's "except Cost before M6").** Per the new P0 protocol, the checker
@@ -53,21 +53,21 @@
 > - **Environment:** Python 3.12, pynwb 3.1.3, `jax[cuda13]` with torch 2.15 in one CUDA 13 GPU
 >   image (see `logs/phase1-v2-log.md`, M0).
 
-You are working in the dusk repository (github.com/s9mlabs/dusk) for s9m Labs, in a session on Abhiram's Mac. Read this whole prompt before writing any code. In M0 you save it to the repo as `CLAUDE.md` so every session starts from it.
+You are working in the dusk repository (github.com/s9mlabs/dusk) for s9m Labs. The working clone is on the Windows laptop, at `~/NEXUS` in WSL2. The session itself runs on Abhiram's Mac and reaches the laptop over SSH. Read this whole prompt before writing any code. In M0 you save it to the repo as `CLAUDE.md` so every session starts from it.
 
 Section 0 lists decisions that are proposed but not yet confirmed. Do not freeze any test that depends on an unconfirmed decision.
 
 ## 0. Before any work
 
 ### 0.1 Environment check
-1. You run on the Mac. The GPU machine is the Windows laptop with an RTX 4050 (6 GB), reachable over Tailscale. Verify, in order:
+1. The session runs on the Mac, but all the work happens on the Windows laptop, which has an RTX 4050 (6 GB) and is reachable over Tailscale. Verify, in order:
    - `tailscale status` shows it.
    - SSH works (old values were host `abhiram-lenovo`, user `windows-rig`; confirm with Abhiram if they fail).
    - `nvidia-smi` runs on it.
 
    If any step fails, stop and report. Do not guess hostnames.
-2. No compute jobs on the Mac. The Mac only edits code, runs git, reads documents and drives the laptop over SSH. Every script, test, install and model run executes on the Windows laptop, inside the same pinned container if Docker with GPU support is available there; otherwise in a pinned conda env, with the gap logged.
-3. Never store credentials in the repo.
+2. The Mac is only where Abhiram prompts Claude and where Claude SSHes into the laptop. Code edits, commits, pushes, scripts, tests, installs and model runs all happen on the Windows laptop, in the working clone at `~/NEXUS`, inside the same pinned container if Docker with GPU support is available there; otherwise in a pinned conda env, with the gap logged.
+3. Never store credentials in the repo. The laptop pushes to GitHub with an SSH key kept in `~/.ssh` in WSL2, outside the repo.
 
 ### 0.2 Decisions to confirm with Abhiram (and Udeern where marked)
 Ask these as one message at the start. Each item has a proposed default. Work that does not depend on an item may proceed, but no test that depends on an unconfirmed item is frozen.
@@ -294,7 +294,7 @@ Also:
 
 ## 6. Compute
 
-- No compute jobs on the Mac: it only edits code, runs git, reads documents and drives the laptop over SSH. Develop and test on the Windows laptop (CPU and GPU, over Tailscale). Use cloud GPUs only for runs whose results will be kept.
+- The Mac does no repo work and no compute: it is only where Abhiram prompts Claude and where Claude SSHes into the laptop. Edit, commit, push, develop and test on the Windows laptop (CPU and GPU, over Tailscale). Use cloud GPUs only for runs whose results will be kept.
 - Cloud is Google Cloud on the Antler credits. Write SkyPilot task files with auto-stop and spot instances, checkpointing so a reclaimed machine loses minutes. L4 for debugging, A100 for the circuit library.
 - Expected totals from the Engineering Plan: circuit library 45 to 450 A100-hours. Re-estimate from the M3 pilot, including compile time, before scaling.
 - Gate: before the first cloud launch, and before any job estimated above $200, stop and send Abhiram the task file, machine type, hours and dollar estimate. Do not create cloud projects, billing accounts or quota requests yourself.

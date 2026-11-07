@@ -1452,3 +1452,8 @@ at github.com/s9mlabs/dusk (Abhiram, 6 November). `origin` points there. The Pyt
 `nexus`, and the locked prereg files are unchanged. Older entries here, and the audit line in
 `archive/phase1-betse/REV3.md`, keep the old name because they record what was true at the time.
 
+
+The working clone moved to the Windows laptop (Abhiram, 6 November). `~/NEXUS` in WSL2 now tracks
+github.com/s9mlabs/dusk, and code edits, commits, pushes, scripts, tests, installs and model runs all
+happen there. The Mac is only where Abhiram prompts Claude and where Claude SSHes into the laptop. The
+laptop pushes with an SSH key kept in `~/.ssh`, outside the repo.
